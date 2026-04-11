@@ -20,6 +20,18 @@
       "imageHint": "business meeting"
     },
     {
+      "id": "blockchain-proof-1",
+      "description": "Sanitized blockchain transaction explorer screenshot showing successful recovery",
+      "imageUrl": "https://picsum.photos/seed/proof1/600/400",
+      "imageHint": "blockchain explorer"
+    },
+    {
+      "id": "blockchain-proof-2",
+      "description": "Digital forensics report highlighting asset reclamation",
+      "imageUrl": "https://picsum.photos/seed/proof2/600/400",
+      "imageHint": "forensics report"
+    },
+    {
       "id": "blog-1",
       "description": "Crypto security guide cover",
       "imageUrl": "https://picsum.photos/seed/blog1/400/250",

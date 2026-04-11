@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, Twitter, Facebook, Linkedin, Github } from "lucide-react";
+import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export function AegisFooter() {
@@ -28,6 +28,16 @@ export function AegisFooter() {
             <p className="text-muted-foreground leading-relaxed">
               Global leaders in professional cryptocurrency and digital asset recovery services. Trusted by individuals and institutional investors worldwide.
             </p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>1201 Digital Forensics Tower, Zürich, CH-8001</span>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <Building className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>AnalogHeal Systems Ltd. | Reg #HE-45293-C1</span>
+              </div>
+            </div>
             <div className="flex gap-4">
               <Link href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 transition-colors">
                 <Twitter className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />

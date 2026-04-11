@@ -1,6 +1,7 @@
 
 import { AegisNavbar } from "@/components/AegisNavbar";
 import { AegisHero } from "@/components/AegisHero";
+import { AnalogHealProofLayer } from "@/components/AnalogHealProofLayer";
 import { AegisServices } from "@/components/AegisServices";
 import { AegisSteps } from "@/components/AegisSteps";
 import { AegisTrustStrip } from "@/components/AegisTrustStrip";
@@ -16,6 +17,7 @@ export default function Home() {
       <AegisNavbar />
       <main>
         <AegisHero />
+        <AnalogHealProofLayer />
         <AegisServices />
         <AegisSteps />
         <AegisTrustStrip />
