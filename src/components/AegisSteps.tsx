@@ -1,25 +1,28 @@
-
-import { ClipboardList, Search, Settings, CheckCircle } from "lucide-react";
+import { ClipboardList, Search, Settings, CheckCircle, Clock } from "lucide-react";
 
 const steps = [
   {
     title: "Submit Request",
-    description: "Provide details of your case via our secure encrypted form.",
+    description: "Provide case details via our secure form. Your file is immediately assigned to a forensic agent.",
+    benefit: "Instant secure intake & encryption",
     icon: ClipboardList,
   },
   {
     title: "Free Assessment",
-    description: "Our experts review your case to determine recovery feasibility.",
+    description: "Experts review your case. You'll receive a clear recovery probability estimate and roadmap.",
+    benefit: "Detailed Probability Report",
     icon: Search,
   },
   {
     title: "Recovery Process",
-    description: "We execute custom forensics strategies to reclaim your assets.",
+    description: "We execute blockchain tracing, forensic analysis, and legal intercept protocols.",
+    benefit: "Active Forensic Investigation",
     icon: Settings,
   },
   {
     title: "Asset Restored",
-    description: "Successful recovery and transfer of assets back to your control.",
+    description: "Successful reclamation and transfer of assets back to your verified wallet or bank.",
+    benefit: "Verified Asset Settlement",
     icon: CheckCircle,
   },
 ];
@@ -48,13 +51,28 @@ export function AegisSteps() {
                   </span>
                   <step.icon className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground text-sm max-w-[200px] leading-relaxed">
+                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <p className="text-muted-foreground text-sm max-w-[240px] leading-relaxed mb-4">
                   {step.description}
                 </p>
+                <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-wider">
+                  {step.benefit}
+                </div>
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="mt-20 flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
+            <Clock className="w-5 h-5 text-primary" />
+            <span className="text-sm font-medium">
+              <strong className="text-foreground">Average Resolution Time:</strong> Most cases are fully resolved within 3–14 business days.
+            </span>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground italic">
+            *Complex multi-jurisdictional cases may require additional forensic cycles.
+          </p>
         </div>
       </div>
     </section>
