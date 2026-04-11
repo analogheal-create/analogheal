@@ -1,4 +1,7 @@
-import { ClipboardList, Search, Settings, CheckCircle, Clock } from "lucide-react";
+
+import { ClipboardList, Search, Settings, CheckCircle, Clock, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const steps = [
   {
@@ -38,8 +41,7 @@ export function AegisSteps() {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connecting Line (Desktop) */}
+        <div className="relative mb-20">
           <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-white/10 -translate-y-1/2 -z-10"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
@@ -63,16 +65,24 @@ export function AegisSteps() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-center justify-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
-            <Clock className="w-5 h-5 text-primary" />
-            <span className="text-sm font-medium">
-              <strong className="text-foreground">Average Resolution Time:</strong> Most cases are fully resolved within 3–14 business days.
-            </span>
+        <div className="flex flex-col items-center justify-center gap-10">
+          <div className="flex flex-col items-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
+              <Clock className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium">
+                <strong className="text-foreground">Average Resolution Time:</strong> Most cases are fully resolved within 3–14 business days.
+              </span>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground italic">
+              *Complex multi-jurisdictional cases may require additional forensic cycles.
+            </p>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground italic">
-            *Complex multi-jurisdictional cases may require additional forensic cycles.
-          </p>
+
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+            <Link href="#request">
+              Check My Case Probability <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

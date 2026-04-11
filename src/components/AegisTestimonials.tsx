@@ -1,6 +1,8 @@
 
-import { Star, Quote, TrendingUp, ShieldCheck, Zap } from "lucide-react";
+import { Star, Quote, TrendingUp, ShieldCheck, Zap, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const caseStudies = [
   {
@@ -46,7 +48,7 @@ export function AegisTestimonials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {caseStudies.map((cs, idx) => (
             <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all">
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -84,6 +86,18 @@ export function AegisTestimonials() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="flex flex-col items-center gap-4">
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+            <Link href="#request">
+              Start My Recovery Now <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <ShieldCheck className="w-4 h-4 text-primary" /> 
+            Join 3,800+ successful recovery clients
+          </div>
         </div>
       </div>
     </section>

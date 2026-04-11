@@ -1,6 +1,8 @@
 
 import { Wallet, Key, ShieldAlert, Landmark, Smartphone, Cpu, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const services = [
   {
@@ -46,7 +48,7 @@ export function AegisServices() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
           {services.map((service) => (
             <Card key={service.title} className="bg-background/40 border-white/10 hover:border-primary/50 transition-all hover:-translate-y-1 group">
               <CardHeader>
@@ -65,6 +67,17 @@ export function AegisServices() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="flex flex-col items-center gap-4">
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+            <Link href="#request">
+              Get My Free Assessment <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+          <p className="text-sm text-muted-foreground font-medium">
+            Confidential review • No upfront fees for scams
+          </p>
         </div>
       </div>
     </section>

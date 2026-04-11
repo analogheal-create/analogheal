@@ -3,7 +3,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Search, ArrowRight, Sparkles, Loader2, FileText } from "lucide-react";
+import Link from "next/link";
+import { Search, ArrowRight, Sparkles, Loader2, FileText, ShieldCheck } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -89,7 +90,7 @@ export function AegisKnowledgeHub() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {blogPosts.map((post) => {
             const imageData = PlaceHolderImages.find((img) => img.id === post.id);
             const isValidImage = imageData?.imageUrl && imageData.imageUrl !== "";
@@ -130,9 +131,14 @@ export function AegisKnowledgeHub() {
           })}
         </div>
         
-        <div className="mt-12 text-center">
-          <Button variant="outline" size="lg" className="px-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+          <Button variant="outline" size="lg" className="px-8 h-12 font-semibold">
             Load More Articles
+          </Button>
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+            <Link href="#request">
+              Check Your Case <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
           </Button>
         </div>
       </div>

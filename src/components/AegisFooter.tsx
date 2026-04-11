@@ -2,8 +2,9 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building } from "lucide-react";
+import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export function AegisFooter() {
   const [year, setYear] = useState<number | null>(null);
@@ -15,7 +16,29 @@ export function AegisFooter() {
   }, []);
 
   return (
-    <footer className="bg-card/50 border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-card/50 border-t border-white/5 pt-0 pb-10">
+      {/* Final Conversion Push */}
+      <div className="relative overflow-hidden py-16 mb-20 border-b border-white/5 bg-primary/5">
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h3 className="text-3xl lg:text-4xl font-headline font-bold mb-4">Don't Leave Your Assets to Chance</h3>
+          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+            Professional forensic recovery is time-sensitive. Speak with a specialist today for a confidential review of your situation.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" asChild className="w-full sm:w-auto px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+              <Link href="#request">
+                Start Recovery Request <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <div className="flex items-center gap-2 text-sm font-bold text-green-500 uppercase tracking-wider">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              Specialists Active Now
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
