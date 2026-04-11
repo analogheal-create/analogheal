@@ -9,7 +9,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -20,6 +20,11 @@ const navLinks = [
 
 export function AegisNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="glass-header">
@@ -65,35 +70,41 @@ export function AegisNavbar() {
           <Button variant="default" size="sm" className="h-9 px-3">
             Start
           </Button>
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="bg-background border-white/10 p-0">
-              <div className="flex flex-col h-full pt-20 px-6 gap-6">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-xl font-headline font-semibold text-foreground"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <div className="mt-auto pb-10 flex flex-col gap-4">
-                  <Button className="w-full justify-between h-12" variant="secondary">
-                    Join Telegram <MessageCircle className="w-5 h-5" />
-                  </Button>
-                  <Button className="w-full justify-between h-12">
-                    Start Recovery <ArrowRight className="w-5 h-5" />
-                  </Button>
+          {mounted ? (
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="w-6 h-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-background border-white/10 p-0">
+                <div className="flex flex-col h-full pt-20 px-6 gap-6">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-xl font-headline font-semibold text-foreground"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <div className="mt-auto pb-10 flex flex-col gap-4">
+                    <Button className="w-full justify-between h-12" variant="secondary">
+                      Join Telegram <MessageCircle className="w-5 h-5" />
+                    </Button>
+                    <Button className="w-full justify-between h-12">
+                      Start Recovery <ArrowRight className="w-5 h-5" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          ) : (
+            <Button variant="ghost" size="icon">
+              <Menu className="w-6 h-6" />
+            </Button>
+          )}
         </div>
       </div>
     </header>

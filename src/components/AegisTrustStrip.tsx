@@ -1,3 +1,6 @@
+
+"use client";
+
 import Image from "next/image";
 import { Shield } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -17,7 +20,7 @@ export function AegisTrustStrip() {
             const imageData = PlaceHolderImages.find((img) => img.id === item.id);
             return (
               <div key={item.id} className="relative group overflow-hidden rounded-2xl aspect-[4/3] bg-card">
-                {imageData?.imageUrl ? (
+                {imageData?.imageUrl && imageData.imageUrl !== "" ? (
                   <Image
                     src={imageData.imageUrl}
                     alt={imageData.description || item.label}

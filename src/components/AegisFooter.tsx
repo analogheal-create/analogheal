@@ -1,14 +1,23 @@
 
+"use client";
+
 import Link from "next/link";
 import { Shield, Twitter, Facebook, Linkedin, Github } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function AegisFooter() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-card/50 border-t border-white/5 pt-20 pb-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 group">
               <Shield className="w-8 h-8 text-primary" />
               <span className="font-headline text-2xl font-bold">
                 Aegis<span className="text-primary">Recovery</span>
@@ -71,7 +80,7 @@ export function AegisFooter() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div>© {new Date().getFullYear()} Aegis Recovery Systems. All rights reserved.</div>
+          <div>© {year ?? '...'} Aegis Recovery Systems. All rights reserved.</div>
           <div className="flex gap-6">
             <span>Certifications:</span>
             <span className="font-bold text-foreground/50">ISO 27001</span>
