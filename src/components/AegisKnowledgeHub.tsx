@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -91,10 +92,12 @@ export function AegisKnowledgeHub() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.map((post) => {
             const imageData = PlaceHolderImages.find((img) => img.id === post.id);
+            const isValidImage = imageData?.imageUrl && imageData.imageUrl !== "";
+
             return (
               <Card key={post.id} className="bg-background border-white/10 overflow-hidden group hover:border-primary/50 transition-all">
                 <div className="relative aspect-video overflow-hidden bg-card">
-                  {imageData?.imageUrl ? (
+                  {isValidImage ? (
                     <Image
                       src={imageData.imageUrl}
                       alt={imageData.description || post.title}

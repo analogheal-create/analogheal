@@ -18,9 +18,11 @@ export function AegisTrustStrip() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {trustItems.map((item) => {
             const imageData = PlaceHolderImages.find((img) => img.id === item.id);
+            const isValidImage = imageData?.imageUrl && imageData.imageUrl !== "";
+
             return (
               <div key={item.id} className="relative group overflow-hidden rounded-2xl aspect-[4/3] bg-card">
-                {imageData?.imageUrl && imageData.imageUrl !== "" ? (
+                {isValidImage ? (
                   <Image
                     src={imageData.imageUrl}
                     alt={imageData.description || item.label}

@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState, useEffect } from "react";
@@ -78,6 +81,10 @@ export function AegisNavbar() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="bg-background border-white/10 p-0">
+                <SheetHeader className="sr-only">
+                  <SheetTitle>Navigation Menu</SheetTitle>
+                  <SheetDescription>Access website sections, services, and recovery tools.</SheetDescription>
+                </SheetHeader>
                 <div className="flex flex-col h-full pt-20 px-6 gap-6">
                   {navLinks.map((link) => (
                     <Link
