@@ -1,4 +1,3 @@
-
 import { Star, Quote, TrendingUp, ShieldCheck, Zap, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -50,7 +49,7 @@ export function AegisTestimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {caseStudies.map((cs, idx) => (
-            <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all">
+            <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all premium-transition">
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Quote className="w-20 h-20 text-primary" />
               </div>
@@ -63,7 +62,7 @@ export function AegisTestimonials() {
                 </div>
                 
                 <h3 className="text-xl font-headline font-bold mb-1">{cs.title}</h3>
-                <div className="text-xs font-medium text-secondary mb-6 flex items-center gap-1">
+                <div className="text-xs font-bold text-accent mb-6 flex items-center gap-1.5 uppercase tracking-wide">
                   <Star className="w-3 h-3 fill-current" /> {cs.result}
                 </div>
 
@@ -75,11 +74,11 @@ export function AegisTestimonials() {
                   <div className="flex justify-between items-end">
                     <div>
                       <div className="font-bold text-sm">{cs.name}</div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{cs.role}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">{cs.role}</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-[10px] font-bold text-primary/70 uppercase">Forensic Method</div>
-                      <div className="text-[9px] text-muted-foreground">{cs.metrics}</div>
+                      <div className="text-[10px] font-bold text-primary/70 uppercase tracking-tight">Forensic Method</div>
+                      <div className="text-[9px] text-muted-foreground font-semibold">{cs.metrics}</div>
                     </div>
                   </div>
                 </div>
@@ -89,13 +88,13 @@ export function AegisTestimonials() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+          <Button size="lg" asChild className="px-10 h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
             <Link href="#request">
               Start My Recovery Now <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <ShieldCheck className="w-4 h-4 text-primary" /> 
+          <div className="flex items-center gap-2 text-sm text-muted-foreground font-semibold">
+            <ShieldCheck className="w-4 h-4 text-accent" /> 
             Join 3,800+ successful recovery clients
           </div>
         </div>

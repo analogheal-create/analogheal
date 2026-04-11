@@ -15,9 +15,9 @@
     --primary-foreground: 210 20% 98%;
     --secondary: 225 76% 48%; /* #1D4ED8 */
     --secondary-foreground: 210 20% 98%;
-    --muted: 220 55% 20%;
+    --muted: 220 55% 15%;
     --muted-foreground: 210 10% 70%;
-    --accent: 38 92% 50%; /* #F59E0B */
+    --accent: 38 92% 50%; /* #F59E0B Accent Gold */
     --accent-foreground: 220 55% 10%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 98%;
@@ -40,7 +40,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body antialiased;
+    background: linear-gradient(135deg, #0B1426 0%, #121E35 100%);
+    background-attachment: fixed;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -57,7 +59,7 @@
 }
 
 .hero-glow {
-  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
 }
 
 .institutional-border {
@@ -70,4 +72,13 @@
 
 .card-hover {
   @apply hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300;
+}
+
+.accent-highlight {
+  @apply text-accent font-semibold;
+}
+
+/* Financial Grade Transitions */
+.premium-transition {
+  @apply transition-all duration-500 ease-out;
 }

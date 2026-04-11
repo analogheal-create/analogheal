@@ -33,12 +33,12 @@ export function AegisHero() {
           
           <div className="flex flex-col items-center gap-6 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-              <Button size="lg" asChild className="w-full sm:w-auto px-8 h-14 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
+              <Button size="lg" asChild className="w-full sm:w-auto px-10 h-16 text-xl font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
                 <Link href="#request">
-                  Start My Recovery Request <ArrowRight className="ml-2 w-5 h-5" />
+                  Start My Recovery Request <ArrowRight className="ml-2 w-6 h-6" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 h-14 text-lg font-semibold border-white/20">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto px-10 h-16 text-lg font-semibold border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10">
                 <Play className="mr-2 w-5 h-5 fill-current" /> See Success Stories
               </Button>
             </div>
@@ -58,26 +58,22 @@ export function AegisHero() {
               </div>
             </div>
             
-            <p className="text-xs text-muted-foreground/60 font-medium">
+            <p className="text-xs text-muted-foreground/60 font-bold uppercase tracking-wider">
               👉 Submission takes less than 2 minutes.
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             {metrics.map((metric) => (
-              <div key={metric.label} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm group card-hover text-left">
-                <metric.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-                <div className="text-3xl font-bold mb-1">{metric.value}</div>
-                <div className="text-sm text-muted-foreground uppercase tracking-wider">{metric.label}</div>
+              <div key={metric.label} className="p-8 rounded-3xl bg-card border border-white/5 backdrop-blur-xl group card-hover text-left shadow-2xl">
+                <metric.icon className="w-10 h-10 text-primary mb-6 group-hover:scale-110 group-hover:text-blue-400 transition-all" />
+                <div className="text-4xl font-bold mb-2 font-headline">{metric.value}</div>
+                <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em]">{metric.label}</div>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -z-10"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-[120px] -z-10"></div>
     </section>
   );
 }
