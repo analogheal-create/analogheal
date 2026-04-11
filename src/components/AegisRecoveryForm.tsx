@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -16,7 +17,10 @@ import {
   Zap, 
   ArrowLeft,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  TrendingUp,
+  Mail,
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +33,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { aiDraftRecoveryMessage } from "@/ai/flows/ai-draft-recovery-message";
 import { cn } from "@/lib/utils";
@@ -51,7 +56,7 @@ const funnelOptions = [
 
 export function AegisRecoveryForm() {
   const { toast } = useToast();
-  const [step, setStep] = useState(0); // 0: Selector, 1: Details
+  const [step, setStep] = useState(0); // 0: Category, 1: Value, 2: Contact/Details
   const [isDrafting, setIsDrafting] = useState(false);
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -66,9 +71,19 @@ export function AegisRecoveryForm() {
     },
   });
 
+  const progress = step === 0 ? 33 : step === 1 ? 66 : 100;
+  const stepLabel = step < 2 ? "Step 1 of 2: Quick Assessment (30s)" : "Step 2 of 2: Case Details (1m)";
+
   const handleSelectType = (id: string) => {
     form.setValue("recoveryType", id);
     setStep(1);
+  };
+
+  const handleNextToFinal = async () => {
+    const isValidValue = await form.trigger("estimatedValue");
+    if (isValidValue) {
+      setStep(2);
+    }
   };
 
   const handleAIDraft = async () => {
@@ -129,12 +144,9 @@ export function AegisRecoveryForm() {
             </p>
           </div>
 
-          <div className={cn(
-            "grid grid-cols-1 lg:grid-cols-12 gap-12 items-start transition-all duration-500",
-            step === 1 ? "opacity-100" : "opacity-95"
-          )}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Trust & Context */}
-            <div className="lg:col-span-5 space-y-8">
+            <div className="lg:col-span-4 space-y-8">
               <div className="p-8 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-sm">
                 <div className="flex items-center gap-3 text-primary font-bold mb-4">
                   <ShieldCheck className="w-6 h-6" />
@@ -157,14 +169,14 @@ export function AegisRecoveryForm() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="font-bold text-lg">Prefer instant messaging?</h3>
+                <h3 className="font-bold text-lg">Immediate Assistance</h3>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors cursor-pointer">
                   <div className="p-3 rounded-lg bg-green-500/10 text-green-500">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="font-semibold">WhatsApp Secure Line</div>
-                    <div className="text-sm text-muted-foreground">Immediate Case Priority</div>
+                    <div className="text-xs text-muted-foreground">Immediate Case Priority</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors cursor-pointer">
@@ -173,29 +185,30 @@ export function AegisRecoveryForm() {
                   </div>
                   <div>
                     <div className="font-semibold">Telegram Verified Bot</div>
-                    <div className="text-sm text-muted-foreground">@AnalogHealSupport</div>
+                    <div className="text-xs text-muted-foreground">@AnalogHealSupport</div>
                   </div>
                 </div>
               </div>
 
-              <p className="text-xs text-muted-foreground leading-relaxed italic">
+              <p className="text-[10px] text-muted-foreground leading-relaxed italic">
                 *Submitting this form does not create a binding contract. All cases are subject to a strict conflict-of-interest check before acceptance.
               </p>
             </div>
 
             {/* Right Column: Funnel Form */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <div className="p-8 rounded-3xl bg-card border border-white/10 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1.5 bg-white/5">
-                  <div 
-                    className="h-full bg-primary transition-all duration-500" 
-                    style={{ width: step === 0 ? '50%' : '100%' }}
-                  />
+                <div className="mb-8">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-xs font-bold text-primary uppercase tracking-wider">{stepLabel}</span>
+                    <span className="text-xs text-muted-foreground">{Math.round(progress)}% Complete</span>
+                  </div>
+                  <Progress value={progress} className="h-1.5 bg-white/5" />
                 </div>
 
-                {step === 0 ? (
+                {step === 0 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                    <h3 className="text-2xl font-headline font-bold mb-2">Step 1: What happened?</h3>
+                    <h3 className="text-2xl font-headline font-bold mb-2">What happened?</h3>
                     <p className="text-muted-foreground mb-8 text-sm">Select the category that best describes your situation.</p>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -212,26 +225,67 @@ export function AegisRecoveryForm() {
                           <div className="font-bold mb-1">{opt.label}</div>
                           <div className="text-xs text-muted-foreground leading-relaxed">{opt.description}</div>
                           <div className="mt-4 text-xs font-bold text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Continue <ChevronRight className="w-3 h-3" />
+                            Select <ChevronRight className="w-3 h-3" />
                           </div>
                         </button>
                       ))}
                     </div>
-                    <p className="mt-8 text-center text-xs text-muted-foreground">
-                      Your selection helps us assign the right expert to your case.
-                    </p>
                   </div>
-                ) : (
+                )}
+
+                {step === 1 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <button 
                       type="button"
                       onClick={() => setStep(0)}
                       className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
                     >
-                      <ArrowLeft className="w-4 h-4" /> Back to selector
+                      <ArrowLeft className="w-4 h-4" /> Back
                     </button>
                     
-                    <h3 className="text-2xl font-headline font-bold mb-6">Step 2: Case Details</h3>
+                    <h3 className="text-2xl font-headline font-bold mb-6">Estimated Asset Value</h3>
+                    <p className="text-muted-foreground mb-8 text-sm">Providing an accurate estimate helps us prioritize your case and assign the correct forensic resources.</p>
+                    
+                    <Form {...form}>
+                      <div className="space-y-8">
+                        <FormField
+                          control={form.control}
+                          name="estimatedValue"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                                <TrendingUp className="w-5 h-5 text-primary" />
+                                Value of Lost/Stolen Assets (USD)
+                              </FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">$</span>
+                                  <Input placeholder="e.g. 25,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10" {...field} />
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
+                          Continue to Final Step <ChevronRight className="ml-2 w-5 h-5" />
+                        </Button>
+                      </div>
+                    </Form>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                    <button 
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
+                    >
+                      <ArrowLeft className="w-4 h-4" /> Back
+                    </button>
+                    
+                    <h3 className="text-2xl font-headline font-bold mb-6">Contact & Case Details</h3>
                     
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -241,7 +295,9 @@ export function AegisRecoveryForm() {
                             name="fullName"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Full Name</FormLabel>
+                                <FormLabel className="flex items-center gap-2">
+                                  <User className="w-4 h-4 text-primary" /> Full Name
+                                </FormLabel>
                                 <FormControl>
                                   <Input placeholder="John Doe" {...field} />
                                 </FormControl>
@@ -254,7 +310,9 @@ export function AegisRecoveryForm() {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Email Address</FormLabel>
+                                <FormLabel className="flex items-center gap-2">
+                                  <Mail className="w-4 h-4 text-primary" /> Email Address
+                                </FormLabel>
                                 <FormControl>
                                   <Input placeholder="john@example.com" {...field} />
                                 </FormControl>
@@ -264,34 +322,21 @@ export function AegisRecoveryForm() {
                           />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                          <FormField
-                            control={form.control}
-                            name="phone"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Secure Phone Number</FormLabel>
-                                <FormControl>
-                                  <Input placeholder="+1..." {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <FormField
-                            control={form.control}
-                            name="estimatedValue"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Estimated Value (USD)</FormLabel>
-                                <FormControl>
-                                  <Input placeholder="e.g. $10,000" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="flex items-center gap-2">
+                                <Phone className="w-4 h-4 text-primary" /> Secure Phone (Signal/Telegram preferred)
+                              </FormLabel>
+                              <FormControl>
+                                <Input placeholder="+1..." {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
 
                         <FormField
                           control={form.control}
@@ -324,11 +369,11 @@ export function AegisRecoveryForm() {
                           )}
                         />
 
-                        <Button type="submit" className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
+                        <Button type="submit" className="w-full h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
                           Submit Recovery Request <Send className="ml-2 w-5 h-5" />
                         </Button>
                         
-                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                        <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-60">
                           <ShieldCheck className="w-3 h-3 text-primary" />
                           Encrypted Submission Secured by AnalogHeal
                         </div>
