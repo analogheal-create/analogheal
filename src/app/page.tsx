@@ -11,6 +11,7 @@ import { AegisKnowledgeHub } from "@/components/AegisKnowledgeHub";
 import { AegisContact } from "@/components/AegisContact";
 import { AegisFooter } from "@/components/AegisFooter";
 import { AegisStickyCTA } from "@/components/AegisStickyCTA";
+import { AegisLiveSupport } from "@/components/AegisLiveSupport";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
       </main>
       <AegisFooter />
       <AegisStickyCTA />
+      <AegisLiveSupport />
     </div>
   );
 }

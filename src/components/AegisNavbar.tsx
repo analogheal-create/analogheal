@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, Menu, MessageCircle, ArrowRight } from "lucide-react";
+import { Shield, Menu, MessageCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -73,12 +73,15 @@ export function AegisNavbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant="secondary" size="sm" className="gap-2 text-primary-foreground font-semibold">
-            <MessageCircle className="w-4 h-4" />
-            Telegram
-          </Button>
-          <Button variant="outline" size="sm" asChild>
-            <Link href="#contact">Contact</Link>
+          <div className="flex items-center gap-2 mr-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Agents Online</span>
+          </div>
+          <Button variant="secondary" size="sm" className="gap-2 text-primary-foreground font-semibold" asChild>
+            <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-4 h-4" />
+              Telegram
+            </a>
           </Button>
           <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
             <Link href="#request">Start Recovery</Link>
@@ -87,6 +90,10 @@ export function AegisNavbar() {
 
         {/* Mobile Navigation */}
         <div className="lg:hidden flex items-center gap-4">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[8px] font-bold text-green-500 uppercase tracking-wider">Live</span>
+          </div>
           <Button variant="default" size="sm" asChild className="h-9 px-3">
             <Link href="#request">Start</Link>
           </Button>
@@ -115,9 +122,18 @@ export function AegisNavbar() {
                   </Link>
                 ))}
                 <div className="mt-auto pb-10 flex flex-col gap-4">
-                  <Button className="w-full justify-between h-12" variant="secondary">
-                    Join Telegram <MessageCircle className="w-5 h-5" />
-                  </Button>
+                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
+                    <div className="flex items-center gap-2 text-primary font-bold text-xs mb-2">
+                      <ShieldCheck className="w-4 h-4" />
+                      Live Agent Support
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically reply in under 5 minutes.</p>
+                    <Button className="w-full justify-between h-11" variant="secondary" asChild>
+                      <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
+                        Join Telegram <MessageCircle className="w-5 h-5" />
+                      </a>
+                    </Button>
+                  </div>
                   <Button className="w-full justify-between h-12" asChild>
                     <Link href="#request" onClick={() => setIsOpen(false)}>
                       Start Recovery <ArrowRight className="w-5 h-5" />
