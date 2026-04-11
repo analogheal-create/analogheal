@@ -4,6 +4,7 @@ import { AegisHero } from "@/components/AegisHero";
 import { AnalogHealProofLayer } from "@/components/AnalogHealProofLayer";
 import { AegisServices } from "@/components/AegisServices";
 import { AegisSteps } from "@/components/AegisSteps";
+import { AnalogHealGuarantee } from "@/components/AnalogHealGuarantee";
 import { AegisTrustStrip } from "@/components/AegisTrustStrip";
 import { AegisRecoveryForm } from "@/components/AegisRecoveryForm";
 import { AegisTestimonials } from "@/components/AegisTestimonials";
@@ -22,6 +23,7 @@ export default function Home() {
         <AnalogHealProofLayer />
         <AegisServices />
         <AegisSteps />
+        <AnalogHealGuarantee />
         <AegisTrustStrip />
         <AegisRecoveryForm />
         <AegisTestimonials />
