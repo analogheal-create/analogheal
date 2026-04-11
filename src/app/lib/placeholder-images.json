@@ -1,0 +1,41 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "team-working",
+      "description": "Expert team working in a modern digital forensics lab",
+      "imageUrl": "https://picsum.photos/seed/aegis1/800/600",
+      "imageHint": "cybersecurity forensics"
+    },
+    {
+      "id": "secure-server",
+      "description": "Highly secure encrypted server infrastructure",
+      "imageUrl": "https://picsum.photos/seed/aegis2/800/600",
+      "imageHint": "server security"
+    },
+    {
+      "id": "client-consultation",
+      "description": "Professional client consultation meeting",
+      "imageUrl": "https://picsum.photos/seed/aegis3/800/600",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "blog-1",
+      "description": "Crypto security guide cover",
+      "imageUrl": "https://picsum.photos/seed/blog1/400/250",
+      "imageHint": "bitcoin crypto"
+    },
+    {
+      "id": "blog-2",
+      "description": "Phishing protection article",
+      "imageUrl": "https://picsum.photos/seed/blog2/400/250",
+      "imageHint": "phishing alert"
+    },
+    {
+      "id": "blog-3",
+      "description": "Wallet recovery success story",
+      "imageUrl": "https://picsum.photos/seed/blog3/400/250",
+      "imageHint": "digital wallet"
+    }
+  ]
+}
