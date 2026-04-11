@@ -1,5 +1,5 @@
-
 import Image from "next/image";
+import { Shield } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const trustItems = [
@@ -16,14 +16,20 @@ export function AegisTrustStrip() {
           {trustItems.map((item) => {
             const imageData = PlaceHolderImages.find((img) => img.id === item.id);
             return (
-              <div key={item.id} className="relative group overflow-hidden rounded-2xl aspect-[4/3]">
-                <Image
-                  src={imageData?.imageUrl || ""}
-                  alt={imageData?.description || ""}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  data-ai-hint={imageData?.imageHint}
-                />
+              <div key={item.id} className="relative group overflow-hidden rounded-2xl aspect-[4/3] bg-card">
+                {imageData?.imageUrl ? (
+                  <Image
+                    src={imageData.imageUrl}
+                    alt={imageData.description || item.label}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    data-ai-hint={imageData.imageHint}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-primary/5">
+                    <Shield className="w-12 h-12 text-primary/20" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <div className="text-lg font-headline font-bold text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     {item.label}

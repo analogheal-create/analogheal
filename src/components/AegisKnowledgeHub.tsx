@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
-import { Search, ArrowRight, Sparkles, Loader2 } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Loader2, FileText } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -94,14 +93,20 @@ export function AegisKnowledgeHub() {
             const imageData = PlaceHolderImages.find((img) => img.id === post.id);
             return (
               <Card key={post.id} className="bg-background border-white/10 overflow-hidden group hover:border-primary/50 transition-all">
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src={imageData?.imageUrl || ""}
-                    alt={imageData?.description || ""}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-ai-hint={imageData?.imageHint}
-                  />
+                <div className="relative aspect-video overflow-hidden bg-card">
+                  {imageData?.imageUrl ? (
+                    <Image
+                      src={imageData.imageUrl}
+                      alt={imageData.description || post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      data-ai-hint={imageData.imageHint}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-primary/5">
+                      <FileText className="w-12 h-12 text-primary/20" />
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-xs font-bold text-white">
                     {post.category}
                   </div>
