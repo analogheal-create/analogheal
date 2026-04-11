@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI assistant flow to help users draft a detailed and clear recovery request message.
@@ -18,7 +19,7 @@ const AiDraftRecoveryMessageInputSchema = z.object({
 export type AiDraftRecoveryMessageInput = z.infer<typeof AiDraftRecoveryMessageInputSchema>;
 
 const AiDraftRecoveryMessageOutputSchema = z.object({
-  draftedMessage: z.string().describe('A detailed and clear drafted message for the recovery request, including optimal phrasing and necessary details for AegisRecovery agents.'),
+  draftedMessage: z.string().describe('A detailed and clear drafted message for the recovery request, including optimal phrasing and necessary details for AnalogHeal agents.'),
 });
 export type AiDraftRecoveryMessageOutput = z.infer<typeof AiDraftRecoveryMessageOutputSchema>;
 
@@ -32,7 +33,7 @@ const draftRecoveryMessagePrompt = ai.definePrompt({
   name: 'draftRecoveryMessagePrompt',
   input: {schema: AiDraftRecoveryMessageInputSchema},
   output: {schema: AiDraftRecoveryMessageOutputSchema},
-  prompt: `You are an AI assistant for AegisRecovery, a professional crypto and digital asset recovery service. Your task is to help users draft a detailed and clear recovery request message based on their provided information. The message should be professional, empathetic, and include all necessary details for AegisRecovery agents to quickly understand the situation and initiate the recovery process efficiently.
+  prompt: `You are an AI assistant for AnalogHeal, a professional crypto and digital asset recovery service. Your task is to help users draft a detailed and clear recovery request message based on their provided information. The message should be professional, empathetic, and include all necessary details for AnalogHeal agents to quickly understand the situation and initiate the recovery process efficiently.
 
 Focus on:
 - Clearly stating the recovery type.

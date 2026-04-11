@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, Menu, MessageCircle, Phone, ArrowRight } from "lucide-react";
+import { Shield, Menu, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -29,6 +29,23 @@ export function AegisNavbar() {
     setMounted(true);
   }, []);
 
+  if (!mounted) {
+    return (
+      <header className="glass-header">
+        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Shield className="w-8 h-8 text-primary" />
+            </div>
+            <span className="font-headline text-2xl font-bold tracking-tight">
+              Analog<span className="text-primary">Heal</span>
+            </span>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="glass-header">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -37,7 +54,7 @@ export function AegisNavbar() {
             <Shield className="w-8 h-8 text-primary" />
           </div>
           <span className="font-headline text-2xl font-bold tracking-tight">
-            Aegis<span className="text-primary">Recovery</span>
+            Analog<span className="text-primary">Heal</span>
           </span>
         </Link>
 
@@ -73,45 +90,41 @@ export function AegisNavbar() {
           <Button variant="default" size="sm" className="h-9 px-3">
             Start
           </Button>
-          {mounted ? (
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="w-6 h-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="bg-background border-white/10 p-0">
-                <SheetHeader className="sr-only">
-                  <SheetTitle>Navigation Menu</SheetTitle>
-                  <SheetDescription>Access website sections, services, and recovery tools.</SheetDescription>
-                </SheetHeader>
-                <div className="flex flex-col h-full pt-20 px-6 gap-6">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-xl font-headline font-semibold text-foreground"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                  <div className="mt-auto pb-10 flex flex-col gap-4">
-                    <Button className="w-full justify-between h-12" variant="secondary">
-                      Join Telegram <MessageCircle className="w-5 h-5" />
-                    </Button>
-                    <Button className="w-full justify-between h-12">
-                      Start Recovery <ArrowRight className="w-5 h-5" />
-                    </Button>
-                  </div>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-background border-white/10 p-0">
+              <SheetHeader className="px-6 pt-10 text-left">
+                <SheetTitle className="text-2xl font-headline font-bold">Menu</SheetTitle>
+                <SheetDescription>
+                  Access our professional recovery services and knowledge hub.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="flex flex-col h-full pt-6 px-6 gap-6">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-xl font-headline font-semibold text-foreground"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <div className="mt-auto pb-10 flex flex-col gap-4">
+                  <Button className="w-full justify-between h-12" variant="secondary">
+                    Join Telegram <MessageCircle className="w-5 h-5" />
+                  </Button>
+                  <Button className="w-full justify-between h-12">
+                    Start Recovery <ArrowRight className="w-5 h-5" />
+                  </Button>
                 </div>
-              </SheetContent>
-            </Sheet>
-          ) : (
-            <Button variant="ghost" size="icon">
-              <Menu className="w-6 h-6" />
-            </Button>
-          )}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

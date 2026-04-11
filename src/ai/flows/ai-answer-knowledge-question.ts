@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview This file implements a Genkit flow for answering user questions
@@ -30,7 +31,7 @@ const knowledgeQuestionPrompt = ai.definePrompt({
   name: 'knowledgeQuestionPrompt',
   input: { schema: AIAnswerKnowledgeQuestionInputSchema },
   output: { schema: AIAnswerKnowledgeQuestionOutputSchema },
-  prompt: `You are an expert in crypto recovery and digital assets. Your goal is to provide concise, direct, and helpful answers to user questions.
+  prompt: `You are an expert in crypto recovery and digital assets at AnalogHeal. Your goal is to provide concise, direct, and helpful answers to user questions.
 
 Answer the following question based on the provided context articles. If no context articles are provided, or if they do not contain the answer, use your general knowledge to answer as best as you can.
 

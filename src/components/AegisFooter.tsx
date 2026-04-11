@@ -7,9 +7,11 @@ import { useState, useEffect } from "react";
 
 export function AegisFooter() {
   const [year, setYear] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
+    setMounted(true);
   }, []);
 
   return (
@@ -20,7 +22,7 @@ export function AegisFooter() {
             <Link href="/" className="flex items-center gap-2 group">
               <Shield className="w-8 h-8 text-primary" />
               <span className="font-headline text-2xl font-bold">
-                Aegis<span className="text-primary">Recovery</span>
+                Analog<span className="text-primary">Heal</span>
               </span>
             </Link>
             <p className="text-muted-foreground leading-relaxed">
@@ -80,7 +82,7 @@ export function AegisFooter() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div>© {year ?? '...'} Aegis Recovery Systems. All rights reserved.</div>
+          <div>© {mounted ? year : '...'} AnalogHeal Recovery Systems. All rights reserved.</div>
           <div className="flex gap-6">
             <span>Certifications:</span>
             <span className="font-bold text-foreground/50">ISO 27001</span>

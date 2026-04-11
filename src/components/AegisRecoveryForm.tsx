@@ -76,7 +76,7 @@ export function AegisRecoveryForm() {
       form.setValue("message", result.draftedMessage);
       toast({
         title: "AI Draft Complete",
-        description: "Your message has been enhanced for our agents.",
+        description: "Your message has been enhanced for our AnalogHeal agents.",
       });
     } catch (error) {
       toast({
@@ -125,7 +125,7 @@ export function AegisRecoveryForm() {
                   </div>
                   <div>
                     <div className="font-semibold">Telegram Channel</div>
-                    <div className="text-sm text-muted-foreground">@AegisRecovery</div>
+                    <div className="text-sm text-muted-foreground">@AnalogHeal</div>
                   </div>
                 </div>
               </div>

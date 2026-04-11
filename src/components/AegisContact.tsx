@@ -1,5 +1,5 @@
 
-import { Mail, Phone, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
+import { Mail, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
 
 const benefits = [
   "Industry-leading 94% success rate",
@@ -27,7 +27,7 @@ export function AegisContact() {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">Email Us</div>
-                  <div className="text-lg font-semibold">support@aegisrecovery.com</div>
+                  <div className="text-lg font-semibold">support@analogheal.com</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -36,7 +36,7 @@ export function AegisContact() {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">Telegram</div>
-                  <div className="text-lg font-semibold">@AegisRecoverySupport</div>
+                  <div className="text-lg font-semibold">@AnalogHealSupport</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ export function AegisContact() {
           </div>
 
           <div className="p-10 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-md">
-            <h3 className="text-2xl font-headline font-bold mb-8">Why Choose Aegis Recovery?</h3>
+            <h3 className="text-2xl font-headline font-bold mb-8">Why Choose AnalogHeal?</h3>
             <ul className="space-y-6">
               {benefits.map((benefit) => (
                 <li key={benefit} className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export function AegisContact() {
               ))}
             </ul>
             <div className="mt-10 pt-10 border-t border-primary/20">
-              <div className="text-sm text-muted-foreground mb-4">Aegis Recovery is a registered digital forensics firm specializing in blockchain asset reclamation and cyber insurance recovery.</div>
+              <div className="text-sm text-muted-foreground mb-4">AnalogHeal is a registered digital forensics firm specializing in blockchain asset reclamation and cyber insurance recovery.</div>
             </div>
           </div>
         </div>
