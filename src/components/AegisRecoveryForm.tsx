@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -267,7 +266,7 @@ export function AegisRecoveryForm() {
                             </FormItem>
                           )}
                         />
-                        <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
+                        <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
                           Continue to Final Step <ChevronRight className="ml-2 w-5 h-5" />
                         </Button>
                       </div>
@@ -369,7 +368,7 @@ export function AegisRecoveryForm() {
                           )}
                         />
 
-                        <Button type="submit" className="w-full h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
+                        <Button type="submit" className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
                           Submit Recovery Request <Send className="ml-2 w-5 h-5" />
                         </Button>
                         

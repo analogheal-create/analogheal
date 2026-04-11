@@ -63,3 +63,11 @@
 .institutional-border {
   @apply border border-white/10 hover:border-primary/50 transition-colors duration-300;
 }
+
+.btn-glow {
+  @apply shadow-lg shadow-primary/20 hover:shadow-primary/40 active:shadow-inner transition-all;
+}
+
+.card-hover {
+  @apply hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300;
+}
