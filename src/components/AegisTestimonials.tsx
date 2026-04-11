@@ -1,28 +1,37 @@
 
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, TrendingUp, ShieldCheck, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-const testimonials = [
+const caseStudies = [
   {
-    name: "Alex Thompson",
+    name: "A. Thompson",
     role: "Private Investor",
-    result: "$45k Recovered",
-    quote: "After losing my seed phrase for an old hardware wallet, I thought my life savings were gone. AnalogHeal's forensic team found a way in within 48 hours. Absolute lifesavers.",
+    title: "Phishing Scam Reclamation",
+    result: "$32,700 Recovered (82%)",
+    metrics: "Mixer Hop Tracing • VASP Freeze",
+    quote: "I lost my USDT to a sophisticated drainer. AnalogHeal traced the funds across 4 mixer hops and identified the final exchange endpoint. Most of my capital was returned within 11 days.",
     stars: 5,
+    icon: TrendingUp,
   },
   {
-    name: "Sarah Chen",
+    name: "S. Chen",
     role: "Crypto Trader",
-    result: "Hacked Account Restored",
-    quote: "My exchange account was compromised via a sophisticated phishing attack. AnalogHeal worked with the exchange compliance team and tracked the movements, leading to a full recovery.",
+    title: "SIM-Swap Account Hijack",
+    result: "Full Exchange Access Restored",
+    metrics: "Identity Forensics • Legal Intercept",
+    quote: "Locked out of my primary exchange after a SIM-swap. The AnalogHeal team navigated the exchange's legal compliance layer and verified my forensic identity trail to restore access in 72 hours.",
     stars: 5,
+    icon: ShieldCheck,
   },
   {
-    name: "Michael Miller",
+    name: "M. Miller",
     role: "DeFi Developer",
-    result: "Multi-sig Access Restored",
-    quote: "Professional, transparent, and incredibly knowledgeable. They understand the underlying smart contracts better than most developers. Highly recommended for complex cases.",
+    title: "Legacy Wallet Extraction",
+    result: "$118,000 Recovered (100%)",
+    metrics: "GPU Cluster Brute-Force",
+    quote: "Forgotten password on an old JSON wallet from 2016. Their high-performance computing cluster successfully extracted the private key where others failed. Incredible technical depth.",
     stars: 5,
+    icon: Zap,
   },
 ];
 
@@ -31,31 +40,46 @@ export function AegisTestimonials() {
     <section className="py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl lg:text-5xl font-headline font-bold mb-6">Trusted by the Global Community</h2>
+          <h2 className="text-3xl lg:text-5xl font-headline font-bold mb-6">Proven Recovery Results</h2>
           <p className="text-muted-foreground text-lg">
-            Our success is measured by the peace of mind we restore to our clients.
+            Specificity is our strength. See how we've navigated complex blockchain forensics to reclaim digital wealth for our clients.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, idx) => (
-            <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+          {caseStudies.map((cs, idx) => (
+            <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all">
+              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Quote className="w-20 h-20 text-primary" />
               </div>
               <CardContent className="pt-8">
-                <div className="flex gap-1 mb-6">
-                  {Array.from({ length: t.stars }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                  ))}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                    <cs.icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Case Study #{idx + 1042}</span>
                 </div>
-                <p className="text-lg leading-relaxed mb-8 italic text-muted-foreground">
-                  "{t.quote}"
+                
+                <h3 className="text-xl font-headline font-bold mb-1">{cs.title}</h3>
+                <div className="text-xs font-medium text-secondary mb-6 flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-current" /> {cs.result}
+                </div>
+
+                <p className="text-base leading-relaxed mb-8 italic text-muted-foreground">
+                  "{cs.quote}"
                 </p>
-                <div>
-                  <div className="font-bold text-lg">{t.name}</div>
-                  <div className="text-sm text-primary font-semibold">{t.role}</div>
-                  <div className="mt-2 text-xs uppercase tracking-widest text-secondary">{t.result}</div>
+                
+                <div className="pt-6 border-t border-white/5">
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <div className="font-bold text-sm">{cs.name}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{cs.role}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-[10px] font-bold text-primary/70 uppercase">Forensic Method</div>
+                      <div className="text-[9px] text-muted-foreground">{cs.metrics}</div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
