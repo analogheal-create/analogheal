@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -50,7 +49,7 @@ export function AegisNavbar() {
     <header className="glass-header">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
+          <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors glow-interaction">
             <Shield className="w-8 h-8 text-primary" />
           </div>
           <span className="font-headline text-2xl font-bold tracking-tight">
@@ -67,34 +66,34 @@ export function AegisNavbar() {
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full shadow-sm shadow-primary"></span>
             </Link>
           ))}
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          <div className="flex items-center gap-2 mr-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <div className="flex items-center gap-2 mr-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 glow-confirmation">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
             <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Agents Online</span>
           </div>
-          <Button variant="secondary" size="sm" className="gap-2 text-primary-foreground font-semibold" asChild>
+          <Button variant="secondary" size="sm" className="gap-2 text-primary-foreground font-semibold glow-interaction" asChild>
             <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="w-4 h-4" />
               Telegram
             </a>
           </Button>
-          <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
+          <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 btn-glow">
             <Link href="#request">Start Recovery</Link>
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <div className="lg:hidden flex items-center gap-4">
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 border border-green-500/20">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 border border-green-500/20 glow-confirmation">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
             <span className="text-[8px] font-bold text-green-500 uppercase tracking-wider">Live</span>
           </div>
-          <Button variant="default" size="sm" asChild className="h-9 px-3">
+          <Button variant="default" size="sm" asChild className="h-9 px-3 btn-glow">
             <Link href="#request">Start</Link>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -122,7 +121,7 @@ export function AegisNavbar() {
                   </Link>
                 ))}
                 <div className="mt-auto pb-10 flex flex-col gap-4">
-                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
+                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 glow-interaction">
                     <div className="flex items-center gap-2 text-primary font-bold text-xs mb-2">
                       <ShieldCheck className="w-4 h-4" />
                       Live Agent Support
@@ -134,7 +133,7 @@ export function AegisNavbar() {
                       </a>
                     </Button>
                   </div>
-                  <Button className="w-full justify-between h-12" asChild>
+                  <Button className="w-full justify-between h-12 btn-glow" asChild>
                     <Link href="#request" onClick={() => setIsOpen(false)}>
                       Start Recovery <ArrowRight className="w-5 h-5" />
                     </Link>

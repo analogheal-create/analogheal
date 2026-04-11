@@ -55,7 +55,7 @@ const funnelOptions = [
 
 export function AegisRecoveryForm() {
   const { toast } = useToast();
-  const [step, setStep] = useState(0); // 0: Category, 1: Value, 2: Contact/Details
+  const [step, setStep] = useState(0); 
   const [isDrafting, setIsDrafting] = useState(false);
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -146,22 +146,22 @@ export function AegisRecoveryForm() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Trust & Context */}
             <div className="lg:col-span-4 space-y-8">
-              <div className="p-8 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-sm">
+              <div className="p-8 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-sm glow-confirmation">
                 <div className="flex items-center gap-3 text-primary font-bold mb-4">
-                  <ShieldCheck className="w-6 h-6" />
+                  <ShieldCheck className="w-6 h-6 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                   AnalogHeal Security Protocol
                 </div>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
                     <span className="text-sm">End-to-end encrypted communication via Swiss servers.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
                     <span className="text-sm">No upfront forensic fees for qualifying scam cases.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
                     <span className="text-sm">Direct access to certified blockchain investigators.</span>
                   </li>
                 </ul>
@@ -169,8 +169,8 @@ export function AegisRecoveryForm() {
 
               <div className="space-y-4">
                 <h3 className="font-bold text-lg">Immediate Assistance</h3>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors cursor-pointer">
-                  <div className="p-3 rounded-lg bg-green-500/10 text-green-500">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-500/50 glow-confirmation transition-colors cursor-pointer group">
+                  <div className="p-3 rounded-lg bg-green-500/10 text-green-500 group-hover:bg-green-500/20">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
@@ -178,8 +178,8 @@ export function AegisRecoveryForm() {
                     <div className="text-xs text-muted-foreground">Immediate Case Priority</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors cursor-pointer">
-                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-500">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 glow-interaction transition-colors cursor-pointer group">
+                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-500 group-hover:bg-blue-500/20">
                     <MessageCircle className="w-6 h-6" />
                   </div>
                   <div>
@@ -196,7 +196,7 @@ export function AegisRecoveryForm() {
 
             {/* Right Column: Funnel Form */}
             <div className="lg:col-span-8">
-              <div className="p-8 rounded-3xl bg-card border border-white/10 shadow-2xl relative overflow-hidden">
+              <div className="p-8 rounded-3xl bg-card border border-white/10 shadow-2xl relative overflow-hidden glow-interaction">
                 <div className="mb-8">
                   <div className="flex justify-between items-end mb-2">
                     <span className="text-xs font-bold text-primary uppercase tracking-wider">{stepLabel}</span>
@@ -216,9 +216,9 @@ export function AegisRecoveryForm() {
                           key={opt.id}
                           type="button"
                           onClick={() => handleSelectType(opt.id)}
-                          className="flex flex-col items-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group text-left"
+                          className="flex flex-col items-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group text-left glow-interaction"
                         >
-                          <div className="p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
+                          <div className="p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                             <opt.icon className="w-6 h-6" />
                           </div>
                           <div className="font-bold mb-1">{opt.label}</div>
@@ -253,13 +253,13 @@ export function AegisRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-lg font-semibold flex items-center gap-2">
-                                <TrendingUp className="w-5 h-5 text-primary" />
+                                <TrendingUp className="w-5 h-5 text-accent glow-success" />
                                 Value of Lost/Stolen Assets (USD)
                               </FormLabel>
                               <FormControl>
                                 <div className="relative">
                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">$</span>
-                                  <Input placeholder="e.g. 25,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10" {...field} />
+                                  <Input placeholder="e.g. 25,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10 focus:border-accent/50 glow-success" {...field} />
                                 </div>
                               </FormControl>
                               <FormMessage />
@@ -298,7 +298,7 @@ export function AegisRecoveryForm() {
                                   <User className="w-4 h-4 text-primary" /> Full Name
                                 </FormLabel>
                                 <FormControl>
-                                  <Input placeholder="John Doe" {...field} />
+                                  <Input placeholder="John Doe" {...field} className="glow-interaction" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -313,7 +313,7 @@ export function AegisRecoveryForm() {
                                   <Mail className="w-4 h-4 text-primary" /> Email Address
                                 </FormLabel>
                                 <FormControl>
-                                  <Input placeholder="john@example.com" {...field} />
+                                  <Input placeholder="john@example.com" {...field} className="glow-interaction" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -330,7 +330,7 @@ export function AegisRecoveryForm() {
                                 <Phone className="w-4 h-4 text-primary" /> Secure Phone (Signal/Telegram preferred)
                               </FormLabel>
                               <FormControl>
-                                <Input placeholder="+1..." {...field} />
+                                <Input placeholder="+1..." {...field} className="glow-interaction" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -348,7 +348,7 @@ export function AegisRecoveryForm() {
                                   type="button" 
                                   variant="ghost" 
                                   size="sm" 
-                                  className="h-8 text-primary gap-1.5 px-2 hover:bg-primary/10"
+                                  className="h-8 text-accent gap-1.5 px-2 hover:bg-accent/10 glow-success"
                                   onClick={handleAIDraft}
                                   disabled={isDrafting}
                                 >
@@ -359,7 +359,7 @@ export function AegisRecoveryForm() {
                               <FormControl>
                                 <Textarea 
                                   placeholder="What was the last step before you lost access? Mention any transaction IDs if available." 
-                                  className="min-h-[140px] bg-background/50"
+                                  className="min-h-[140px] bg-background/50 glow-interaction"
                                   {...field} 
                                 />
                               </FormControl>
@@ -372,8 +372,8 @@ export function AegisRecoveryForm() {
                           Submit Recovery Request <Send className="ml-2 w-5 h-5" />
                         </Button>
                         
-                        <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-60">
-                          <ShieldCheck className="w-3 h-3 text-primary" />
+                        <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-60 glow-confirmation py-1 rounded-full">
+                          <ShieldCheck className="w-3 h-3 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
                           Encrypted Submission Secured by AnalogHeal
                         </div>
                       </form>

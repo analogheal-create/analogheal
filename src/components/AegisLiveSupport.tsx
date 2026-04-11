@@ -21,7 +21,7 @@ export function AegisLiveSupport() {
       <div
         className={cn(
           "mb-4 w-72 sm:w-80 rounded-2xl bg-card border border-white/10 shadow-2xl overflow-hidden transition-all duration-300 origin-bottom-right",
-          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
+          isOpen ? "scale-100 opacity-100 glow-interaction" : "scale-95 opacity-0 pointer-events-none"
         )}
       >
         <div className="bg-primary p-4 flex items-center justify-between text-white">
@@ -30,7 +30,7 @@ export function AegisLiveSupport() {
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-primary rounded-full animate-pulse" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-primary rounded-full animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,1)]" />
             </div>
             <div>
               <div className="font-bold text-sm font-body">AnalogHeal Support</div>
@@ -52,12 +52,12 @@ export function AegisLiveSupport() {
           
           <div className="space-y-2">
             <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 font-body">Secure Direct Lines</div>
-            <Button variant="secondary" className="w-full justify-between h-11 text-xs font-bold font-body" asChild>
+            <Button variant="secondary" className="w-full justify-between h-11 text-xs font-bold font-body glow-interaction" asChild>
               <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
                 Verified Telegram <MessageCircle className="w-4 h-4" />
               </a>
             </Button>
-            <Button variant="outline" className="w-full justify-between h-11 text-xs font-bold border-white/10 font-body" asChild>
+            <Button variant="outline" className="w-full justify-between h-11 text-xs font-bold border-white/10 font-body hover:border-green-500/50 glow-confirmation" asChild>
               <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer">
                 WhatsApp Secure <Phone className="w-4 h-4 text-green-500" />
               </a>
@@ -65,7 +65,7 @@ export function AegisLiveSupport() {
           </div>
 
           <div className="pt-2 flex items-center justify-center gap-1.5 text-[9px] text-muted-foreground opacity-60 font-body">
-            <ShieldCheck className="w-3 h-3" />
+            <ShieldCheck className="w-3 h-3 text-green-500" />
             Swiss-encrypted secure interaction
           </div>
         </div>
@@ -76,14 +76,14 @@ export function AegisLiveSupport() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            "w-14 h-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 relative z-10",
+            "w-14 h-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 relative z-10 btn-glow",
             isOpen ? "rotate-90" : "rotate-0"
           )}
         >
           {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
         </button>
         {!isOpen && (
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-background rounded-full z-20" />
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-background rounded-full z-20 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.8)]" />
         )}
       </div>
     </div>

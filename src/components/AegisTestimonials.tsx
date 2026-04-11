@@ -13,6 +13,7 @@ const caseStudies = [
     quote: "I lost my USDT to a sophisticated drainer. AnalogHeal traced the funds across 4 mixer hops and identified the final exchange endpoint. Most of my capital was returned within 11 days.",
     stars: 5,
     icon: TrendingUp,
+    glow: "glow-success",
   },
   {
     name: "S. Chen",
@@ -23,6 +24,7 @@ const caseStudies = [
     quote: "Locked out of my primary exchange after a SIM-swap. The AnalogHeal team navigated the exchange's legal compliance layer and verified my forensic identity trail to restore access in 72 hours.",
     stars: 5,
     icon: ShieldCheck,
+    glow: "glow-confirmation",
   },
   {
     name: "M. Miller",
@@ -33,6 +35,7 @@ const caseStudies = [
     quote: "Forgotten password on an old JSON wallet from 2016. Their high-performance computing cluster successfully extracted the private key where others failed. Incredible technical depth.",
     stars: 5,
     icon: Zap,
+    glow: "glow-interaction",
   },
 ];
 
@@ -49,20 +52,20 @@ export function AegisTestimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {caseStudies.map((cs, idx) => (
-            <Card key={idx} className="bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all premium-transition">
+            <Card key={idx} className={`bg-card border-white/5 relative overflow-hidden group hover:border-primary/50 transition-all premium-transition ${cs.glow}`}>
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Quote className="w-20 h-20 text-primary" />
               </div>
               <CardContent className="pt-8">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                  <div className={`p-2 rounded-lg bg-primary/10 text-primary ${idx === 0 ? 'glow-success' : ''}`}>
                     <cs.icon className="w-4 h-4" />
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Case Study #{idx + 1042}</span>
                 </div>
                 
                 <h3 className="text-xl font-headline font-bold mb-1">{cs.title}</h3>
-                <div className="text-xs font-bold text-accent mb-6 flex items-center gap-1.5 uppercase tracking-wide">
+                <div className="text-xs font-bold text-accent mb-6 flex items-center gap-1.5 uppercase tracking-wide glow-success w-fit px-2 py-0.5 rounded-full bg-accent/5">
                   <Star className="w-3 h-3 fill-current" /> {cs.result}
                 </div>
 
@@ -88,13 +91,13 @@ export function AegisTestimonials() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <Button size="lg" asChild className="px-10 h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+          <Button size="lg" asChild className="px-10 h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105 btn-glow">
             <Link href="#request">
               Start My Recovery Now <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground font-semibold">
-            <ShieldCheck className="w-4 h-4 text-accent" /> 
+          <div className="flex items-center gap-2 text-sm text-muted-foreground font-semibold glow-confirmation px-3 py-1 rounded-full bg-green-500/5">
+            <ShieldCheck className="w-4 h-4 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]" /> 
             Join 3,800+ successful recovery clients
           </div>
         </div>
