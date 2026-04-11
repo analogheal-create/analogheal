@@ -80,15 +80,15 @@ export function AegisNavbar() {
           <Button variant="outline" size="sm" asChild>
             <Link href="#contact">Contact</Link>
           </Button>
-          <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 animate-pulse-subtle">
-            Start Recovery
+          <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
+            <Link href="#request">Start Recovery</Link>
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <div className="lg:hidden flex items-center gap-4">
-          <Button variant="default" size="sm" className="h-9 px-3">
-            Start
+          <Button variant="default" size="sm" asChild className="h-9 px-3">
+            <Link href="#request">Start</Link>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -118,8 +118,10 @@ export function AegisNavbar() {
                   <Button className="w-full justify-between h-12" variant="secondary">
                     Join Telegram <MessageCircle className="w-5 h-5" />
                   </Button>
-                  <Button className="w-full justify-between h-12">
-                    Start Recovery <ArrowRight className="w-5 h-5" />
+                  <Button className="w-full justify-between h-12" asChild>
+                    <Link href="#request" onClick={() => setIsOpen(false)}>
+                      Start Recovery <ArrowRight className="w-5 h-5" />
+                    </Link>
                   </Button>
                 </div>
               </div>

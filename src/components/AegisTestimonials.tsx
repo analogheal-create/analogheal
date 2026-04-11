@@ -7,14 +7,14 @@ const testimonials = [
     name: "Alex Thompson",
     role: "Private Investor",
     result: "$45k Recovered",
-    quote: "After losing my seed phrase for an old hardware wallet, I thought my life savings were gone. AegisRecovery's forensic team found a way in within 48 hours. Absolute lifesavers.",
+    quote: "After losing my seed phrase for an old hardware wallet, I thought my life savings were gone. AnalogHeal's forensic team found a way in within 48 hours. Absolute lifesavers.",
     stars: 5,
   },
   {
     name: "Sarah Chen",
     role: "Crypto Trader",
     result: "Hacked Account Restored",
-    quote: "My exchange account was compromised via a sophisticated phishing attack. Aegis worked with the exchange compliance team and tracked the movements, leading to a full recovery.",
+    quote: "My exchange account was compromised via a sophisticated phishing attack. AnalogHeal worked with the exchange compliance team and tracked the movements, leading to a full recovery.",
     stars: 5,
   },
   {

@@ -93,7 +93,7 @@ export function AegisRecoveryForm() {
     console.log(values);
     toast({
       title: "Request Submitted",
-      description: "Our experts will review your case and contact you within 24-48 hours.",
+      description: "Our experts will review your case and contact you within 24 hours.",
     });
     form.reset();
   }
@@ -258,7 +258,7 @@ export function AegisRecoveryForm() {
                     )}
                   />
 
-                  <Button type="submit" className="w-full h-12 text-lg font-bold">
+                  <Button type="submit" className="w-full h-12 text-lg font-bold bg-primary hover:bg-primary/90">
                     Send Request <Send className="ml-2 w-5 h-5" />
                   </Button>
                 </form>
