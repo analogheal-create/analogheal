@@ -1,4 +1,3 @@
-
 import { ClipboardList, Search, Settings, CheckCircle, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -53,11 +52,11 @@ export function AegisSteps() {
                   </span>
                   <step.icon className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                <p className="text-muted-foreground text-sm max-w-[240px] leading-relaxed mb-4">
+                <h3 className="text-xl font-headline font-bold mb-2">{step.title}</h3>
+                <p className="text-muted-foreground text-sm max-w-[240px] leading-relaxed mb-4 font-body">
                   {step.description}
                 </p>
-                <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-wider">
+                <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-wider font-body">
                   {step.benefit}
                 </div>
               </div>
@@ -69,16 +68,16 @@ export function AegisSteps() {
           <div className="flex flex-col items-center">
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10">
               <Clock className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">
+              <span className="text-sm font-body font-medium">
                 <strong className="text-foreground">Average Resolution Time:</strong> Most cases are fully resolved within 3–14 business days.
               </span>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground italic">
+            <p className="mt-4 text-xs text-muted-foreground italic font-body">
               *Complex multi-jurisdictional cases may require additional forensic cycles.
             </p>
           </div>
 
-          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105 font-body">
             <Link href="#request">
               Check My Case Probability <ArrowRight className="ml-2 w-5 h-5" />
             </Link>

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -34,8 +33,8 @@ export function AegisLiveSupport() {
               <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-primary rounded-full animate-pulse" />
             </div>
             <div>
-              <div className="font-bold text-sm">AnalogHeal Support</div>
-              <div className="text-[10px] opacity-80 flex items-center gap-1">
+              <div className="font-bold text-sm font-body">AnalogHeal Support</div>
+              <div className="text-[10px] opacity-80 flex items-center gap-1 font-body">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
                 Specialists Online
               </div>
@@ -47,25 +46,25 @@ export function AegisLiveSupport() {
         </div>
 
         <div className="p-4 space-y-4">
-          <div className="bg-white/5 rounded-xl p-3 text-xs leading-relaxed text-muted-foreground">
+          <div className="bg-white/5 rounded-xl p-3 text-xs leading-relaxed text-muted-foreground font-body">
             Hi! I'm here to help you with your recovery. Typically, we reply in <span className="text-primary font-bold">under 5 minutes</span>. How can we assist you today?
           </div>
           
           <div className="space-y-2">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">Secure Direct Lines</div>
-            <Button variant="secondary" className="w-full justify-between h-11 text-xs font-bold" asChild>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 font-body">Secure Direct Lines</div>
+            <Button variant="secondary" className="w-full justify-between h-11 text-xs font-bold font-body" asChild>
               <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
                 Verified Telegram <MessageCircle className="w-4 h-4" />
               </a>
             </Button>
-            <Button variant="outline" className="w-full justify-between h-11 text-xs font-bold border-white/10" asChild>
+            <Button variant="outline" className="w-full justify-between h-11 text-xs font-bold border-white/10 font-body" asChild>
               <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer">
                 WhatsApp Secure <Phone className="w-4 h-4 text-green-500" />
               </a>
             </Button>
           </div>
 
-          <div className="pt-2 flex items-center justify-center gap-1.5 text-[9px] text-muted-foreground opacity-60">
+          <div className="pt-2 flex items-center justify-center gap-1.5 text-[9px] text-muted-foreground opacity-60 font-body">
             <ShieldCheck className="w-3 h-3" />
             Swiss-encrypted secure interaction
           </div>

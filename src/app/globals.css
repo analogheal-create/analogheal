@@ -5,19 +5,19 @@
 @layer base {
   :root {
     /* Elite Forensic Authority Palette */
-    --background: 220 55% 10%;
+    --background: 220 55% 10%; /* #0B1426 */
     --foreground: 210 20% 98%;
-    --card: 219 49% 14%;
+    --card: 219 49% 14%; /* #121E35 */
     --card-foreground: 210 20% 98%;
     --popover: 220 55% 10%;
     --popover-foreground: 210 20% 98%;
-    --primary: 217 91% 60%;
+    --primary: 217 91% 60%; /* #3B82F6 */
     --primary-foreground: 210 20% 98%;
-    --secondary: 225 76% 48%;
+    --secondary: 225 76% 48%; /* #1D4ED8 */
     --secondary-foreground: 210 20% 98%;
     --muted: 220 55% 20%;
     --muted-foreground: 210 10% 70%;
-    --accent: 38 92% 50%;
+    --accent: 38 92% 50%; /* #F59E0B */
     --accent-foreground: 220 55% 10%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 98%;
@@ -28,7 +28,7 @@
 
     /* Chart Colors */
     --chart-1: 217 91% 60%;
-    --chart-2: 142 71% 45%;
+    --chart-2: 142 71% 45%; /* #22C55E Success */
     --chart-3: 38 92% 50%;
     --chart-4: 225 76% 48%;
     --chart-5: 0 84% 60%;
@@ -40,8 +40,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
   }
 }
 
