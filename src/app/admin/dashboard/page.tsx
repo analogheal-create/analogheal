@@ -4,18 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { 
-  Shield, 
-  LogOut, 
-  LayoutDashboard, 
   FileText, 
-  Users, 
-  Settings, 
   Activity, 
   TrendingUp, 
   ShieldCheck,
   Search,
   ChevronRight,
-  MoreVertical,
   Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,13 +24,12 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
+import { AdminSidebar } from "@/components/AdminSidebar";
 
 export default function AdminDashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -51,15 +44,6 @@ export default function AdminDashboardPage() {
     checkAuth();
   }, [router]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Logged Out",
-      description: "Secure session terminated.",
-    });
-    router.push("/admin/login");
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -70,57 +54,10 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-white/5 bg-card/30 backdrop-blur-xl hidden lg:flex flex-col">
-        <div className="p-6 border-b border-white/5">
-          <div className="flex items-center gap-2 mb-2">
-            <Shield className="w-6 h-6 text-primary" />
-            <span className="font-headline font-bold text-lg">AnalogHeal</span>
-          </div>
-          <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-            Forensic Command
-          </div>
-        </div>
-
-        <nav className="flex-1 p-4 space-y-2">
-          <Button variant="secondary" className="w-full justify-start gap-3 bg-primary/10 text-primary">
-            <LayoutDashboard className="w-4 h-4" /> Dashboard
-          </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-primary">
-            <FileText className="w-4 h-4" /> Recovery Files
-          </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-primary">
-            <Activity className="w-4 h-4" /> Intelligence Logs
-          </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-primary">
-            <Users className="w-4 h-4" /> Client Database
-          </Button>
-          <div className="pt-4 mt-4 border-t border-white/5">
-            <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-primary">
-              <Settings className="w-4 h-4" /> Lab Settings
-            </Button>
-          </div>
-        </nav>
-
-        <div className="p-4 border-t border-white/5">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 mb-4">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
-              AD
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-xs font-bold truncate">{user?.email?.split('@')[0]}</div>
-              <div className="text-[9px] text-muted-foreground uppercase font-bold">Lead Analyst</div>
-            </div>
-          </div>
-          <Button variant="ghost" className="w-full justify-start gap-3 text-destructive hover:bg-destructive/10" onClick={handleLogout}>
-            <LogOut className="w-4 h-4" /> Sign Out
-          </Button>
-        </div>
-      </aside>
+      <AdminSidebar userEmail={user?.email} />
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        {/* Header */}
         <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
           <h1 className="font-headline font-bold text-xl">Operational Overview</h1>
           <div className="flex items-center gap-4">
@@ -232,54 +169,6 @@ export default function AdminDashboardPage() {
               </Table>
             </CardContent>
           </Card>
-
-          {/* Infrastructure Health */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="bg-card/50 border-white/5">
-              <CardHeader>
-                <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Laboratory Load</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    { label: "Zürich Node (Main)", load: 65, color: "bg-primary" },
-                    { label: "Singapore Relay", load: 42, color: "bg-accent" },
-                    { label: "New York Forensic Cluster", load: 88, color: "bg-amber-500" },
-                  ].map((node) => (
-                    <div key={node.label} className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] font-bold uppercase tracking-tighter">
-                        <span>{node.label}</span>
-                        <span>{node.load}%</span>
-                      </div>
-                      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                        <div className={`h-full ${node.color} transition-all duration-500`} style={{ width: `${node.load}%` }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/50 border-white/5">
-              <CardHeader>
-                <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Security Notifications</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="p-3 rounded-lg bg-primary/5 border border-primary/20 flex gap-3">
-                  <ShieldCheck className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  <div className="text-[11px] leading-relaxed">
-                    <span className="font-bold">System integrity verified.</span> All Swiss-based storage nodes report nominal performance.
-                  </div>
-                </div>
-                <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/20 flex gap-3">
-                  <Activity className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                  <div className="text-[11px] leading-relaxed">
-                    <span className="font-bold">Heuristic match detected.</span> Potential link found between file AH-4921 and known mixer pattern.
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </main>
     </div>
