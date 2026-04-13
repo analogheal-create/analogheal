@@ -9,11 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -25,6 +27,16 @@ export default function AdminLoginPage() {
       }
     };
     checkUser();
+
+    const fetchLogo = async () => {
+      const { data } = await supabase
+        .from('operational_proofs')
+        .select('image_url')
+        .eq('asset_key', 'brand-logo')
+        .single();
+      if (data) setLogoUrl(data.image_url);
+    };
+    fetchLogo();
   }, [router]);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -66,7 +78,13 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 rounded-2xl bg-primary/10 border border-primary/20 mb-4">
-            <Shield className="w-10 h-10 text-primary" />
+            {logoUrl ? (
+              <div className="relative w-12 h-12">
+                <Image src={logoUrl} alt="Logo" fill className="object-contain" />
+              </div>
+            ) : (
+              <Shield className="w-10 h-10 text-primary" />
+            )}
           </div>
           <h1 className="text-3xl font-headline font-bold text-foreground">
             Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground">Forensics</span>

@@ -9,7 +9,8 @@ import {
   Loader2, 
   CheckCircle2,
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  Image as ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -20,6 +21,7 @@ import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
 const assetTypes = [
+  { key: "brand-logo", label: "Institutional Brand Logo", hint: "company logo" },
   { key: "expert-team", label: "Expert Team", hint: "cybersecurity forensics" },
   { key: "secure-ops", label: "Secure Operations Center", hint: "server security" },
   { key: "consultation", label: "Client Consultation", hint: "business meeting" },
@@ -113,7 +115,7 @@ export default function TrustAssetsPage() {
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl">Trust Assets Manager</h1>
+          <h1 className="font-headline font-bold text-xl text-primary">Trust Assets Manager</h1>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
             <ShieldCheck className="w-3.5 h-3.5 text-primary" />
             <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Institutional Proof Hub</span>
@@ -125,7 +127,7 @@ export default function TrustAssetsPage() {
             <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 flex gap-4 items-center">
               <AlertCircle className="w-5 h-5 text-amber-500" />
               <p className="text-xs text-muted-foreground">
-                <strong>Attention:</strong> Updating these assets will immediately change the public Trust Strip on the homepage. Ensure all uploaded images meet AnalogHeal Forensic Lab's high-resolution standards.
+                <strong>Attention:</strong> Updating these assets will immediately change the public Trust Strip and brand elements across the platform. Ensure all uploaded images meet AnalogHeal Forensic Lab's high-resolution institutional standards.
               </p>
             </div>
 
@@ -135,16 +137,19 @@ export default function TrustAssetsPage() {
                   <div className="flex flex-col md:flex-row">
                     <div className="w-full md:w-64 bg-black/20 relative aspect-video md:aspect-auto">
                       {assets[type.key] ? (
-                        <Image 
-                          src={assets[type.key].image_url} 
-                          alt={type.label} 
-                          fill 
-                          className="object-cover"
-                        />
+                        <div className="relative w-full h-full p-4 flex items-center justify-center bg-white/[0.02]">
+                          <Image 
+                            src={assets[type.key].image_url} 
+                            alt={type.label} 
+                            width={200}
+                            height={200}
+                            className="object-contain max-h-full"
+                          />
+                        </div>
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground">
-                          <Camera className="w-8 h-8 mb-2 opacity-20" />
-                          <span className="text-[10px] uppercase font-bold tracking-widest">No Image</span>
+                          <ImageIcon className="w-8 h-8 mb-2 opacity-20" />
+                          <span className="text-[10px] uppercase font-bold tracking-widest">No Asset</span>
                         </div>
                       )}
                       {uploadingKey === type.key && (
@@ -163,7 +168,11 @@ export default function TrustAssetsPage() {
                             </div>
                           )}
                         </div>
-                        <p className="text-xs text-muted-foreground">Identified as institutional proof node. Displays in the primary Trust Strip section.</p>
+                        <p className="text-xs text-muted-foreground">
+                          {type.key === 'brand-logo' 
+                            ? "Official institutional logo used in Navbar, Sidebar, and Login terminal." 
+                            : "Identified as institutional proof node. Displays in the primary Trust Strip section."}
+                        </p>
                       </div>
                       <div className="space-y-3">
                         <Label className="text-[10px] uppercase font-bold text-muted-foreground">Replace Laboratory Evidence</Label>

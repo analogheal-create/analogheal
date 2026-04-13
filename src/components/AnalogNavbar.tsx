@@ -12,6 +12,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -23,10 +25,47 @@ const navLinks = [
 export function AnalogNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
+    const fetchLogo = async () => {
+      const { data } = await supabase
+        .from('operational_proofs')
+        .select('image_url')
+        .eq('asset_key', 'brand-logo')
+        .single();
+      if (data) setLogoUrl(data.image_url);
+    };
+    fetchLogo();
   }, []);
+
+  const LogoContent = () => (
+    <div className="flex items-center gap-3 group">
+      {logoUrl ? (
+        <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-primary/5 border border-white/5">
+          <Image 
+            src={logoUrl} 
+            alt="AnalogHeal Logo" 
+            fill 
+            className="object-contain p-1"
+          />
+        </div>
+      ) : (
+        <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors glow-interaction shrink-0">
+          <Shield className="w-8 h-8 text-primary" />
+        </div>
+      )}
+      <div className="flex flex-col">
+        <span className="font-headline text-2xl font-bold tracking-tight leading-none">
+          Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground font-medium text-lg">Forensics</span>
+        </span>
+        <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider mt-1 hidden sm:block">
+          Crypto Asset Recovery & Blockchain Intelligence
+        </span>
+      </div>
+    </div>
+  );
 
   if (!mounted) {
     return (
@@ -54,17 +93,7 @@ export function AnalogNavbar() {
     <header className="glass-header">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors glow-interaction shrink-0">
-            <Shield className="w-8 h-8 text-primary" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-headline text-2xl font-bold tracking-tight leading-none">
-              Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground font-medium text-lg">Forensics</span>
-            </span>
-            <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider mt-1 hidden sm:block">
-              Crypto Asset Recovery & Blockchain Intelligence
-            </span>
-          </div>
+          <LogoContent />
         </Link>
 
         {/* Desktop Navigation */}

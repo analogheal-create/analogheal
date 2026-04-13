@@ -17,13 +17,13 @@ Stores the authenticated recovery evidence displayed on the public "Verified For
 | `image_url` | `text` | NOT NULL | The public URL of the authenticated screenshot. |
 
 ### `operational_proofs`
-Stores the institutional trust images (Expert Team, SOC, etc.) displayed on the homepage.
+Stores the institutional trust images (Expert Team, SOC, Brand Logo, etc.) displayed on the homepage and across the platform.
 
 | Column | Type | Constraints | Description |
 | :--- | :--- | :--- | :--- |
 | `id` | `uuid` | PRIMARY KEY, DEFAULT gen_random_uuid() | Unique identifier. |
 | `created_at` | `timestamp` | DEFAULT now() | Creation date. |
-| `asset_key` | `text` | NOT NULL, UNIQUE | The identifier (e.g., "expert-team", "secure-ops", "consultation"). |
+| `asset_key` | `text` | NOT NULL, UNIQUE | The identifier (e.g., "brand-logo", "expert-team", "secure-ops", "consultation"). |
 | `label` | `text` | NOT NULL | Display label. |
 | `image_url` | `text` | NOT NULL | Public image URL. |
 

@@ -4,14 +4,26 @@ import Link from "next/link";
 import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
+import Image from "next/image";
 
 export function AnalogFooter() {
   const [year, setYear] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
     setMounted(true);
+    const fetchLogo = async () => {
+      const { data } = await supabase
+        .from('operational_proofs')
+        .select('image_url')
+        .eq('asset_key', 'brand-logo')
+        .single();
+      if (data) setLogoUrl(data.image_url);
+    };
+    fetchLogo();
   }, []);
 
   return (
@@ -42,7 +54,13 @@ export function AnalogFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <Shield className="w-8 h-8 text-primary" />
+              {logoUrl ? (
+                <div className="relative w-8 h-8 rounded bg-primary/10 overflow-hidden">
+                  <Image src={logoUrl} alt="Logo" fill className="object-contain p-1" />
+                </div>
+              ) : (
+                <Shield className="w-8 h-8 text-primary" />
+              )}
               <span className="font-headline text-2xl font-bold">
                 Analog<span className="text-primary">Heal</span> <span className="text-sm font-medium opacity-50">Forensics</span>
               </span>

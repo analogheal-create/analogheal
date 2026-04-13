@@ -19,11 +19,26 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export function AdminSidebar({ userEmail }: { userEmail?: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const { toast } = useToast();
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      const { data } = await supabase
+        .from('operational_proofs')
+        .select('image_url')
+        .eq('asset_key', 'brand-logo')
+        .single();
+      if (data) setLogoUrl(data.image_url);
+    };
+    fetchLogo();
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -48,8 +63,14 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
   return (
     <aside className="w-64 border-r border-white/5 bg-card/30 backdrop-blur-xl hidden lg:flex flex-col">
       <div className="p-6 border-b border-white/5">
-        <Link href="/admin/dashboard" className="flex items-center gap-2 mb-2">
-          <Shield className="w-6 h-6 text-primary" />
+        <Link href="/admin/dashboard" className="flex items-center gap-3 mb-2">
+          {logoUrl ? (
+            <div className="relative w-8 h-8 rounded bg-primary/10 overflow-hidden">
+              <Image src={logoUrl} alt="Logo" fill className="object-contain p-1" />
+            </div>
+          ) : (
+            <Shield className="w-6 h-6 text-primary" />
+          )}
           <span className="font-headline font-bold text-lg">AnalogHeal</span>
         </Link>
         <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
