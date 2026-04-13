@@ -14,8 +14,8 @@
     --popover: 225 51% 8%;
     --popover-foreground: 223 25% 93%;
     
-    /* Blue for Action */
-    --primary: 217 91% 60%; /* #3B82F6 Signal Blue */
+    /* Signal Blue for Action (#3B82F6) */
+    --primary: 217 91% 60%; 
     --primary-foreground: 210 40% 98%;
     
     --secondary: 221 37% 20%; /* #1F2A44 Steel Blue */
@@ -24,8 +24,8 @@
     --muted: 221 37% 20%;
     --muted-foreground: 215 15% 65%; /* #9AA4B2 */
     
-    /* Cyan for Intelligence & Data */
-    --accent: 189 86% 53%; /* #22D3EE Forensic Cyan */
+    /* Forensic Cyan for Intelligence & Data (#22D3EE) */
+    --accent: 189 86% 53%; 
     --accent-foreground: 225 51% 8%;
     
     --destructive: 0 84% 60%; /* #EF4444 Alert Red */
@@ -38,10 +38,10 @@
     --radius: 0.75rem;
 
     /* Chart Colors */
-    --chart-1: 217 91% 60%; /* Action/Trace */
-    --chart-2: 189 86% 53%; /* Intelligence */
-    --chart-3: 142 71% 45%; /* Success */
-    --chart-4: 0 84% 60%;   /* Threat */
+    --chart-1: 217 91% 60%; /* Action/Trace (Blue) */
+    --chart-2: 189 86% 53%; /* Intelligence (Cyan) */
+    --chart-3: 142 71% 45%; /* Success (Green) */
+    --chart-4: 0 84% 60%;   /* Threat (Red) */
     --chart-5: 221 37% 40%;
   }
 }
@@ -52,7 +52,8 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
-    background: radial-gradient(circle at 50% -20%, #121A2F 0%, #0A0F1F 100%);
+    /* High-End Gradient System */
+    background: linear-gradient(135deg, #0A0F1F 0%, #121A2F 50%, #1A2540 100%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
