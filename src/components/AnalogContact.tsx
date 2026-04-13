@@ -1,4 +1,3 @@
-
 import { Mail, Clock, CheckCircle2 } from "lucide-react";
 
 const benefits = [
