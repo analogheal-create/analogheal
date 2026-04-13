@@ -27,6 +27,19 @@ Stores the institutional trust images (Expert Team, SOC, etc.) displayed on the 
 | `label` | `text` | NOT NULL | Display label. |
 | `image_url` | `text` | NOT NULL | Public image URL. |
 
+### `articles`
+Stores the knowledge hub guides and security research.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `uuid` | PRIMARY KEY, DEFAULT gen_random_uuid() | Unique identifier. |
+| `created_at` | `timestamp` | DEFAULT now() | Creation date. |
+| `category` | `text` | NOT NULL | e.g., "Security", "Recovery", "Legal". |
+| `title` | `text" | NOT NULL | Article title. |
+| `description` | `text" | NOT NULL | Short summary. |
+| `content` | `text" | NOT NULL | Full article content (Markdown/Plaintext). |
+| `image_url` | `text" | NOT NULL | Public image URL. |
+
 #### SQL Schema
 ```sql
 -- Forensic Results
@@ -48,17 +61,31 @@ CREATE TABLE operational_proofs (
   image_url TEXT NOT NULL
 );
 
+-- Articles (Knowledge Hub)
+CREATE TABLE articles (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  category TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  content TEXT NOT NULL,
+  image_url TEXT NOT NULL
+);
+
 -- Enable RLS
 ALTER TABLE forensic_results ENABLE ROW LEVEL SECURITY;
 ALTER TABLE operational_proofs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access
 CREATE POLICY "Public Read Access Results" ON forensic_results FOR SELECT USING (true);
 CREATE POLICY "Public Read Access Proofs" ON operational_proofs FOR SELECT USING (true);
+CREATE POLICY "Public Read Access Articles" ON articles FOR SELECT USING (true);
 
 -- Allow authenticated CRUD for admins
 CREATE POLICY "Admin CRUD Access Results" ON forensic_results FOR ALL TO authenticated USING (true);
 CREATE POLICY "Admin CRUD Access Proofs" ON operational_proofs FOR ALL TO authenticated USING (true);
+CREATE POLICY "Admin CRUD Access Articles" ON articles FOR ALL TO authenticated USING (true);
 ```
 
 ## Storage Buckets
@@ -70,6 +97,7 @@ Used for hosting all forensic evidence and operational proof images.
 - **Folders**: 
     - `results/`: Case evidence screenshots.
     - `operational/`: Lab and team photos.
+    - `blog/`: Knowledge Hub article cover images.
 - **Access Policy**: 
     - `SELECT`: Publicly accessible.
     - `INSERT/UPDATE/DELETE`: Restricted to authenticated administrators.
