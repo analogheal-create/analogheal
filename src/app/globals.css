@@ -4,41 +4,41 @@
 
 @layer base {
   :root {
-    /* Forensic Intelligence Palette - Dual Accent System */
-    --background: 225 51% 8%; /* #0A0F1F Deep Navy Base */
+    /* Midnight Gold Authority Palette */
+    --background: 225 51% 6%; /* #070B14 Dark Navy Base */
     --foreground: 223 25% 93%; /* #E6EAF2 */
     
-    --card: 223 45% 13%; /* #121A2F Layered Blue */
+    --card: 223 45% 10%; /* #0B1426 Layered Blue */
     --card-foreground: 223 25% 93%;
     
-    --popover: 225 51% 8%;
+    --popover: 225 51% 6%;
     --popover-foreground: 223 25% 93%;
     
-    /* Signal Blue for Action (#3B82F6) */
-    --primary: 217 91% 60%; 
-    --primary-foreground: 210 40% 98%;
+    /* Royal Gold for Action & Recovered Wealth (#F59E0B) */
+    --primary: 38 92% 50%; 
+    --primary-foreground: 38 92% 5%;
     
-    --secondary: 221 37% 20%; /* #1F2A44 Steel Blue */
+    --secondary: 221 37% 16%; /* #111827 Charcoal Blue */
     --secondary-foreground: 223 25% 93%;
     
-    --muted: 221 37% 20%;
+    --muted: 221 37% 16%;
     --muted-foreground: 215 15% 65%; /* #9AA4B2 */
     
     /* Forensic Cyan for Intelligence & Data (#22D3EE) */
     --accent: 189 86% 53%; 
-    --accent-foreground: 225 51% 8%;
+    --accent-foreground: 225 51% 6%;
     
     --destructive: 0 84% 60%; /* #EF4444 Alert Red */
     --destructive-foreground: 210 40% 98%;
     
-    --border: 225 51% 15%;
-    --input: 225 51% 15%;
-    --ring: 217 91% 60%;
+    --border: 225 51% 12%;
+    --input: 225 51% 12%;
+    --ring: 38 92% 50%;
     
     --radius: 0.75rem;
 
     /* Chart Colors */
-    --chart-1: 217 91% 60%; /* Action/Trace (Blue) */
+    --chart-1: 38 92% 50%;  /* Wealth (Gold) */
     --chart-2: 189 86% 53%; /* Intelligence (Cyan) */
     --chart-3: 142 71% 45%; /* Success (Green) */
     --chart-4: 0 84% 60%;   /* Threat (Red) */
@@ -52,8 +52,8 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
-    /* High-End Gradient System */
-    background: linear-gradient(135deg, #0A0F1F 0%, #121A2F 50%, #1A2540 100%);
+    /* Premium Midnight Gradient */
+    background: linear-gradient(135deg, #070B14 0%, #0B1426 50%, #111827 100%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -66,7 +66,7 @@
 }
 
 .text-gradient-action {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-amber-300;
 }
 
 .text-gradient-intelligence {
@@ -74,11 +74,11 @@
 }
 
 .hero-glow {
-  background: radial-gradient(circle at 50% -20%, rgba(34, 211, 238, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
 }
 
 .btn-glow-action {
-  @apply shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all;
+  @apply shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all;
 }
 
 .btn-glow-intelligence {
@@ -94,7 +94,7 @@
 }
 
 .card-hover {
-  @apply hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-300;
+  @apply hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300;
 }
 
 @keyframes pulse-green {

@@ -13,7 +13,7 @@ export function AnalogHero() {
       <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-accent/5 blur-[120px] rounded-full" />
 
       <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT CONTENT - Conversion Focus (Blue) */}
+        {/* LEFT CONTENT - Conversion Focus (Royal Gold) */}
         <motion.div 
           className="z-10"
           initial={{ opacity: 0, x: -20 }}
@@ -23,42 +23,42 @@ export function AnalogHero() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
             </span>
-            Verified Forensic Analysts Active
+            Certified Forensic Intake Active
           </div>
 
           <h1 className="text-4xl md:text-6xl font-headline font-bold leading-tight mb-6">
             AnalogHeal <span className="text-primary">Forensics</span><br />
             <span className="text-muted-foreground text-3xl md:text-4xl font-medium">
-              Recover Lost Crypto from Scams, Hacks & Locked Wallets
+              Recover Stolen Assets from Scams, Hacks & Locked Wallets
             </span>
           </h1>
 
           <p className="text-muted-foreground text-lg mb-8 max-w-lg font-body leading-relaxed">
-            Advanced blockchain tracing and forensic intelligence services.
-            Free technical case review within 24 hours. Data-driven reclamation protocols.
+            Specialized blockchain tracing and institutional-grade forensic intelligence.
+            Free technical file review within 24 hours. Confidential asset reclamation.
           </p>
 
           {/* Trust bullets */}
           <div className="mb-10 space-y-3 text-sm font-medium">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.3)]" />
-              <span>Free case review in 24 hours</span>
+              <span>Priority case review in 24 hours</span>
             </div>
             <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-primary shadow-[0_0_5px_rgba(59,130,246,0.3)]" />
-              <span>Confidential & secure forensic process</span>
+              <ShieldCheck className="w-5 h-5 text-primary shadow-[0_0_5px_rgba(245,158,11,0.3)]" />
+              <span>Swiss-standard data confidentiality</span>
             </div>
             <div className="flex items-center gap-3">
               <BarChart3 className="w-5 h-5 text-accent shadow-[0_0_5px_rgba(34,211,238,0.3)]" />
-              <span className="text-accent font-bold">Institutional probability assessment</span>
+              <span className="text-accent font-bold">Heuristic probability assessment</span>
             </div>
           </div>
 
-          {/* CTA Group - Action Color (Blue) */}
+          {/* CTA Group - Action Color (Gold) */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" asChild className="h-14 px-8 text-lg font-bold btn-glow-action bg-primary hover:bg-primary/90 transition-all hover:scale-105">
+            <Button size="lg" asChild className="h-14 px-8 text-lg font-bold btn-glow-action bg-primary text-primary-foreground hover:bg-primary/90 transition-all hover:scale-105">
               <Link href="#request">
                 Start Forensic Intake <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
@@ -109,10 +109,10 @@ export function AnalogHero() {
                 opacity="0.6"
               />
 
-              {/* Action Nodes - Signal Blue (#3B82F6) */}
-              <circle cx="100" cy="120" r="10" fill="#3B82F6" />
-              <circle cx="250" cy="220" r="12" fill="#3B82F6" />
-              <circle cx="380" cy="140" r="10" fill="#3B82F6" />
+              {/* Action Nodes - Signal Gold (#F59E0B) */}
+              <circle cx="100" cy="120" r="10" fill="#F59E0B" />
+              <circle cx="250" cy="220" r="12" fill="#F59E0B" />
+              <circle cx="380" cy="140" r="10" fill="#F59E0B" />
 
               {/* Threat Node - Alert Red (#EF4444) */}
               <motion.circle

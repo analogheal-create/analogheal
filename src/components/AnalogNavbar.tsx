@@ -84,9 +84,9 @@ export function AnalogNavbar() {
         <div className="hidden lg:flex items-center gap-4">
           <div className="flex items-center gap-2 mr-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 glow-confirmation">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
-            <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Forensic Agents Online</span>
+            <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Lab Analysts Online</span>
           </div>
-          <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 btn-glow">
+          <Button variant="default" size="sm" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 btn-glow-action font-bold">
             <Link href="#request">Start Recovery</Link>
           </Button>
         </div>
@@ -97,7 +97,7 @@ export function AnalogNavbar() {
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
             <span className="text-[8px] font-bold text-green-500 uppercase tracking-wider">Live</span>
           </div>
-          <Button variant="default" size="sm" asChild className="h-9 px-3 btn-glow">
+          <Button variant="default" size="sm" asChild className="h-9 px-3 btn-glow-action text-primary-foreground font-bold">
             <Link href="#request">Start</Link>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -128,11 +128,11 @@ export function AnalogNavbar() {
                   <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 glow-interaction">
                     <div className="flex items-center gap-2 text-primary font-bold text-xs mb-2">
                       <ShieldCheck className="w-4 h-4" />
-                      Forensic Agent Support
+                      Forensic Intelligence
                     </div>
-                    <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically review cases in under 24 hours.</p>
+                    <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically review case files in under 24 hours.</p>
                   </div>
-                  <Button className="w-full justify-between h-12 btn-glow" asChild>
+                  <Button className="w-full justify-between h-12 btn-glow-action text-primary-foreground font-bold" asChild>
                     <Link href="#request" onClick={() => setIsOpen(false)}>
                       Start Recovery <ArrowRight className="w-5 h-5" />
                     </Link>

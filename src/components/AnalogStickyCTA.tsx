@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -39,11 +38,11 @@ export function AnalogStickyCTA() {
         <div className="bg-card/90 backdrop-blur-xl border border-white/10 rounded-2xl p-3 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 glow-interaction">
           <div className="hidden md:flex items-center gap-3 px-4 border-r border-white/10">
             <div className="relative">
-              <Shield className="w-5 h-5 text-primary shadow-[0_0_8px_rgba(59,130,246,0.3)]" />
+              <Shield className="w-5 h-5 text-primary shadow-[0_0_8px_rgba(245,158,11,0.3)]" />
               <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.8)]" />
             </div>
             <div className="text-left">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-primary">Priority Recovery</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-primary">Priority Forensic Intake</div>
               <div className="text-[10px] font-semibold flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-green-500 shadow-[0_0_3px_rgba(34,197,94,0.5)]" />
                 Analysts Active Now
@@ -52,7 +51,7 @@ export function AnalogStickyCTA() {
           </div>
 
           <div className="flex flex-1 items-center justify-center sm:justify-end gap-2 w-full">
-            <Button size="lg" asChild className="w-full sm:w-auto h-12 px-8 gap-2 font-bold text-xs bg-primary shadow-lg shadow-primary/20 btn-glow">
+            <Button size="lg" asChild className="w-full sm:w-auto h-12 px-8 gap-2 font-bold text-xs bg-primary text-primary-foreground shadow-lg shadow-primary/20 btn-glow-action">
               <Link href="#request">
                 Start My Free Assessment <ArrowRight className="w-4 h-4" />
               </Link>
