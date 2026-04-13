@@ -18,7 +18,8 @@ import {
   ShieldCheck,
   TrendingUp,
   Mail,
-  User
+  User,
+  Activity
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -70,7 +71,7 @@ export function AnalogRecoveryForm() {
   });
 
   const progress = step === 0 ? 33 : step === 1 ? 66 : 100;
-  const stepLabel = step < 2 ? "Step 1 of 2: Lab Assessment (30s)" : "Step 2 of 2: Case Forensics (1m)";
+  const stepLabel = step < 2 ? "Step 1 of 2: Lab Assessment (30s)" : "Step 2 of 2: Technical Summary (1m)";
 
   const handleSelectType = (id: string) => {
     form.setValue("recoveryType", id);
@@ -107,8 +108,8 @@ export function AnalogRecoveryForm() {
       });
       form.setValue("message", result.draftedMessage);
       toast({
-        title: "AI Analysis Complete",
-        description: "Your technical report has been enhanced for our forensic analysts.",
+        title: "Forensic Analysis Complete",
+        description: "Technical report enhanced for investigative review.",
       });
     } catch (error) {
       toast({
@@ -124,21 +125,21 @@ export function AnalogRecoveryForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     toast({
-      title: "Forensic Case Initiated",
-      description: "Our lab team will review your case and contact you within 24 hours.",
+      title: "Forensic Intake Initiated",
+      description: "A lead analyst will review your encrypted file and contact you in < 24h.",
     });
     form.reset();
     setStep(0);
   }
 
   return (
-    <section id="request" className="py-24 bg-gradient-to-b from-transparent to-card/30">
+    <section id="request" className="py-24 bg-gradient-to-b from-transparent to-card/20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-6xl font-headline font-bold mb-6 text-foreground">Initiate Forensic Recovery</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Submit your case to our recovery labs. Our forensic analysts will provide a technical assessment within 24 hours.
+              Submit your case to our recovery labs. Our technical team provides a secure forensic assessment within 24 hours.
             </p>
           </div>
 
@@ -147,38 +148,38 @@ export function AnalogRecoveryForm() {
             <div className="lg:col-span-4 space-y-8">
               <div className="p-8 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-sm glow-confirmation">
                 <div className="flex items-center gap-3 text-primary font-bold mb-4">
-                  <ShieldCheck className="w-6 h-6 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-                  AnalogHeal Forensic Protocol
+                  <ShieldCheck className="w-6 h-6" />
+                  Forensic Lab Protocol
                 </div>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                     <span className="text-sm">End-to-end encrypted communication via Swiss forensic servers.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                     <span className="text-sm">Institutional no-upfront fee policy for qualifying fraud cases.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
-                    <span className="text-sm">Direct engagement with certified blockchain investigators.</span>
+                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <span className="text-sm">Direct engagement with certified blockchain intelligence experts.</span>
                   </li>
                 </ul>
               </div>
 
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="font-bold text-lg mb-4">Official Forensic Intake</h3>
+                <h3 className="font-bold text-lg mb-4">Official Laboratory Intake</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  This secure intake form is the mandated primary method for initiating a case. Your data is isolated and encrypted until reviewed by a lead analyst.
+                  All data is isolated and encrypted until reviewed by a lead analyst. This secure portal is the mandated method for initiating a recovery file.
                 </p>
-                <div className="flex items-center gap-2 text-xs font-bold text-primary">
-                  <ShieldCheck className="w-4 h-4" />
-                  ISO 27001 Certified Laboratory
+                <div className="flex items-center gap-2 text-xs font-bold text-accent">
+                  <Activity className="w-4 h-4" />
+                  ISO 27001 Certified Infrastructure
                 </div>
               </div>
 
               <p className="text-[10px] text-muted-foreground leading-relaxed italic">
-                *Case submission does not guarantee acceptance. All files undergo strict forensic conflict-of-interest vetting.
+                *File submission does not guarantee case acceptance. All submissions undergo strict conflict-of-interest vetting.
               </p>
             </div>
 
@@ -196,7 +197,7 @@ export function AnalogRecoveryForm() {
                 {step === 0 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <h3 className="text-2xl font-headline font-bold mb-2">Case Categorization</h3>
-                    <p className="text-muted-foreground mb-8 text-sm">Select the forensic category that best describes your loss.</p>
+                    <p className="text-muted-foreground mb-8 text-sm">Select the technical category that best describes your loss situation.</p>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {funnelOptions.map((opt) => (
@@ -204,15 +205,15 @@ export function AnalogRecoveryForm() {
                           key={opt.id}
                           type="button"
                           onClick={() => handleSelectType(opt.id)}
-                          className="flex flex-col items-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group text-left glow-interaction"
+                          className="flex flex-col items-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-accent/50 hover:bg-accent/5 transition-all group text-left card-hover"
                         >
-                          <div className="p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                          <div className="p-3 rounded-xl bg-accent/10 text-accent mb-4 group-hover:scale-110 group-hover:bg-accent group-hover:text-background transition-all duration-300">
                             <opt.icon className="w-6 h-6" />
                           </div>
                           <div className="font-bold mb-1">{opt.label}</div>
                           <div className="text-xs text-muted-foreground leading-relaxed">{opt.description}</div>
-                          <div className="mt-4 text-xs font-bold text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Assign Category <ChevronRight className="w-3 h-3" />
+                          <div className="mt-4 text-xs font-bold text-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Categorize <ChevronRight className="w-3 h-3" />
                           </div>
                         </button>
                       ))}
@@ -225,13 +226,13 @@ export function AnalogRecoveryForm() {
                     <button 
                       type="button"
                       onClick={() => setStep(0)}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent mb-6 transition-colors"
                     >
-                      <ArrowLeft className="w-4 h-4" /> Back to Step 1
+                      <ArrowLeft className="w-4 h-4" /> Back to Categorization
                     </button>
                     
                     <h3 className="text-2xl font-headline font-bold mb-6">Valuation Analysis</h3>
-                    <p className="text-muted-foreground mb-8 text-sm">Providing an accurate valuation helps our lab assign the appropriate forensic computing resources to your case.</p>
+                    <p className="text-muted-foreground mb-8 text-sm">Accurate valuation allows our lab to allocate the necessary forensic computing cycles to your case.</p>
                     
                     <Form {...form}>
                       <div className="space-y-8">
@@ -241,21 +242,21 @@ export function AnalogRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-lg font-semibold flex items-center gap-2">
-                                <TrendingUp className="w-5 h-5 text-accent glow-success" />
-                                Estimated Market Value (USD)
+                                <TrendingUp className="w-5 h-5 text-accent" />
+                                Market Value for Reclamation (USD)
                               </FormLabel>
                               <FormControl>
                                 <div className="relative">
-                                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">$</span>
-                                  <Input placeholder="e.g. 50,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10 focus:border-accent/50 glow-success" {...field} />
+                                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold font-mono">$</span>
+                                  <Input placeholder="e.g. 50,000" className="h-16 pl-8 text-2xl font-bold font-mono bg-background/50 border-white/10 focus:border-accent/50 glow-success" {...field} />
                                 </div>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-                        <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
-                          Continue to Forensic Details <ChevronRight className="ml-2 w-5 h-5" />
+                        <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
+                          Proceed to Technical Details <ChevronRight className="ml-2 w-5 h-5" />
                         </Button>
                       </div>
                     </Form>
@@ -267,12 +268,12 @@ export function AnalogRecoveryForm() {
                     <button 
                       type="button"
                       onClick={() => setStep(1)}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent mb-6 transition-colors"
                     >
-                      <ArrowLeft className="w-4 h-4" /> Back to Step 2
+                      <ArrowLeft className="w-4 h-4" /> Back to Valuation
                     </button>
                     
-                    <h3 className="text-2xl font-headline font-bold mb-6">Client Identity & Technical Summary</h3>
+                    <h3 className="text-2xl font-headline font-bold mb-6">Identity & Forensic Summary</h3>
                     
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -283,10 +284,10 @@ export function AnalogRecoveryForm() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="flex items-center gap-2">
-                                  <User className="w-4 h-4 text-primary" /> Full Name
+                                  <User className="w-4 h-4 text-accent" /> Full Name
                                 </FormLabel>
                                 <FormControl>
-                                  <Input placeholder="John Doe" {...field} className="glow-interaction" />
+                                  <Input placeholder="John Doe" {...field} className="bg-background/50" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -298,10 +299,10 @@ export function AnalogRecoveryForm() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="flex items-center gap-2">
-                                  <Mail className="w-4 h-4 text-primary" /> Official Email
+                                  <Mail className="w-4 h-4 text-accent" /> Official Email
                                 </FormLabel>
                                 <FormControl>
-                                  <Input placeholder="john@example.com" {...field} className="glow-interaction" />
+                                  <Input placeholder="john@example.com" {...field} className="bg-background/50" />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -315,10 +316,10 @@ export function AnalogRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-primary" /> Secure Phone Number
+                                <Phone className="w-4 h-4 text-accent" /> Secure Phone Number
                               </FormLabel>
                               <FormControl>
-                                <Input placeholder="+1..." {...field} className="glow-interaction" />
+                                <Input placeholder="+1..." {...field} className="bg-background/50" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -341,13 +342,13 @@ export function AnalogRecoveryForm() {
                                   disabled={isDrafting}
                                 >
                                   {isDrafting ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
-                                  Forensic AI Analysis
+                                  Forensic AI Optimization
                                 </Button>
                               </div>
                               <FormControl>
                                 <Textarea 
                                   placeholder="Detail the events leading to the loss. Include transaction IDs (TXIDs) if available for tracing." 
-                                  className="min-h-[140px] bg-background/50 glow-interaction"
+                                  className="min-h-[140px] bg-background/50"
                                   {...field} 
                                 />
                               </FormControl>
@@ -357,11 +358,11 @@ export function AnalogRecoveryForm() {
                         />
 
                         <Button type="submit" className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
-                          Initiate Recovery Request <Send className="ml-2 w-5 h-5" />
+                          Initiate Recovery File <Send className="ml-2 w-5 h-5" />
                         </Button>
                         
                         <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-60 glow-confirmation py-1 rounded-full">
-                          <ShieldCheck className="w-3 h-3 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
+                          <ShieldCheck className="w-3 h-3 text-green-500" />
                           Encrypted Intake Secured by AnalogHeal Forensics
                         </div>
                       </form>
