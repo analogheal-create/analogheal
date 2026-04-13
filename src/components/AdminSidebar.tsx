@@ -11,7 +11,8 @@ import {
   Users, 
   Settings, 
   Activity,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Camera
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -35,6 +36,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Recovery Files", href: "/admin/recovery-files", icon: FileText },
     { name: "Forensic Results", href: "/admin/forensic-results", icon: ImageIcon },
+    { name: "Trust Assets", href: "/admin/trust-assets", icon: Camera },
     { name: "Intelligence Logs", href: "/admin/intelligence-logs", icon: Activity },
     { name: "Client Database", href: "/admin/clients", icon: Users },
   ];

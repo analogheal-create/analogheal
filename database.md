@@ -16,8 +16,20 @@ Stores the authenticated recovery evidence displayed on the public "Verified For
 | `forensic_id` | `text` | | The unique forensic case ID (e.g., "#882-01"). |
 | `image_url` | `text` | NOT NULL | The public URL of the authenticated screenshot. |
 
+### `operational_proofs`
+Stores the institutional trust images (Expert Team, SOC, etc.) displayed on the homepage.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `uuid` | PRIMARY KEY, DEFAULT gen_random_uuid() | Unique identifier. |
+| `created_at` | `timestamp` | DEFAULT now() | Creation date. |
+| `asset_key` | `text` | NOT NULL, UNIQUE | The identifier (e.g., "expert-team", "secure-ops", "consultation"). |
+| `label` | `text` | NOT NULL | Display label. |
+| `image_url` | `text` | NOT NULL | Public image URL. |
+
 #### SQL Schema
 ```sql
+-- Forensic Results
 CREATE TABLE forensic_results (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -27,28 +39,40 @@ CREATE TABLE forensic_results (
   image_url TEXT NOT NULL
 );
 
+-- Operational Proofs (Trust Assets)
+CREATE TABLE operational_proofs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  asset_key TEXT NOT NULL UNIQUE,
+  label TEXT NOT NULL,
+  image_url TEXT NOT NULL
+);
+
 -- Enable RLS
 ALTER TABLE forensic_results ENABLE ROW LEVEL SECURITY;
+ALTER TABLE operational_proofs ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access
-CREATE POLICY "Public Read Access" ON forensic_results
-  FOR SELECT USING (true);
+CREATE POLICY "Public Read Access Results" ON forensic_results FOR SELECT USING (true);
+CREATE POLICY "Public Read Access Proofs" ON operational_proofs FOR SELECT USING (true);
 
--- Allow authenticated insert/delete for admins
-CREATE POLICY "Admin CRUD Access" ON forensic_results
-  FOR ALL TO authenticated USING (true);
+-- Allow authenticated CRUD for admins
+CREATE POLICY "Admin CRUD Access Results" ON forensic_results FOR ALL TO authenticated USING (true);
+CREATE POLICY "Admin CRUD Access Proofs" ON operational_proofs FOR ALL TO authenticated USING (true);
 ```
 
 ## Storage Buckets
 
 ### `public-assets`
-Used for hosting the authenticated forensic evidence images.
+Used for hosting all forensic evidence and operational proof images.
 
 - **Bucket Name**: `public-assets`
-- **Internal Path**: `results/`
+- **Folders**: 
+    - `results/`: Case evidence screenshots.
+    - `operational/`: Lab and team photos.
 - **Access Policy**: 
-    - `SELECT`: Publicly accessible (authenticated for upload).
+    - `SELECT`: Publicly accessible.
     - `INSERT/UPDATE/DELETE`: Restricted to authenticated administrators.
 
 ---
-*Last Updated: ${new Date().toLocaleDateString()}*
+*Last Updated: 11/25/2024*
