@@ -26,9 +26,22 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { AdminSidebar } from "@/components/AdminSidebar";
 
+const typeLabels: Record<string, string> = {
+  scammed: "Fraudulent Scam",
+  wallet: "Hardware Lockout",
+  exchange: "Exchange Dispute",
+  hacked: "Compromised Account",
+};
+
 export default function AdminDashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [requests, setRequests] = useState<any[]>([]);
+  const [stats, setStats] = useState({
+    activeFiles: 0,
+    totalRecovered: "$1.8M", // Static for now as requested no new features beyond visibility
+    verifiedSignatures: 3842
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -38,11 +51,25 @@ export default function AdminDashboardPage() {
         router.push("/admin/login");
       } else {
         setUser(session.user);
+        fetchRecentRequests();
       }
-      setIsLoading(false);
     };
     checkAuth();
   }, [router]);
+
+  const fetchRecentRequests = async () => {
+    const { data, error, count } = await supabase
+      .from("recovery_requests")
+      .select("*", { count: 'exact' })
+      .order("created_at", { ascending: false })
+      .limit(5);
+    
+    if (!error && data) {
+      setRequests(data);
+      if (count !== null) setStats(prev => ({ ...prev, activeFiles: count }));
+    }
+    setIsLoading(false);
+  };
 
   if (isLoading) {
     return (
@@ -56,7 +83,6 @@ export default function AdminDashboardPage() {
     <div className="min-h-screen bg-background text-foreground flex">
       <AdminSidebar userEmail={user?.email} />
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
           <h1 className="font-headline font-bold text-xl">Operational Overview</h1>
@@ -79,9 +105,9 @@ export default function AdminDashboardPage() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
                   <FileText className="w-4 h-4 text-primary" />
-                  <Badge variant="outline" className="text-[10px] border-primary/20 text-primary">+12%</Badge>
+                  <Badge variant="outline" className="text-[10px] border-primary/20 text-primary">Live</Badge>
                 </div>
-                <div className="text-2xl font-bold">142</div>
+                <div className="text-2xl font-bold">{stats.activeFiles}</div>
                 <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Active Recovery Files</div>
               </CardContent>
             </Card>
@@ -91,8 +117,8 @@ export default function AdminDashboardPage() {
                   <TrendingUp className="w-4 h-4 text-accent" />
                   <Badge variant="outline" className="text-[10px] border-accent/20 text-accent">94.2%</Badge>
                 </div>
-                <div className="text-2xl font-bold">$1.8M</div>
-                <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Assets Reclaimed (MoM)</div>
+                <div className="text-2xl font-bold">{stats.totalRecovered}</div>
+                <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Assets Reclaimed (Est)</div>
               </CardContent>
             </Card>
             <Card className="bg-card/50 border-white/5">
@@ -101,7 +127,7 @@ export default function AdminDashboardPage() {
                   <ShieldCheck className="w-4 h-4 text-green-500" />
                   <Badge variant="outline" className="text-[10px] border-green-500/20 text-green-500">Secured</Badge>
                 </div>
-                <div className="text-2xl font-bold">3,842</div>
+                <div className="text-2xl font-bold">{stats.verifiedSignatures}</div>
                 <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Forensic Signatures Verified</div>
               </CardContent>
             </Card>
@@ -124,7 +150,7 @@ export default function AdminDashboardPage() {
                 <CardTitle className="font-headline text-lg">Recent Forensic Intake</CardTitle>
                 <CardDescription>Latest recovery requests awaiting analyst review.</CardDescription>
               </div>
-              <Button variant="outline" size="sm" className="h-8 text-[10px] font-bold uppercase tracking-wider">View All Files</Button>
+              <Button variant="outline" size="sm" onClick={() => router.push('/admin/recovery-files')} className="h-8 text-[10px] font-bold uppercase tracking-wider">View All Files</Button>
             </CardHeader>
             <CardContent>
               <Table>
@@ -139,22 +165,17 @@ export default function AdminDashboardPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[
-                    { id: "AH-4921", name: "David K.", category: "Fraudulent Scam", value: "$42,500", status: "Pending" },
-                    { id: "AH-4920", name: "Sarah M.", category: "Hardware Lockout", value: "$12,800", status: "Assigned" },
-                    { id: "AH-4919", name: "Blockchain Corp", category: "Compromised Account", value: "$210,000", status: "In Progress" },
-                    { id: "AH-4918", name: "James L.", category: "Exchange Dispute", value: "$3,400", status: "Pending" },
-                  ].map((request) => (
+                  {requests.map((request) => (
                     <TableRow key={request.id} className="border-white/5 hover:bg-white/5 group transition-colors">
-                      <TableCell className="font-mono text-[10px] font-bold text-primary">{request.id}</TableCell>
-                      <TableCell className="text-sm font-medium">{request.name}</TableCell>
+                      <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{request.id.slice(0, 4)}</TableCell>
+                      <TableCell className="text-sm font-medium">{request.full_name}</TableCell>
                       <TableCell>
-                        <Badge variant="secondary" className="bg-white/5 text-[10px] border-none">{request.category}</Badge>
+                        <Badge variant="secondary" className="bg-white/5 text-[10px] border-none">{typeLabels[request.recovery_type] || request.recovery_type}</Badge>
                       </TableCell>
-                      <TableCell className="text-sm font-bold font-mono text-accent">{request.value}</TableCell>
+                      <TableCell className="text-sm font-bold font-mono text-accent">${request.estimated_value}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <div className={`w-1.5 h-1.5 rounded-full ${request.status === 'Pending' ? 'bg-amber-500' : request.status === 'Assigned' ? 'bg-blue-500' : 'bg-green-500'} animate-pulse`} />
+                          <div className={`w-1.5 h-1.5 rounded-full ${request.status === 'Pending' ? 'bg-amber-500' : 'bg-green-500'} animate-pulse`} />
                           <span className="text-xs font-medium">{request.status}</span>
                         </div>
                       </TableCell>
@@ -165,6 +186,11 @@ export default function AdminDashboardPage() {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {requests.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center py-8 text-muted-foreground italic">No forensic intake files found.</TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>

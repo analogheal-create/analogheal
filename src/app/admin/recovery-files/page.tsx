@@ -31,16 +31,17 @@ import { Badge } from "@/components/ui/badge";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { cn } from "@/lib/utils";
 
-const categories = {
-  "Fraudulent Scam": { icon: ShieldAlert, color: "text-red-400" },
-  "Hardware Lockout": { icon: Key, color: "text-amber-400" },
-  "Compromised Account": { icon: Zap, color: "text-primary" },
-  "Exchange Dispute": { icon: Landmark, color: "text-accent" },
+const categories: Record<string, any> = {
+  "scammed": { label: "Fraudulent Scam", icon: ShieldAlert, color: "text-red-400" },
+  "wallet": { label: "Hardware Lockout", icon: Key, color: "text-amber-400" },
+  "hacked": { label: "Compromised Account", icon: Zap, color: "text-primary" },
+  "exchange": { label: "Exchange Dispute", icon: Landmark, color: "text-accent" },
 };
 
 export default function RecoveryFilesPage() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [requests, setRequests] = useState<any[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -50,11 +51,23 @@ export default function RecoveryFilesPage() {
         router.push("/admin/login");
       } else {
         setUser(session.user);
+        fetchRequests();
       }
-      setIsLoading(false);
     };
     checkAuth();
   }, [router]);
+
+  const fetchRequests = async () => {
+    const { data, error } = await supabase
+      .from("recovery_requests")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (!error && data) {
+      setRequests(data);
+    }
+    setIsLoading(false);
+  };
 
   if (isLoading) {
     return (
@@ -85,14 +98,14 @@ export default function RecoveryFilesPage() {
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative w-full md:w-96">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search by name, ID, or wallet address..." className="pl-9 h-10 bg-white/5 border-white/10" />
+              <Input placeholder="Search by name, ID, or email..." className="pl-9 h-10 bg-white/5 border-white/10" />
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="icon" className="h-10 w-10 border-white/10">
                 <Filter className="w-4 h-4" />
               </Button>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-none py-1.5 px-3">
-                142 Active Files
+                {requests.length} Active Files
               </Badge>
             </div>
           </div>
@@ -106,39 +119,27 @@ export default function RecoveryFilesPage() {
                     <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client</TableHead>
                     <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Category</TableHead>
                     <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Assets</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Prob. Rate</TableHead>
+                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Date</TableHead>
                     <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Status</TableHead>
                     <TableHead className="text-right"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[
-                    { id: "AH-4921", name: "David K.", category: "Fraudulent Scam", value: "$42,500", prob: "84%", status: "Analyzing" },
-                    { id: "AH-4920", name: "Sarah M.", category: "Hardware Lockout", value: "$12,800", prob: "62%", status: "Tracing" },
-                    { id: "AH-4919", name: "Blockchain Corp", category: "Compromised Account", value: "$210,000", prob: "91%", status: "Freezing" },
-                    { id: "AH-4918", name: "James L.", category: "Exchange Dispute", value: "$3,400", prob: "45%", status: "Pending" },
-                    { id: "AH-4917", name: "Elena R.", category: "Fraudulent Scam", value: "$8,200", prob: "78%", status: "Legal Review" },
-                    { id: "AH-4916", name: "Robert P.", category: "Hardware Lockout", value: "$145,000", prob: "55%", status: "GPU Queue" },
-                  ].map((file) => {
-                    const Cat = categories[file.category as keyof typeof categories];
+                  {requests.map((file) => {
+                    const catInfo = categories[file.recovery_type] || { label: file.recovery_type, icon: FileText, color: "text-muted-foreground" };
                     return (
                       <TableRow key={file.id} className="border-white/5 hover:bg-white/5 group transition-colors">
-                        <TableCell className="font-mono text-[10px] font-bold text-primary">{file.id}</TableCell>
-                        <TableCell className="text-sm font-medium">{file.name}</TableCell>
+                        <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{file.id.slice(0, 4)}</TableCell>
+                        <TableCell className="text-sm font-medium">{file.full_name}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <Cat.icon className={cn("w-3.5 h-3.5", Cat.color)} />
-                            <span className="text-xs">{file.category}</span>
+                            <catInfo.icon className={cn("w-3.5 h-3.5", catInfo.color)} />
+                            <span className="text-xs">{catInfo.label}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-sm font-bold font-mono text-accent">{file.value}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <div className="h-1.5 w-12 bg-white/5 rounded-full overflow-hidden">
-                              <div className="h-full bg-primary" style={{ width: file.prob }} />
-                            </div>
-                            <span className="text-[10px] font-bold">{file.prob}</span>
-                          </div>
+                        <TableCell className="text-sm font-bold font-mono text-accent">${file.estimated_value}</TableCell>
+                        <TableCell className="text-[10px] font-medium text-muted-foreground">
+                          {new Date(file.created_at).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
                           <Badge variant="outline" className="text-[10px] border-white/10 uppercase tracking-tighter">
@@ -153,6 +154,13 @@ export default function RecoveryFilesPage() {
                       </TableRow>
                     );
                   })}
+                  {requests.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={7} className="text-center py-12 text-muted-foreground italic">
+                        The laboratory intake database is currently empty.
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>
