@@ -13,7 +13,7 @@ import {
   Key, 
   Landmark, 
   Zap, 
-  ArrowLeft,
+  ArrowLeft, 
   ChevronRight,
   ShieldCheck,
   TrendingUp,
@@ -36,6 +36,7 @@ import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { aiDraftRecoveryMessage } from "@/ai/flows/ai-draft-recovery-message";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters."),
@@ -57,6 +58,7 @@ export function AnalogRecoveryForm() {
   const { toast } = useToast();
   const [step, setStep] = useState(0); 
   const [isDrafting, setIsDrafting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -122,14 +124,39 @@ export function AnalogRecoveryForm() {
     }
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Forensic Intake Initiated",
-      description: "A lead analyst will review your encrypted file and contact you in < 24h.",
-    });
-    form.reset();
-    setStep(0);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from('recovery_requests')
+        .insert([{
+          full_name: values.fullName,
+          email: values.email,
+          phone: values.phone,
+          recovery_type: values.recoveryType,
+          estimated_value: values.estimatedValue,
+          message: values.message,
+          status: 'Pending'
+        }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Forensic Intake Initiated",
+        description: "A lead analyst will review your encrypted file and contact you in < 24h.",
+      });
+      
+      form.reset();
+      setStep(0);
+    } catch (error: any) {
+      toast({
+        title: "Transmission Failed",
+        description: "The secure uplink failed. Please try again or email the lab directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -352,8 +379,16 @@ export function AnalogRecoveryForm() {
                           )}
                         />
 
-                        <Button type="submit" className="w-full h-16 text-lg font-bold btn-glow-action bg-primary hover:bg-primary/90 transition-all hover:scale-105">
-                          Initiate Recovery File <Send className="ml-2 w-5 h-5" />
+                        <Button 
+                          type="submit" 
+                          className="w-full h-16 text-lg font-bold btn-glow-action bg-primary hover:bg-primary/90 transition-all hover:scale-105"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? (
+                            <>Transmitting to Lab... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
+                          ) : (
+                            <>Initiate Recovery File <Send className="ml-2 w-5 h-5" /></>
+                          )}
                         </Button>
                       </form>
                     </Form>

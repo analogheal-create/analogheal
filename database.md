@@ -56,6 +56,21 @@ Stores the "Proven Recovery Results" case studies and client testimonials.
 | `case_id` | `text` | NOT NULL | Display case number (e.g., "#1042"). |
 | `icon_type` | `text` | NOT NULL | Icon identifier ('trending', 'shield', 'zap'). |
 
+### `recovery_requests`
+Stores the forensic intake submissions from the public recovery form.
+
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `uuid` | PRIMARY KEY, DEFAULT gen_random_uuid() | Unique case ID. |
+| `created_at` | `timestamp` | DEFAULT now() | Submission timestamp. |
+| `full_name` | `text` | NOT NULL | Client's full name. |
+| `email` | `text` | NOT NULL | Client's official email. |
+| `phone` | `text` | NOT NULL | Secure contact phone. |
+| `recovery_type` | `text` | NOT NULL | Categorized loss type. |
+| `estimated_value` | `text` | NOT NULL | Estimated asset value in USD. |
+| `message` | `text` | NOT NULL | Technical case description. |
+| `status` | `text` | DEFAULT 'Pending' | Current investigation status. |
+
 #### SQL Schema
 ```sql
 -- Forensic Results
@@ -102,11 +117,25 @@ CREATE TABLE case_studies (
   icon_type TEXT NOT NULL DEFAULT 'trending'
 );
 
+-- Recovery Requests (Forensic Intake)
+CREATE TABLE recovery_requests (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  recovery_type TEXT NOT NULL,
+  estimated_value TEXT NOT NULL,
+  message TEXT NOT NULL,
+  status TEXT DEFAULT 'Pending'
+);
+
 -- Enable RLS
 ALTER TABLE forensic_results ENABLE ROW LEVEL SECURITY;
 ALTER TABLE operational_proofs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE case_studies ENABLE ROW LEVEL SECURITY;
+ALTER TABLE recovery_requests ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access
 CREATE POLICY "Public Read Access Results" ON forensic_results FOR SELECT USING (true);
@@ -114,11 +143,15 @@ CREATE POLICY "Public Read Access Proofs" ON operational_proofs FOR SELECT USING
 CREATE POLICY "Public Read Access Articles" ON articles FOR SELECT USING (true);
 CREATE POLICY "Public Read Access Case Studies" ON case_studies FOR SELECT USING (true);
 
+-- Allow public insert for recovery requests
+CREATE POLICY "Public Insert Requests" ON recovery_requests FOR INSERT WITH CHECK (true);
+
 -- Allow authenticated CRUD for admins
 CREATE POLICY "Admin CRUD Access Results" ON forensic_results FOR ALL TO authenticated USING (true);
 CREATE POLICY "Admin CRUD Access Proofs" ON operational_proofs FOR ALL TO authenticated USING (true);
 CREATE POLICY "Admin CRUD Access Articles" ON articles FOR ALL TO authenticated USING (true);
 CREATE POLICY "Admin CRUD Access Case Studies" ON case_studies FOR ALL TO authenticated USING (true);
+CREATE POLICY "Admin CRUD Access Requests" ON recovery_requests FOR ALL TO authenticated USING (true);
 ```
 
 ## Storage Buckets
