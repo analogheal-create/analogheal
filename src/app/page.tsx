@@ -1,40 +1,39 @@
-
-import { AegisNavbar } from "@/components/AegisNavbar";
-import { AegisHero } from "@/components/AegisHero";
+import { AnalogNavbar } from "@/components/AnalogNavbar";
+import { AnalogHero } from "@/components/AnalogHero";
 import { AnalogHealProofLayer } from "@/components/AnalogHealProofLayer";
-import { AegisServices } from "@/components/AegisServices";
+import { AnalogServices } from "@/components/AnalogServices";
 import { AnalogHealMethodology } from "@/components/AnalogHealMethodology";
-import { AegisSteps } from "@/components/AegisSteps";
+import { AnalogSteps } from "@/components/AnalogSteps";
 import { AnalogHealGuarantee } from "@/components/AnalogHealGuarantee";
-import { AegisTrustStrip } from "@/components/AegisTrustStrip";
-import { AegisRecoveryForm } from "@/components/AegisRecoveryForm";
-import { AegisTestimonials } from "@/components/AegisTestimonials";
-import { AegisKnowledgeHub } from "@/components/AegisKnowledgeHub";
-import { AegisContact } from "@/components/AegisContact";
-import { AegisFooter } from "@/components/AegisFooter";
-import { AegisStickyCTA } from "@/components/AegisStickyCTA";
-import { AegisLiveSupport } from "@/components/AegisLiveSupport";
+import { AnalogTrustStrip } from "@/components/AnalogTrustStrip";
+import { AnalogRecoveryForm } from "@/components/AnalogRecoveryForm";
+import { AnalogTestimonials } from "@/components/AnalogTestimonials";
+import { AnalogKnowledgeHub } from "@/components/AnalogKnowledgeHub";
+import { AnalogContact } from "@/components/AnalogContact";
+import { AnalogFooter } from "@/components/AnalogFooter";
+import { AnalogStickyCTA } from "@/components/AnalogStickyCTA";
+import { AnalogLiveSupport } from "@/components/AnalogLiveSupport";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <AegisNavbar />
+      <AnalogNavbar />
       <main>
-        <AegisHero />
+        <AnalogHero />
         <AnalogHealProofLayer />
-        <AegisServices />
+        <AnalogServices />
         <AnalogHealMethodology />
-        <AegisSteps />
+        <AnalogSteps />
         <AnalogHealGuarantee />
-        <AegisTrustStrip />
-        <AegisRecoveryForm />
-        <AegisTestimonials />
-        <AegisKnowledgeHub />
-        <AegisContact />
+        <AnalogTrustStrip />
+        <AnalogRecoveryForm />
+        <AnalogTestimonials />
+        <AnalogKnowledgeHub />
+        <AnalogContact />
       </main>
-      <AegisFooter />
-      <AegisStickyCTA />
-      <AegisLiveSupport />
+      <AnalogFooter />
+      <AnalogStickyCTA />
+      <AnalogLiveSupport />
     </div>
   );
 }
