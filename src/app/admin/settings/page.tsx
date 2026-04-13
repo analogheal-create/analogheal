@@ -23,6 +23,7 @@ import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 export default function SettingsPage() {
   const [user, setUser] = useState<any>(null);

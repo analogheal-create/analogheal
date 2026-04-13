@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { AdminSidebar } from "@/components/AdminSidebar";
+import { cn } from "@/lib/utils";
 
 const categories = {
   "Fraudulent Scam": { icon: ShieldAlert, color: "text-red-400" },

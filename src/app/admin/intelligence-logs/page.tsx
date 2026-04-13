@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AdminSidebar } from "@/components/AdminSidebar";
+import { cn } from "@/lib/utils";
 
 const logs = [
   { time: "09:42:12", event: "VASP Endpoint Identification", source: "Chainalysis Relay", status: "Verified", color: "text-primary" },
@@ -82,7 +83,7 @@ export default function IntelligenceLogsPage() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Database className="w-3.5 h-3.5" /> Intelligence Nodes
-                </dt>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">428</div>
@@ -91,7 +92,7 @@ export default function IntelligenceLogsPage() {
             </Card>
             <Card className="bg-card/50 border-white/5">
               <CardHeader className="pb-2">
-                <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Lock className="w-3.5 h-3.5" /> Encryption Status
                 </CardTitle>
               </CardHeader>
