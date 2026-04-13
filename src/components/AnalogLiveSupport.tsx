@@ -1,8 +1,8 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
-import { MessageSquare, X, ShieldCheck, MessageCircle, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MessageSquare, X, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function AnalogLiveSupport() {
@@ -33,10 +33,10 @@ export function AnalogLiveSupport() {
               <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-primary rounded-full animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,1)]" />
             </div>
             <div>
-              <div className="font-bold text-sm font-body">AnalogHeal Support</div>
+              <div className="font-bold text-sm font-body">AnalogHeal Status</div>
               <div className="text-[10px] opacity-80 flex items-center gap-1 font-body">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                Specialists Online
+                Analysts Online
               </div>
             </div>
           </div>
@@ -47,26 +47,12 @@ export function AnalogLiveSupport() {
 
         <div className="p-4 space-y-4">
           <div className="bg-white/5 rounded-xl p-3 text-xs leading-relaxed text-muted-foreground font-body">
-            Hi! I'm here to help you with your recovery. Typically, we reply in <span className="text-primary font-bold">under 5 minutes</span>. How can we assist you today?
+            Hi! Our forensic team is active. To protect your privacy and case data, please submit a request via our encrypted intake form. Analysts typically review new cases in <span className="text-primary font-bold">under 24 hours</span>.
           </div>
           
-          <div className="space-y-2">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 font-body">Secure Direct Lines</div>
-            <Button variant="secondary" className="w-full justify-between h-11 text-xs font-bold font-body glow-interaction" asChild>
-              <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
-                Verified Telegram <MessageCircle className="w-4 h-4" />
-              </a>
-            </Button>
-            <Button variant="outline" className="w-full justify-between h-11 text-xs font-bold border-white/10 font-body hover:border-green-500/50 glow-confirmation" asChild>
-              <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer">
-                WhatsApp Secure <Phone className="w-4 h-4 text-green-500" />
-              </a>
-            </Button>
-          </div>
-
           <div className="pt-2 flex items-center justify-center gap-1.5 text-[9px] text-muted-foreground opacity-60 font-body">
             <ShieldCheck className="w-3 h-3 text-green-500" />
-            Swiss-encrypted secure interaction
+            Institutional Grade Secure Infrastructure
           </div>
         </div>
       </div>

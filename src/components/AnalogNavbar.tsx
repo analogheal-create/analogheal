@@ -1,7 +1,8 @@
+
 "use client";
 
 import Link from "next/link";
-import { Shield, Menu, MessageCircle, ArrowRight, ShieldCheck } from "lucide-react";
+import { Shield, Menu, ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -76,12 +77,6 @@ export function AnalogNavbar() {
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
             <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Agents Online</span>
           </div>
-          <Button variant="secondary" size="sm" className="gap-2 text-primary-foreground font-semibold glow-interaction" asChild>
-            <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="w-4 h-4" />
-              Telegram
-            </a>
-          </Button>
           <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 btn-glow">
             <Link href="#request">Start Recovery</Link>
           </Button>
@@ -126,12 +121,7 @@ export function AnalogNavbar() {
                       <ShieldCheck className="w-4 h-4" />
                       Live Agent Support
                     </div>
-                    <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically reply in under 5 minutes.</p>
-                    <Button className="w-full justify-between h-11" variant="secondary" asChild>
-                      <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
-                        Join Telegram <MessageCircle className="w-5 h-5" />
-                      </a>
-                    </Button>
+                    <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically review cases in under 24 hours.</p>
                   </div>
                   <Button className="w-full justify-between h-12 btn-glow" asChild>
                     <Link href="#request" onClick={() => setIsOpen(false)}>

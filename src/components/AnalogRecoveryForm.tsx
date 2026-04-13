@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -5,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { 
-  MessageCircle, 
   Send, 
   Sparkles, 
   Loader2, 
@@ -167,25 +167,14 @@ export function AnalogRecoveryForm() {
                 </ul>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="font-bold text-lg">Immediate Assistance</h3>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-500/50 glow-confirmation transition-colors cursor-pointer group">
-                  <div className="p-3 rounded-lg bg-green-500/10 text-green-500 group-hover:bg-green-500/20">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">WhatsApp Secure Line</div>
-                    <div className="text-xs text-muted-foreground">Immediate Case Priority</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 glow-interaction transition-colors cursor-pointer group">
-                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-500 group-hover:bg-blue-500/20">
-                    <MessageCircle className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">Telegram Verified Bot</div>
-                    <div className="text-xs text-muted-foreground">@AnalogHealSupport</div>
-                  </div>
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <h3 className="font-bold text-lg mb-4">Official Submission</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  This secure form is the primary method for initiating a case. Once submitted, your data is isolated and encrypted until reviewed by a forensic analyst.
+                </p>
+                <div className="flex items-center gap-2 text-xs font-bold text-primary">
+                  <ShieldCheck className="w-4 h-4" />
+                  ISO 27001 Compliant Intake
                 </div>
               </div>
 
@@ -327,7 +316,7 @@ export function AnalogRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-primary" /> Secure Phone (Signal/Telegram preferred)
+                                <Phone className="w-4 h-4 text-primary" /> Phone Number
                               </FormLabel>
                               <FormControl>
                                 <Input placeholder="+1..." {...field} className="glow-interaction" />

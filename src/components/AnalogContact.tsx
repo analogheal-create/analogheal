@@ -1,4 +1,5 @@
-import { Mail, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
+
+import { Mail, Clock, CheckCircle2 } from "lucide-react";
 
 const benefits = [
   "Industry-leading 94% success rate",
@@ -16,7 +17,7 @@ export function AnalogContact() {
           <div>
             <h2 className="text-3xl lg:text-5xl font-headline font-bold mb-8">Ready to Recover Your Assets?</h2>
             <p className="text-muted-foreground text-lg mb-10">
-              Don't leave your digital wealth to chance. Speak with an expert today and begin the professional recovery process.
+              Don't leave your digital wealth to chance. Speak with an expert today and begin the professional recovery process through our secure channels.
             </p>
             
             <div className="space-y-6 mb-12">
@@ -27,15 +28,6 @@ export function AnalogContact() {
                 <div>
                   <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">Email Us</div>
                   <div className="text-lg font-semibold">support@analogheal.com</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                  <MessageCircle className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">Telegram</div>
-                  <div className="text-lg font-semibold">@AnalogHealSupport</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">

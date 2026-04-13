@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Shield, MessageCircle, Phone, ArrowRight } from "lucide-react";
+import { Shield, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -45,27 +46,15 @@ export function AnalogStickyCTA() {
               <div className="text-[10px] font-bold uppercase tracking-wider text-primary">Priority Recovery</div>
               <div className="text-[10px] font-semibold flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-green-500 shadow-[0_0_3px_rgba(34,197,94,0.5)]" />
-                Agents Online: &lt; 5m
+                Analysts Active Now
               </div>
             </div>
           </div>
 
           <div className="flex flex-1 items-center justify-center sm:justify-end gap-2 w-full">
-            <Button size="sm" variant="secondary" asChild className="flex-1 sm:flex-none h-11 px-4 gap-2 font-bold text-[10px] glow-interaction">
-              <a href="https://t.me/AnalogHealSupport" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-4 h-4" />
-                Telegram
-              </a>
-            </Button>
-            <Button size="sm" variant="outline" asChild className="flex-1 sm:flex-none h-11 px-4 gap-2 font-bold text-[10px] border-white/10 hover:border-green-500/50 glow-confirmation">
-              <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer">
-                <Phone className="w-4 h-4 text-green-500" />
-                WhatsApp
-              </a>
-            </Button>
-            <Button size="sm" asChild className="flex-[2] sm:flex-none h-11 px-6 gap-2 font-bold text-[10px] bg-primary shadow-lg shadow-primary/20 btn-glow">
+            <Button size="lg" asChild className="w-full sm:w-auto h-12 px-8 gap-2 font-bold text-xs bg-primary shadow-lg shadow-primary/20 btn-glow">
               <Link href="#request">
-                Start Free Recovery <ArrowRight className="w-4 h-4" />
+                Start My Free Assessment <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
           </div>
