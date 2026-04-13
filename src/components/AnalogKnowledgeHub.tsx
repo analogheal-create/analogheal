@@ -1,12 +1,20 @@
+
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, ArrowRight, Sparkles, Loader2, FileText, ShieldCheck } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Loader2, FileText, ShieldCheck, X, BookOpen, ShieldAlert, Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { aiAnswerKnowledgeQuestion } from "@/ai/flows/ai-answer-knowledge-question";
 
@@ -16,18 +24,24 @@ const blogPosts = [
     category: "Security",
     title: "How to Secure Your Assets Against Phishing",
     description: "Learn the latest tactics used by cybercriminals and how to protect your digital wealth from evolving threats.",
+    content: "Phishing is the most common way digital assets are lost. Criminals create perfect replicas of popular wallets like MetaMask or exchanges like Coinbase. They trick you into entering your 12 or 24-word seed phrase. Once they have this, they can recreate your wallet and drain your funds instantly.\n\nTo stay safe:\n\n1. **Never** type your seed phrase into any website or digital document. Your seed phrase is only for physical backup.\n2. **Verify URLs**: Always bookmark your primary crypto sites to avoid clicking fake search engine ads that lead to clones.\n3. **Use a Hardware Wallet**: For large amounts of capital, hardware wallets like Ledger or Trezor keep your keys offline. This means even if a hacker compromises your computer, they cannot move funds without physical confirmation on the device.",
+    icon: ShieldAlert
   },
   {
     id: "blog-2",
     category: "Recovery",
     title: "Top 5 Myths About Crypto Wallet Recovery",
     description: "Think your lost Bitcoin is gone forever? We debunk common misconceptions about blockchain forensics and recovery.",
+    content: "Many people believe that once crypto is gone, it's gone forever. While the blockchain is immutable, the human element behind it can be traced. Here are 5 myths debunked:\n\n1. **'Hackers are ghosts'**: False. Most hackers eventually move funds to a centralized exchange to cash out. These exchanges have KYC (Know Your Customer) records that lead to real identities.\n2. **'Law enforcement can't help'**: Specialized cybercrime units are growing rapidly and frequently cooperate with private forensic firms to freeze stolen assets.\n3. 'Privacy mixers make it impossible': While difficult, advanced 'heuristic analysis' can often see through mixers to identify the final destination of funds.\n4. **'Forgotten passwords mean total loss'**: In cases of device failure or forgotten passwords, professional brute-forcing on secure GPU clusters can often reclaim access.\n5. **'Every recovery service is a scam'**: While the industry has bad actors, certified firms provide legal contracts, transparent probability reports, and real results.",
+    icon: BookOpen
   },
   {
     id: "blog-3",
     category: "Legal",
     title: "What to Do Immediately After Your Wallet is Hacked",
     description: "Time is of the essence. Follow our step-by-step emergency protocol to increase your chances of asset recovery.",
+    content: "If you notice unauthorized transactions, every second counts. Follow this institutional-grade emergency protocol:\n\n1. **ISOLATE**: Immediately disconnect your computer and phone from the internet. The hacker may still have an active remote session on your device.\n2. **AUDIT**: Use a block explorer (like Etherscan or Blockchain.com) on a clean device to find the Transaction IDs (TXIDs) of the theft.\n3. **REPORT**: If the funds moved to a centralized exchange (like Binance or Kraken), contact their emergency compliance team immediately to request an asset freeze.\n4. **PRESERVE**: Do not wipe your device. It may contain forensic 'footprints' or metadata that can help identify the attacker.\n5. **ACT**: Contact a professional recovery specialist to begin a technical trace. Acting within the first 24-48 hours dramatically increases the probability of a successful asset freeze.",
+    icon: Zap
   },
 ];
 
@@ -35,6 +49,7 @@ export function AnalogKnowledgeHub() {
   const [question, setQuestion] = useState("");
   const [aiAnswer, setAiAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
 
   const handleAskAI = async () => {
     if (!question) return;
@@ -95,7 +110,11 @@ export function AnalogKnowledgeHub() {
             const isValidImage = imageData?.imageUrl && imageData.imageUrl !== "";
 
             return (
-              <Card key={post.id} className="bg-background border-white/10 overflow-hidden group hover:border-primary/50 transition-all">
+              <Card 
+                key={post.id} 
+                className="bg-background border-white/10 overflow-hidden group hover:border-primary/50 transition-all cursor-pointer"
+                onClick={() => setSelectedPost(post)}
+              >
                 <div className="relative aspect-video overflow-hidden bg-card">
                   {isValidImage ? (
                     <Image
@@ -118,7 +137,7 @@ export function AnalogKnowledgeHub() {
                   <h3 className="text-xl font-headline font-bold mb-3 group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-2">
                     {post.description}
                   </p>
                   <button className="flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all">
@@ -141,6 +160,46 @@ export function AnalogKnowledgeHub() {
           </Button>
         </div>
       </div>
+
+      {/* Article Dialog */}
+      <Dialog open={!!selectedPost} onOpenChange={(open) => !open && setSelectedPost(null)}>
+        <DialogContent className="max-w-2xl bg-card border-white/10 text-foreground overflow-y-auto max-h-[90vh]">
+          {selectedPost && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest mb-2">
+                  <selectedPost.icon className="w-4 h-4" />
+                  {selectedPost.category} Guidance
+                </div>
+                <DialogTitle className="text-2xl lg:text-3xl font-headline font-bold leading-tight">
+                  {selectedPost.title}
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground text-base mt-2">
+                  {selectedPost.description}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                {selectedPost.content.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx} className="text-base text-foreground/90">
+                    {paragraph.split('**').map((part, i) => 
+                      i % 2 === 1 ? <strong key={i} className="text-primary">{part}</strong> : part
+                    )}
+                  </p>
+                ))}
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-xs text-muted-foreground flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-green-500" />
+                  Verified Forensic Insight
+                </div>
+                <Button onClick={() => setSelectedPost(null)} variant="secondary" className="w-full sm:w-auto">
+                  Close Article
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
