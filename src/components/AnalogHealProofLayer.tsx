@@ -1,17 +1,31 @@
-
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ShieldCheck, FileText, Globe, Scale, ExternalLink, Activity } from "lucide-react";
+import { ShieldCheck, FileText, Globe, Scale, ExternalLink, Activity, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
-
-const proofs = [
-  { id: "blockchain-proof-1", label: "Forensic Reclamation - $1.2M", date: "Nov 25" },
-  { id: "blockchain-proof-2", label: "CEX Dispute Resolution", date: "Mar 2026" },
-];
+import { supabase } from "@/lib/supabase";
 
 export function AnalogHealProofLayer() {
+  const [proofs, setProofs] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProofs = async () => {
+      const { data, error } = await supabase
+        .from("forensic_results")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(2); // Keep the design clean with top 2 recent proofs
+      
+      if (!error && data) {
+        setProofs(data);
+      }
+      setIsLoading(false);
+    };
+    fetchProofs();
+  }, []);
+
   return (
     <section className="py-20 bg-primary/5 border-y border-white/5">
       <div className="container mx-auto px-4">
@@ -44,27 +58,26 @@ export function AnalogHealProofLayer() {
                 Validated recovery reports available for legal review
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {proofs.map((proof) => {
-                const imageData = PlaceHolderImages.find((img) => img.id === proof.id);
-                return (
+            
+            {isLoading ? (
+              <div className="flex items-center justify-center h-48">
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {proofs.map((proof) => (
                   <Card key={proof.id} className="bg-background border-white/10 overflow-hidden group">
                     <div className="relative aspect-video overflow-hidden">
-                      {imageData?.imageUrl ? (
-                        <Image
-                          src={imageData.imageUrl}
-                          alt={imageData.description}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          data-ai-hint={imageData.imageHint}
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-card">
-                          <FileText className="w-12 h-12 text-primary/20" />
-                        </div>
-                      )}
+                      <Image
+                        src={proof.image_url}
+                        alt={proof.label}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                        <span className="text-xs font-bold uppercase tracking-widest bg-primary px-2 py-1 rounded">Forensic ID: #882-{proof.id.slice(-2)}</span>
+                        <span className="text-xs font-bold uppercase tracking-widest bg-primary text-primary-foreground px-2 py-1 rounded">
+                          Forensic ID: {proof.forensic_id}
+                        </span>
                       </div>
                     </div>
                     <CardContent className="p-4 flex items-center justify-between">
@@ -75,9 +88,14 @@ export function AnalogHealProofLayer() {
                       <ExternalLink className="w-4 h-4 text-muted-foreground" />
                     </CardContent>
                   </Card>
-                );
-              })}
-            </div>
+                ))}
+                {proofs.length === 0 && (
+                  <div className="col-span-full p-8 rounded-xl border border-dashed border-white/10 bg-white/5 text-center">
+                    <p className="text-muted-foreground text-sm italic">Laboratory results pending authentication...</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="bg-card p-8 rounded-3xl border border-white/10 shadow-xl">

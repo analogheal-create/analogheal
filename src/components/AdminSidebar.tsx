@@ -10,7 +10,8 @@ import {
   FileText, 
   Users, 
   Settings, 
-  Activity 
+  Activity,
+  Image as ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -33,6 +34,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
   const navItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Recovery Files", href: "/admin/recovery-files", icon: FileText },
+    { name: "Forensic Results", href: "/admin/forensic-results", icon: ImageIcon },
     { name: "Intelligence Logs", href: "/admin/intelligence-logs", icon: Activity },
     { name: "Client Database", href: "/admin/clients", icon: Users },
   ];
