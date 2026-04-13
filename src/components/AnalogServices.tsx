@@ -79,16 +79,16 @@ export function AnalogServices() {
               onClick={() => setSelectedService(service)}
             >
               <CardHeader>
-                <div className="p-3 w-fit rounded-xl bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-8 h-8 text-primary" />
+                <div className="p-3 w-fit rounded-xl bg-accent/10 mb-4 group-hover:bg-accent/20 transition-colors">
+                  <service.icon className="w-8 h-8 text-accent" />
                 </div>
-                <CardTitle className="text-xl font-headline group-hover:text-primary transition-colors">{service.title}</CardTitle>
+                <CardTitle className="text-xl font-headline group-hover:text-accent transition-colors">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                <button className="flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
+                <button className="flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
                   Learn more <ArrowRight className="w-4 h-4" />
                 </button>
               </CardContent>
@@ -97,12 +97,13 @@ export function AnalogServices() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold btn-glow-action bg-primary hover:bg-primary/90 transition-all hover:scale-105">
             <Link href="#request">
               Get My Free Assessment <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
-          <p className="text-sm text-muted-foreground font-medium">
+          <p className="text-sm text-muted-foreground font-medium flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-accent" />
             Confidential review • No upfront fees for scams
           </p>
         </div>
@@ -114,7 +115,7 @@ export function AnalogServices() {
           {selectedService && (
             <>
               <DialogHeader>
-                <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest mb-2">
+                <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-widest mb-2">
                   <selectedService.icon className="w-4 h-4" />
                   Professional Service Insight
                 </div>
@@ -127,9 +128,9 @@ export function AnalogServices() {
               </DialogHeader>
               
               <div className="mt-6 space-y-6">
-                <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20">
+                <div className="p-6 rounded-2xl bg-accent/5 border border-accent/20">
                   <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
+                    <div className="p-2 rounded-lg bg-accent/10 text-accent shrink-0">
                       <Info className="w-5 h-5" />
                     </div>
                     <div>
@@ -143,11 +144,11 @@ export function AnalogServices() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                    <div className="text-primary font-bold text-xs uppercase tracking-widest mb-1">Standard Timeframe</div>
+                    <div className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Standard Timeframe</div>
                     <div className="text-sm font-semibold">3–7 Business Days</div>
                   </div>
                   <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                    <div className="text-primary font-bold text-xs uppercase tracking-widest mb-1">Success Rate</div>
+                    <div className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Success Rate</div>
                     <div className="text-sm font-semibold">94% Technical Recovery</div>
                   </div>
                 </div>

@@ -4,16 +4,17 @@
 
 @layer base {
   :root {
-    /* Forensic Intelligence Palette */
-    --background: 225 51% 8%; /* #0A0F1F */
+    /* Forensic Intelligence Palette - Dual Accent System */
+    --background: 225 51% 8%; /* #0A0F1F Deep Navy Base */
     --foreground: 223 25% 93%; /* #E6EAF2 */
     
-    --card: 223 45% 13%; /* #121A2F */
+    --card: 223 45% 13%; /* #121A2F Layered Blue */
     --card-foreground: 223 25% 93%;
     
     --popover: 225 51% 8%;
     --popover-foreground: 223 25% 93%;
     
+    /* Blue for Action */
     --primary: 217 91% 60%; /* #3B82F6 Signal Blue */
     --primary-foreground: 210 40% 98%;
     
@@ -23,23 +24,24 @@
     --muted: 221 37% 20%;
     --muted-foreground: 215 15% 65%; /* #9AA4B2 */
     
+    /* Cyan for Intelligence & Data */
     --accent: 189 86% 53%; /* #22D3EE Forensic Cyan */
     --accent-foreground: 225 51% 8%;
     
     --destructive: 0 84% 60%; /* #EF4444 Alert Red */
     --destructive-foreground: 210 40% 98%;
     
-    --border: 225 51% 15%; /* Custom border based on base */
+    --border: 225 51% 15%;
     --input: 225 51% 15%;
     --ring: 217 91% 60%;
     
     --radius: 0.75rem;
 
-    /* Chart Colors aligned with palette */
-    --chart-1: 217 91% 60%;
-    --chart-2: 189 86% 53%;
-    --chart-3: 142 71% 45%; /* Success Green */
-    --chart-4: 0 84% 60%;
+    /* Chart Colors */
+    --chart-1: 217 91% 60%; /* Action/Trace */
+    --chart-2: 189 86% 53%; /* Intelligence */
+    --chart-3: 142 71% 45%; /* Success */
+    --chart-4: 0 84% 60%;   /* Threat */
     --chart-5: 221 37% 40%;
   }
 }
@@ -62,28 +64,31 @@
   @apply sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-white/5;
 }
 
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-blue-400;
+.text-gradient-action {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
+}
+
+.text-gradient-intelligence {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan-300;
 }
 
 .hero-glow {
-  background: radial-gradient(circle at 50% -20%, rgba(34, 211, 238, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% -20%, rgba(34, 211, 238, 0.05) 0%, transparent 70%);
 }
 
-/* Trust Glow System */
-.btn-glow {
-  @apply shadow-lg shadow-primary/20 hover:shadow-primary/40 active:shadow-inner transition-all;
+.btn-glow-action {
+  @apply shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all;
 }
 
-.glow-interaction {
-  @apply shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.25)] transition-shadow duration-300;
+.btn-glow-intelligence {
+  @apply shadow-lg shadow-accent/20 hover:shadow-accent/40 transition-all;
+}
+
+.glow-intelligence {
+  @apply shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.2)] transition-shadow duration-300;
 }
 
 .glow-success {
-  @apply shadow-[0_0_15px_rgba(34,211,238,0.15)] hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-shadow duration-300;
-}
-
-.glow-confirmation {
   @apply shadow-[0_0_15px_rgba(34,197,94,0.15)] transition-shadow duration-300;
 }
 
@@ -91,11 +96,6 @@
   @apply hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-300;
 }
 
-.accent-highlight {
-  @apply text-accent font-semibold;
-}
-
-/* Custom Animations */
 @keyframes pulse-green {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.1); opacity: 0.7; }

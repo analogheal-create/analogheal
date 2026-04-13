@@ -9,18 +9,18 @@ export function AnalogHero() {
   return (
     <section className="relative overflow-hidden bg-background pt-20 pb-24 lg:pt-32 lg:pb-40 hero-glow">
       {/* Background Decorative Elements */}
-      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full" />
+      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full" />
       <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-accent/5 blur-[120px] rounded-full" />
 
       <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT CONTENT */}
+        {/* LEFT CONTENT - Conversion Focus (Blue) */}
         <motion.div 
           className="z-10"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8 glow-interaction">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -52,41 +52,41 @@ export function AnalogHero() {
             </div>
             <div className="flex items-center gap-3">
               <BarChart3 className="w-5 h-5 text-accent" />
-              <span>Institutional probability assessment</span>
+              <span className="text-accent">Institutional probability assessment</span>
             </div>
           </div>
 
-          {/* CTA Group */}
+          {/* CTA Group - Action Color (Blue) */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" asChild className="h-14 px-8 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
+            <Button size="lg" asChild className="h-14 px-8 text-lg font-bold btn-glow-action bg-primary hover:bg-primary/90 transition-all hover:scale-105">
               <Link href="#request">
                 Start Forensic Intake <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-semibold border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 glow-interaction">
+            <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-semibold border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-primary/50">
               <Play className="mr-2 w-5 h-5 fill-current" /> How It Works
             </Button>
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE - ANIMATED FORENSIC GRAPH */}
+        {/* RIGHT SIDE - Intelligence Visualization (Cyan) */}
         <motion.div 
           className="relative h-[400px] lg:h-[500px] flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <div className="w-full h-full relative p-8 rounded-[3rem] bg-card/40 border border-white/5 backdrop-blur-3xl shadow-2xl overflow-hidden glow-interaction">
+          <div className="w-full h-full relative p-8 rounded-[3rem] bg-card/40 border border-white/5 backdrop-blur-3xl shadow-2xl overflow-hidden glow-intelligence">
             <svg className="w-full h-full" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
-              {/* Animated Forensic Tracing Lines */}
+              {/* Animated Forensic Tracing Lines - Cyan Accent */}
               <motion.line
                 x1="100" y1="120" x2="250" y2="220"
-                stroke="hsl(var(--primary))"
+                stroke="hsl(var(--accent))"
                 strokeWidth="2"
                 strokeDasharray="8 8"
                 animate={{ strokeDashoffset: [0, -32] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                opacity="0.6"
+                opacity="0.4"
               />
 
               <motion.line
@@ -111,10 +111,10 @@ export function AnalogHero() {
 
               {/* Nodes */}
               <circle cx="100" cy="120" r="10" fill="hsl(var(--secondary))" />
-              <circle cx="250" cy="220" r="12" fill="hsl(var(--primary))" />
+              <circle cx="250" cy="220" r="12" fill="hsl(var(--accent))" />
               <circle cx="380" cy="140" r="10" fill="hsl(var(--accent))" />
 
-              {/* Threat Node */}
+              {/* Threat Node - Red Alert */}
               <motion.circle
                 cx="440"
                 cy="280"
@@ -129,14 +129,14 @@ export function AnalogHero() {
 
               {/* Technical Labels */}
               <text x="80" y="100" fill="white" fontSize="10" fontWeight="bold" className="font-body opacity-40">INPUT_SOURCE</text>
-              <text x="230" y="255" fill="hsl(var(--primary))" fontSize="10" fontWeight="bold" className="font-body">HOP_01</text>
+              <text x="230" y="255" fill="hsl(var(--accent))" fontSize="10" fontWeight="bold" className="font-body">HOP_01</text>
               <text x="360" y="120" fill="hsl(var(--accent))" fontSize="10" fontWeight="bold" className="font-body">DEANONYMIZED</text>
               <text x="420" y="315" fill="hsl(var(--destructive))" fontSize="10" fontWeight="bold" className="font-body">THREAT_IDENTIFIED</text>
             </svg>
 
-            {/* Forensic Overlays */}
+            {/* Forensic Overlays - Cyan for Intelligence */}
             <motion.div
-              className="absolute top-10 right-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-2xl"
+              className="absolute top-10 right-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-accent/20 shadow-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
@@ -157,7 +157,7 @@ export function AnalogHero() {
             </motion.div>
 
             <motion.div
-              className="absolute bottom-10 left-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-2xl"
+              className="absolute bottom-10 left-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-destructive/20 shadow-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 }}

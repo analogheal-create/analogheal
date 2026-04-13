@@ -1,10 +1,9 @@
-
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, ArrowRight, Sparkles, Loader2, FileText, ShieldCheck, X, BookOpen, ShieldAlert, Zap } from "lucide-react";
+import { Search, ArrowRight, Sparkles, Loader2, FileText, ShieldCheck, BookOpen, ShieldAlert, Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -79,25 +78,25 @@ export function AnalogKnowledgeHub() {
             </p>
           </div>
           
-          <div className="w-full lg:max-w-md p-6 rounded-2xl bg-primary/5 border border-primary/20 backdrop-blur-sm">
-            <div className="flex items-center gap-2 text-primary font-bold mb-4">
+          <div className="w-full lg:max-w-md p-6 rounded-2xl bg-accent/5 border border-accent/20 backdrop-blur-sm glow-intelligence">
+            <div className="flex items-center gap-2 text-accent font-bold mb-4">
               <Sparkles className="w-5 h-5" />
               Ask our AI Expert
             </div>
             <div className="flex gap-2">
               <Input 
                 placeholder="How do I recover a lost Ledger?" 
-                className="bg-background/50" 
+                className="bg-background/50 border-accent/20 focus:border-accent" 
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAskAI()}
               />
-              <Button size="icon" onClick={handleAskAI} disabled={isLoading}>
+              <Button size="icon" onClick={handleAskAI} disabled={isLoading} className="bg-accent text-accent-foreground hover:bg-accent/90">
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
               </Button>
             </div>
             {aiAnswer && (
-              <div className="mt-4 p-4 rounded-lg bg-background/80 border border-white/5 text-sm animate-in fade-in slide-in-from-top-2">
+              <div className="mt-4 p-4 rounded-lg bg-background/80 border border-accent/10 text-sm animate-in fade-in slide-in-from-top-2 text-foreground/90 leading-relaxed">
                 {aiAnswer}
               </div>
             )}
@@ -112,7 +111,7 @@ export function AnalogKnowledgeHub() {
             return (
               <Card 
                 key={post.id} 
-                className="bg-background border-white/10 overflow-hidden group hover:border-primary/50 transition-all cursor-pointer"
+                className="bg-background border-white/10 overflow-hidden group hover:border-accent/50 transition-all cursor-pointer"
                 onClick={() => setSelectedPost(post)}
               >
                 <div className="relative aspect-video overflow-hidden bg-card">
@@ -125,22 +124,22 @@ export function AnalogKnowledgeHub() {
                       data-ai-hint={imageData.imageHint}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-primary/5">
-                      <FileText className="w-12 h-12 text-primary/20" />
+                    <div className="w-full h-full flex items-center justify-center bg-accent/5">
+                      <FileText className="w-12 h-12 text-accent/20" />
                     </div>
                   )}
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-xs font-bold text-white">
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-accent text-xs font-bold text-accent-foreground">
                     {post.category}
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-headline font-bold mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-headline font-bold mb-3 group-hover:text-accent transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-2">
                     {post.description}
                   </p>
-                  <button className="flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all">
+                  <button className="flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
                     Read article <ArrowRight className="w-4 h-4" />
                   </button>
                 </CardContent>
@@ -150,10 +149,10 @@ export function AnalogKnowledgeHub() {
         </div>
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-          <Button variant="outline" size="lg" className="px-8 h-12 font-semibold">
+          <Button variant="outline" size="lg" className="px-8 h-12 font-semibold border-white/10 hover:border-accent/50">
             Load More Articles
           </Button>
-          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+          <Button size="lg" asChild className="px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 btn-glow-action">
             <Link href="#request">
               Check Your Case <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
@@ -163,11 +162,11 @@ export function AnalogKnowledgeHub() {
 
       {/* Article Dialog */}
       <Dialog open={!!selectedPost} onOpenChange={(open) => !open && setSelectedPost(null)}>
-        <DialogContent className="max-w-2xl bg-card border-white/10 text-foreground overflow-y-auto max-h-[90vh]">
+        <DialogContent className="max-w-2xl bg-card border-accent/20 text-foreground overflow-y-auto max-h-[90vh]">
           {selectedPost && (
             <>
               <DialogHeader>
-                <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest mb-2">
+                <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-widest mb-2">
                   <selectedPost.icon className="w-4 h-4" />
                   {selectedPost.category} Guidance
                 </div>
@@ -182,7 +181,7 @@ export function AnalogKnowledgeHub() {
                 {selectedPost.content.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="text-base text-foreground/90">
                     {paragraph.split('**').map((part, i) => 
-                      i % 2 === 1 ? <strong key={i} className="text-primary">{part}</strong> : part
+                      i % 2 === 1 ? <strong key={i} className="text-accent">{part}</strong> : part
                     )}
                   </p>
                 ))}
