@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -6,8 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const proofs = [
-  { id: "blockchain-proof-1", label: "Forensic Reclamation - $1.2M", date: "Jan 2024" },
-  { id: "blockchain-proof-2", label: "CEX Dispute Resolution", date: "Feb 2024" },
+  { id: "blockchain-proof-1", label: "Forensic Reclamation - $1.2M", date: "Nov 25" },
+  { id: "blockchain-proof-2", label: "CEX Dispute Resolution", date: "Mar 2026" },
 ];
 
 export function AnalogHealProofLayer() {
