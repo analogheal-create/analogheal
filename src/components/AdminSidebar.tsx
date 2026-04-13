@@ -13,7 +13,8 @@ import {
   Activity,
   Image as ImageIcon,
   Camera,
-  BookOpen
+  BookOpen,
+  Quote
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -39,6 +40,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
     { name: "Forensic Results", href: "/admin/forensic-results", icon: ImageIcon },
     { name: "Trust Assets", href: "/admin/trust-assets", icon: Camera },
     { name: "Knowledge Hub", href: "/admin/articles", icon: BookOpen },
+    { name: "Case Studies", href: "/admin/case-studies", icon: Quote },
     { name: "Intelligence Logs", href: "/admin/intelligence-logs", icon: Activity },
     { name: "Client Database", href: "/admin/clients", icon: Users },
   ];
