@@ -23,7 +23,7 @@ export function AnalogHero() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
             </span>
             Verified Forensic Analysts Active
           </div>
@@ -43,16 +43,16 @@ export function AnalogHero() {
           {/* Trust bullets */}
           <div className="mb-10 space-y-3 text-sm font-medium">
             <div className="flex items-center gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-500" />
+              <CheckCircle2 className="w-5 h-5 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.3)]" />
               <span>Free case review in 24 hours</span>
             </div>
             <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-primary" />
+              <ShieldCheck className="w-5 h-5 text-primary shadow-[0_0_5px_rgba(59,130,246,0.3)]" />
               <span>Confidential & secure forensic process</span>
             </div>
             <div className="flex items-center gap-3">
-              <BarChart3 className="w-5 h-5 text-accent" />
-              <span className="text-accent">Institutional probability assessment</span>
+              <BarChart3 className="w-5 h-5 text-accent shadow-[0_0_5px_rgba(34,211,238,0.3)]" />
+              <span className="text-accent font-bold">Institutional probability assessment</span>
             </div>
           </div>
 
@@ -78,10 +78,10 @@ export function AnalogHero() {
         >
           <div className="w-full h-full relative p-8 rounded-[3rem] bg-card/40 border border-white/5 backdrop-blur-3xl shadow-2xl overflow-hidden glow-intelligence">
             <svg className="w-full h-full" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
-              {/* Animated Forensic Tracing Lines - Cyan Accent */}
+              {/* Animated Forensic Tracing Lines - Cyan Accent (#22D3EE) */}
               <motion.line
                 x1="100" y1="120" x2="250" y2="220"
-                stroke="hsl(var(--accent))"
+                stroke="#22D3EE"
                 strokeWidth="2"
                 strokeDasharray="8 8"
                 animate={{ strokeDashoffset: [0, -32] }}
@@ -91,7 +91,7 @@ export function AnalogHero() {
 
               <motion.line
                 x1="250" y1="220" x2="380" y2="140"
-                stroke="hsl(var(--accent))"
+                stroke="#22D3EE"
                 strokeWidth="2"
                 strokeDasharray="8 8"
                 animate={{ strokeDashoffset: [0, -32] }}
@@ -101,7 +101,7 @@ export function AnalogHero() {
 
               <motion.line
                 x1="380" y1="140" x2="440" y2="280"
-                stroke="hsl(var(--destructive))"
+                stroke="#22D3EE"
                 strokeWidth="2"
                 strokeDasharray="8 8"
                 animate={{ strokeDashoffset: [0, -32] }}
@@ -109,17 +109,17 @@ export function AnalogHero() {
                 opacity="0.6"
               />
 
-              {/* Nodes */}
-              <circle cx="100" cy="120" r="10" fill="hsl(var(--secondary))" />
-              <circle cx="250" cy="220" r="12" fill="hsl(var(--accent))" />
-              <circle cx="380" cy="140" r="10" fill="hsl(var(--accent))" />
+              {/* Action Nodes - Signal Blue (#3B82F6) */}
+              <circle cx="100" cy="120" r="10" fill="#3B82F6" />
+              <circle cx="250" cy="220" r="12" fill="#3B82F6" />
+              <circle cx="380" cy="140" r="10" fill="#3B82F6" />
 
-              {/* Threat Node - Red Alert */}
+              {/* Threat Node - Alert Red (#EF4444) */}
               <motion.circle
                 cx="440"
                 cy="280"
                 r="15"
-                fill="hsl(var(--destructive))"
+                fill="#EF4444"
                 animate={{ 
                   scale: [1, 1.2, 1],
                   opacity: [0.8, 1, 0.8]
@@ -129,9 +129,9 @@ export function AnalogHero() {
 
               {/* Technical Labels */}
               <text x="80" y="100" fill="white" fontSize="10" fontWeight="bold" className="font-body opacity-40">INPUT_SOURCE</text>
-              <text x="230" y="255" fill="hsl(var(--accent))" fontSize="10" fontWeight="bold" className="font-body">HOP_01</text>
-              <text x="360" y="120" fill="hsl(var(--accent))" fontSize="10" fontWeight="bold" className="font-body">DEANONYMIZED</text>
-              <text x="420" y="315" fill="hsl(var(--destructive))" fontSize="10" fontWeight="bold" className="font-body">THREAT_IDENTIFIED</text>
+              <text x="230" y="255" fill="#22D3EE" fontSize="10" fontWeight="bold" className="font-body">HOP_01</text>
+              <text x="360" y="120" fill="#22D3EE" fontSize="10" fontWeight="bold" className="font-body">DEANONYMIZED</text>
+              <text x="420" y="315" fill="#EF4444" fontSize="10" fontWeight="bold" className="font-body">THREAT_IDENTIFIED</text>
             </svg>
 
             {/* Forensic Overlays - Cyan for Intelligence */}
@@ -156,22 +156,25 @@ export function AnalogHero() {
               </div>
             </motion.div>
 
+            {/* Confirmation Pulse - Success Green (#22C55E) */}
             <motion.div
-              className="absolute bottom-10 left-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-destructive/20 shadow-2xl"
+              className="absolute bottom-10 left-10 bg-background/80 backdrop-blur-md p-5 rounded-2xl border border-green-500/20 shadow-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 }}
             >
-              <p className="text-[10px] font-bold text-destructive uppercase tracking-widest mb-2">Exposure Risk</p>
+              <p className="text-[10px] font-bold text-green-500 uppercase tracking-widest mb-2 flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3" /> Integrity Verified
+              </p>
               <div className="flex items-center gap-3">
-                <div className="h-1.5 w-20 bg-destructive/20 rounded-full overflow-hidden">
+                <div className="h-1.5 w-20 bg-green-500/20 rounded-full overflow-hidden">
                   <motion.div 
-                    className="h-full bg-destructive"
+                    className="h-full bg-green-500"
                     animate={{ width: ["0%", "100%"] }}
                     transition={{ duration: 1.5, delay: 1.5 }}
                   />
                 </div>
-                <span className="text-[10px] font-mono font-bold text-destructive">CRITICAL</span>
+                <span className="text-[10px] font-mono font-bold text-green-500">OPTIMAL</span>
               </div>
             </motion.div>
           </div>
