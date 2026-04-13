@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'AnalogHeal | Expert Crypto & Digital Asset Recovery',
-  description: 'Professional recovery services for lost or stolen cryptocurrency and digital assets. Trusted worldwide with a 94% success rate.',
+  title: 'AnalogHeal Forensics | Expert Crypto & Digital Asset Recovery',
+  description: 'Professional forensic recovery services for lost or stolen cryptocurrency and digital assets. Trusted worldwide with a 94% success rate.',
 };
 
 export default function RootLayout({

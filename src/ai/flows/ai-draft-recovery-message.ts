@@ -1,7 +1,6 @@
-
 'use server';
 /**
- * @fileOverview An AI assistant flow to help users draft a detailed and clear recovery request message.
+ * @fileOverview An AI assistant flow to help users draft a detailed and clear recovery request message for forensic analysts.
  *
  * - aiDraftRecoveryMessage - A function that handles the message drafting process.
  * - AiDraftRecoveryMessageInput - The input type for the aiDraftRecoveryMessage function.
@@ -19,7 +18,7 @@ const AiDraftRecoveryMessageInputSchema = z.object({
 export type AiDraftRecoveryMessageInput = z.infer<typeof AiDraftRecoveryMessageInputSchema>;
 
 const AiDraftRecoveryMessageOutputSchema = z.object({
-  draftedMessage: z.string().describe('A detailed and clear drafted message for the recovery request, including optimal phrasing and necessary details for AnalogHeal agents.'),
+  draftedMessage: z.string().describe('A detailed and clear drafted message for the recovery request, including optimal phrasing and necessary details for AnalogHeal forensic agents.'),
 });
 export type AiDraftRecoveryMessageOutput = z.infer<typeof AiDraftRecoveryMessageOutputSchema>;
 
@@ -33,20 +32,21 @@ const draftRecoveryMessagePrompt = ai.definePrompt({
   name: 'draftRecoveryMessagePrompt',
   input: {schema: AiDraftRecoveryMessageInputSchema},
   output: {schema: AiDraftRecoveryMessageOutputSchema},
-  prompt: `You are an AI assistant for AnalogHeal, a professional crypto and digital asset recovery service. Your task is to help users draft a detailed and clear recovery request message based on their provided information. The message should be professional, empathetic, and include all necessary details for AnalogHeal agents to quickly understand the situation and initiate the recovery process efficiently.
+  prompt: `You are a forensic intake specialist for AnalogHeal Forensics, a professional digital asset reclamation laboratory. Your task is to help victims draft a detailed and technical recovery request message based on their information. The message must be professional, empathetic, and formatted to help forensic analysts quickly initiate the tracing process.
 
 Focus on:
-- Clearly stating the recovery type.
-- Mentioning the estimated value of lost assets.
-- Expanding on the user's initial description to include optimal phrasing and potentially ask for more specific details that might be relevant (e.g., dates, specific platforms, nature of the loss, steps already taken).
-- Ensuring the message is structured and easy to read.
+- Clearly stating the forensic recovery type.
+- Mentioning the estimated value and asset symbols (e.g. BTC, ETH, USDT).
+- Expanding on the victim's initial description to include technical details like platform names, potential dates, and nature of the loss (e.g., phishing link, fake exchange, SIM-swap).
+- Encouraging the user to have Transaction IDs (TXIDs) ready.
+- Ensuring the message is structured as a formal case summary.
 
-Here is the user's information:
+Here is the victim's information:
 Recovery Type: {{{recoveryType}}}
 Estimated Value: {{{estimatedValue}}}
-User's Initial Message: {{{userMessage}}}
+Initial Description: {{{userMessage}}}
 
-Draft a detailed recovery request message:
+Draft a detailed forensic recovery request:
 `,
 });
 

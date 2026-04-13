@@ -1,8 +1,7 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { MessageSquare, X, ShieldCheck } from "lucide-react";
+import { MessageSquare, X, ShieldCheck, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function AnalogLiveSupport() {
@@ -33,9 +32,9 @@ export function AnalogLiveSupport() {
               <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-primary rounded-full animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,1)]" />
             </div>
             <div>
-              <div className="font-bold text-sm font-body">AnalogHeal Status</div>
+              <div className="font-bold text-sm font-body">AnalogHeal Lab Status</div>
               <div className="text-[10px] opacity-80 flex items-center gap-1 font-body">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                <Activity className="w-3 h-3 animate-pulse" />
                 Analysts Online
               </div>
             </div>
@@ -47,12 +46,12 @@ export function AnalogLiveSupport() {
 
         <div className="p-4 space-y-4">
           <div className="bg-white/5 rounded-xl p-3 text-xs leading-relaxed text-muted-foreground font-body">
-            Hi! Our forensic team is active. To protect your privacy and case data, please submit a request via our encrypted intake form. Analysts typically review new cases in <span className="text-primary font-bold">under 24 hours</span>.
+            Hi! Our forensic team is currently active. To protect case integrity, all diagnostic data must be submitted via our encrypted intake form. Analysts typically complete initial file reviews in <span className="text-primary font-bold">under 24 hours</span>.
           </div>
           
           <div className="pt-2 flex items-center justify-center gap-1.5 text-[9px] text-muted-foreground opacity-60 font-body">
             <ShieldCheck className="w-3 h-3 text-green-500" />
-            Institutional Grade Secure Infrastructure
+            Institutional Forensic Infrastructure
           </div>
         </div>
       </div>

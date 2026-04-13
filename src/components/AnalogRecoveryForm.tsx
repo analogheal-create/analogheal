@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -47,10 +46,10 @@ const formSchema = z.object({
 });
 
 const funnelOptions = [
-  { id: "scammed", label: "I was scammed", icon: ShieldAlert, description: "Investment scams, phishing, or fake platforms." },
-  { id: "wallet", label: "My wallet is locked", icon: Key, description: "Lost seed phrase, password, or device failure." },
-  { id: "exchange", label: "Exchange issue", icon: Landmark, description: "Account frozen, withdrawal issues, or disputes." },
-  { id: "hacked", label: "Hacked account", icon: Zap, description: "Unauthorized access or compromised credentials." },
+  { id: "scammed", label: "Fraudulent Scam", icon: ShieldAlert, description: "Investment scams, phishing, or fake platforms." },
+  { id: "wallet", label: "Hardware Lockout", icon: Key, description: "Lost seed phrase, password, or device failure." },
+  { id: "exchange", label: "Exchange Dispute", icon: Landmark, description: "Account frozen, withdrawal issues, or disputes." },
+  { id: "hacked", label: "Compromised Account", icon: Zap, description: "Unauthorized access or compromised credentials." },
 ];
 
 export function AnalogRecoveryForm() {
@@ -71,7 +70,7 @@ export function AnalogRecoveryForm() {
   });
 
   const progress = step === 0 ? 33 : step === 1 ? 66 : 100;
-  const stepLabel = step < 2 ? "Step 1 of 2: Quick Assessment (30s)" : "Step 2 of 2: Case Details (1m)";
+  const stepLabel = step < 2 ? "Step 1 of 2: Lab Assessment (30s)" : "Step 2 of 2: Case Forensics (1m)";
 
   const handleSelectType = (id: string) => {
     form.setValue("recoveryType", id);
@@ -108,13 +107,13 @@ export function AnalogRecoveryForm() {
       });
       form.setValue("message", result.draftedMessage);
       toast({
-        title: "AI Draft Complete",
-        description: "Your message has been enhanced for our AnalogHeal agents.",
+        title: "AI Analysis Complete",
+        description: "Your technical report has been enhanced for our forensic analysts.",
       });
     } catch (error) {
       toast({
-        title: "AI Assistant Error",
-        description: "Could not draft message at this time.",
+        title: "Lab Assistant Error",
+        description: "Could not process technical data at this time.",
         variant: "destructive",
       });
     } finally {
@@ -125,8 +124,8 @@ export function AnalogRecoveryForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     toast({
-      title: "Request Submitted Successfully",
-      description: "Our forensic team will review your case and contact you within 24 hours.",
+      title: "Forensic Case Initiated",
+      description: "Our lab team will review your case and contact you within 24 hours.",
     });
     form.reset();
     setStep(0);
@@ -137,49 +136,49 @@ export function AnalogRecoveryForm() {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-6xl font-headline font-bold mb-6 text-foreground">Start Your Professional Recovery</h2>
+            <h2 className="text-3xl lg:text-6xl font-headline font-bold mb-6 text-foreground">Initiate Forensic Recovery</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Tell us what happened. Our forensic experts will analyze your case and provide a free assessment within 24 hours.
+              Submit your case to our recovery labs. Our forensic analysts will provide a technical assessment within 24 hours.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: Trust & Context */}
+            {/* Left Column: Authority & Trust */}
             <div className="lg:col-span-4 space-y-8">
               <div className="p-8 rounded-3xl bg-primary/5 border border-primary/20 backdrop-blur-sm glow-confirmation">
                 <div className="flex items-center gap-3 text-primary font-bold mb-4">
                   <ShieldCheck className="w-6 h-6 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-                  AnalogHeal Security Protocol
+                  AnalogHeal Forensic Protocol
                 </div>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
-                    <span className="text-sm">End-to-end encrypted communication via Swiss servers.</span>
+                    <span className="text-sm">End-to-end encrypted communication via Swiss forensic servers.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
-                    <span className="text-sm">No upfront forensic fees for qualifying scam cases.</span>
+                    <span className="text-sm">Institutional no-upfront fee policy for qualifying fraud cases.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
-                    <span className="text-sm">Direct access to certified blockchain investigators.</span>
+                    <span className="text-sm">Direct engagement with certified blockchain investigators.</span>
                   </li>
                 </ul>
               </div>
 
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="font-bold text-lg mb-4">Official Submission</h3>
+                <h3 className="font-bold text-lg mb-4">Official Forensic Intake</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  This secure form is the primary method for initiating a case. Once submitted, your data is isolated and encrypted until reviewed by a forensic analyst.
+                  This secure intake form is the mandated primary method for initiating a case. Your data is isolated and encrypted until reviewed by a lead analyst.
                 </p>
                 <div className="flex items-center gap-2 text-xs font-bold text-primary">
                   <ShieldCheck className="w-4 h-4" />
-                  ISO 27001 Compliant Intake
+                  ISO 27001 Certified Laboratory
                 </div>
               </div>
 
               <p className="text-[10px] text-muted-foreground leading-relaxed italic">
-                *Submitting this form does not create a binding contract. All cases are subject to a strict conflict-of-interest check before acceptance.
+                *Case submission does not guarantee acceptance. All files undergo strict forensic conflict-of-interest vetting.
               </p>
             </div>
 
@@ -196,8 +195,8 @@ export function AnalogRecoveryForm() {
 
                 {step === 0 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                    <h3 className="text-2xl font-headline font-bold mb-2">What happened?</h3>
-                    <p className="text-muted-foreground mb-8 text-sm">Select the category that best describes your situation.</p>
+                    <h3 className="text-2xl font-headline font-bold mb-2">Case Categorization</h3>
+                    <p className="text-muted-foreground mb-8 text-sm">Select the forensic category that best describes your loss.</p>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {funnelOptions.map((opt) => (
@@ -213,7 +212,7 @@ export function AnalogRecoveryForm() {
                           <div className="font-bold mb-1">{opt.label}</div>
                           <div className="text-xs text-muted-foreground leading-relaxed">{opt.description}</div>
                           <div className="mt-4 text-xs font-bold text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Select <ChevronRight className="w-3 h-3" />
+                            Assign Category <ChevronRight className="w-3 h-3" />
                           </div>
                         </button>
                       ))}
@@ -228,11 +227,11 @@ export function AnalogRecoveryForm() {
                       onClick={() => setStep(0)}
                       className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
                     >
-                      <ArrowLeft className="w-4 h-4" /> Back
+                      <ArrowLeft className="w-4 h-4" /> Back to Step 1
                     </button>
                     
-                    <h3 className="text-2xl font-headline font-bold mb-6">Estimated Asset Value</h3>
-                    <p className="text-muted-foreground mb-8 text-sm">Providing an accurate estimate helps us prioritize your case and assign the correct forensic resources.</p>
+                    <h3 className="text-2xl font-headline font-bold mb-6">Valuation Analysis</h3>
+                    <p className="text-muted-foreground mb-8 text-sm">Providing an accurate valuation helps our lab assign the appropriate forensic computing resources to your case.</p>
                     
                     <Form {...form}>
                       <div className="space-y-8">
@@ -243,12 +242,12 @@ export function AnalogRecoveryForm() {
                             <FormItem>
                               <FormLabel className="text-lg font-semibold flex items-center gap-2">
                                 <TrendingUp className="w-5 h-5 text-accent glow-success" />
-                                Value of Lost/Stolen Assets (USD)
+                                Estimated Market Value (USD)
                               </FormLabel>
                               <FormControl>
                                 <div className="relative">
                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">$</span>
-                                  <Input placeholder="e.g. 25,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10 focus:border-accent/50 glow-success" {...field} />
+                                  <Input placeholder="e.g. 50,000" className="h-16 pl-8 text-2xl font-bold bg-background/50 border-white/10 focus:border-accent/50 glow-success" {...field} />
                                 </div>
                               </FormControl>
                               <FormMessage />
@@ -256,7 +255,7 @@ export function AnalogRecoveryForm() {
                           )}
                         />
                         <Button onClick={handleNextToFinal} className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
-                          Continue to Final Step <ChevronRight className="ml-2 w-5 h-5" />
+                          Continue to Forensic Details <ChevronRight className="ml-2 w-5 h-5" />
                         </Button>
                       </div>
                     </Form>
@@ -270,10 +269,10 @@ export function AnalogRecoveryForm() {
                       onClick={() => setStep(1)}
                       className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
                     >
-                      <ArrowLeft className="w-4 h-4" /> Back
+                      <ArrowLeft className="w-4 h-4" /> Back to Step 2
                     </button>
                     
-                    <h3 className="text-2xl font-headline font-bold mb-6">Contact & Case Details</h3>
+                    <h3 className="text-2xl font-headline font-bold mb-6">Client Identity & Technical Summary</h3>
                     
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -299,7 +298,7 @@ export function AnalogRecoveryForm() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="flex items-center gap-2">
-                                  <Mail className="w-4 h-4 text-primary" /> Email Address
+                                  <Mail className="w-4 h-4 text-primary" /> Official Email
                                 </FormLabel>
                                 <FormControl>
                                   <Input placeholder="john@example.com" {...field} className="glow-interaction" />
@@ -316,7 +315,7 @@ export function AnalogRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-primary" /> Phone Number
+                                <Phone className="w-4 h-4 text-primary" /> Secure Phone Number
                               </FormLabel>
                               <FormControl>
                                 <Input placeholder="+1..." {...field} className="glow-interaction" />
@@ -332,7 +331,7 @@ export function AnalogRecoveryForm() {
                           render={({ field }) => (
                             <FormItem>
                               <div className="flex items-center justify-between">
-                                <FormLabel>Describe Your Case</FormLabel>
+                                <FormLabel>Technical Case Description</FormLabel>
                                 <Button 
                                   type="button" 
                                   variant="ghost" 
@@ -342,12 +341,12 @@ export function AnalogRecoveryForm() {
                                   disabled={isDrafting}
                                 >
                                   {isDrafting ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
-                                  AI Enhance
+                                  Forensic AI Analysis
                                 </Button>
                               </div>
                               <FormControl>
                                 <Textarea 
-                                  placeholder="What was the last step before you lost access? Mention any transaction IDs if available." 
+                                  placeholder="Detail the events leading to the loss. Include transaction IDs (TXIDs) if available for tracing." 
                                   className="min-h-[140px] bg-background/50 glow-interaction"
                                   {...field} 
                                 />
@@ -358,12 +357,12 @@ export function AnalogRecoveryForm() {
                         />
 
                         <Button type="submit" className="w-full h-16 text-lg font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105">
-                          Submit Recovery Request <Send className="ml-2 w-5 h-5" />
+                          Initiate Recovery Request <Send className="ml-2 w-5 h-5" />
                         </Button>
                         
                         <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground uppercase tracking-widest font-bold opacity-60 glow-confirmation py-1 rounded-full">
                           <ShieldCheck className="w-3 h-3 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
-                          Encrypted Submission Secured by AnalogHeal
+                          Encrypted Intake Secured by AnalogHeal Forensics
                         </div>
                       </form>
                     </Form>

@@ -3,10 +3,10 @@ import { ArrowRight, Play, CheckCircle2, TrendingUp, Users, Clock, ShieldCheck }
 import Link from "next/link";
 
 const metrics = [
-  { label: "Recovered", value: "$8M+", icon: TrendingUp, glow: "glow-success" },
+  { label: "Recovered Assets", value: "$8M+", icon: TrendingUp, glow: "glow-success" },
   { label: "Cases Solved", value: "3,800+", icon: Users, glow: "glow-interaction" },
   { label: "Success Rate", value: "94%", icon: CheckCircle2, glow: "glow-confirmation" },
-  { label: "Avg Response", value: "72hr", icon: Clock, glow: "glow-interaction" },
+  { label: "Avg Lab Response", value: "72hr", icon: Clock, glow: "glow-interaction" },
 ];
 
 export function AnalogHero() {
@@ -19,48 +19,48 @@ export function AnalogHero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_5px_rgba(59,130,246,0.8)]"></span>
             </span>
-            Verified AnalogHeal Recovery Specialists
+            Verified AnalogHeal Forensic Specialists
           </div>
           
           <h1 className="text-5xl lg:text-7xl font-headline font-bold leading-tight mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
-            Recover Lost Crypto From <br />
-            <span className="text-gradient">Scams, Hacks, or Locked Wallets</span>
+            Professional Forensic Recovery <br />
+            <span className="text-gradient">For Lost or Stolen Digital Assets</span>
           </h1>
           
           <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-            Victim of a cyberattack? Lost access to your seed phrase? Our world-class forensics experts specialize in reclaiming stolen and inaccessible digital wealth.
+            AnalogHeal Recovery Labs utilizes military-grade forensics to reclaim cryptocurrency from scams, hacks, and locked hardware wallets.
           </p>
           
           <div className="flex flex-col items-center gap-6 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
               <Button size="lg" asChild className="w-full sm:w-auto px-10 h-16 text-xl font-bold btn-glow bg-primary hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
                 <Link href="#request">
-                  Start My Recovery Request <ArrowRight className="ml-2 w-6 h-6" />
+                  Start Forensic Assessment <ArrowRight className="ml-2 w-6 h-6" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="w-full sm:w-auto px-10 h-16 text-lg font-semibold border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-primary/50 glow-interaction">
-                <Play className="mr-2 w-5 h-5 fill-current" /> See Success Stories
+                <Play className="mr-2 w-5 h-5 fill-current" /> See Lab Results
               </Button>
             </div>
             
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.3)]" />
-                Free case review in 24 hours
+                Free Forensic Case Review
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500 shadow-[0_0_5px_rgba(34,197,94,0.3)]" />
-                No upfront payment for most cases
+                Performance-Based Recovery
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-primary shadow-[0_0_5px_rgba(59,130,246,0.3)]" />
-                100% confidential
+                Institutional Privacy Protocol
               </div>
             </div>
             
             <p className="text-xs text-muted-foreground/60 font-bold uppercase tracking-wider flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-accent glow-success animate-pulse" />
-              Submission takes less than 2 minutes.
+              Secure intake takes less than 2 minutes.
             </p>
           </div>
 

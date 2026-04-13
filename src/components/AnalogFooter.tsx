@@ -19,19 +19,19 @@ export function AnalogFooter() {
       {/* Final Conversion Push */}
       <div className="relative overflow-hidden py-16 mb-20 border-b border-white/5 bg-primary/5">
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <h3 className="text-3xl lg:text-4xl font-headline font-bold mb-4">Don't Leave Your Assets to Chance</h3>
+          <h3 className="text-3xl lg:text-4xl font-headline font-bold mb-4">Protect Your Digital Rights Today</h3>
           <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-            Professional forensic recovery is time-sensitive. Speak with a specialist today for a confidential review of your situation.
+            Professional forensic recovery is highly time-sensitive. Speak with our lab specialists today for a confidential review of your situation.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" asChild className="w-full sm:w-auto px-10 h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
               <Link href="#request">
-                Start Recovery Request <ArrowRight className="ml-2 w-5 h-5" />
+                Start Forensic Intake <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
             <div className="flex items-center gap-2 text-sm font-bold text-green-500 uppercase tracking-wider">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              Specialists Active Now
+              Lab Analysts Active
             </div>
           </div>
         </div>
@@ -44,11 +44,11 @@ export function AnalogFooter() {
             <Link href="/" className="flex items-center gap-2 group">
               <Shield className="w-8 h-8 text-primary" />
               <span className="font-headline text-2xl font-bold">
-                Analog<span className="text-primary">Heal</span>
+                Analog<span className="text-primary">Heal</span> <span className="text-sm font-medium opacity-50">Forensics</span>
               </span>
             </Link>
             <p className="text-muted-foreground leading-relaxed">
-              Global leaders in professional cryptocurrency and digital asset recovery services. Trusted by individuals and institutional investors worldwide.
+              Global leaders in professional digital asset forensics and blockchain recovery. AnalogHeal Recovery Labs provides institutional-grade intelligence for asset reclamation.
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -57,7 +57,7 @@ export function AnalogFooter() {
               </div>
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Building className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                <span>AnalogHeal Systems Ltd. | Reg #HE-45293-C1</span>
+                <span>AnalogHeal Forensic Systems Ltd. | Reg #HE-45293-C1</span>
               </div>
             </div>
             <div className="flex gap-4">
@@ -77,48 +77,48 @@ export function AnalogFooter() {
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-6">Quick Links</h4>
+            <h4 className="font-bold text-lg mb-6">Laboratory</h4>
             <ul className="space-y-4 text-muted-foreground">
-              <li><Link href="#services" className="hover:text-primary transition-colors">Our Services</Link></li>
-              <li><Link href="#process" className="hover:text-primary transition-colors">Recovery Process</Link></li>
-              <li><Link href="#blog" className="hover:text-primary transition-colors">Knowledge Hub</Link></li>
-              <li><Link href="#request" className="hover:text-primary transition-colors">Submit Request</Link></li>
-              <li><Link href="#contact" className="hover:text-primary transition-colors">Contact Support</Link></li>
+              <li><Link href="#services" className="hover:text-primary transition-colors">Forensic Services</Link></li>
+              <li><Link href="#process" className="hover:text-primary transition-colors">Methodology</Link></li>
+              <li><Link href="#blog" className="hover:text-primary transition-colors">Intelligence Hub</Link></li>
+              <li><Link href="#request" className="hover:text-primary transition-colors">Submit Forensic Case</Link></li>
+              <li><Link href="#contact" className="hover:text-primary transition-colors">Support Lab</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-6">Legal</h4>
+            <h4 className="font-bold text-lg mb-6">Legal & Compliance</h4>
             <ul className="space-y-4 text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Compliance</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Terms of Forensic Engagement</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Data Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Regulatory Compliance</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Conflict of Interest</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-6">Join our Newsletter</h4>
-            <p className="text-muted-foreground text-sm mb-4">Get the latest security alerts and crypto protection tips delivered to your inbox.</p>
+            <h4 className="font-bold text-lg mb-6">Security Intelligence</h4>
+            <p className="text-muted-foreground text-sm mb-4">Receive critical security alerts and blockchain vulnerability reports from our lab.</p>
             <form className="flex gap-2">
               <input 
                 type="email" 
-                placeholder="Email address" 
+                placeholder="Secure email" 
                 className="flex-1 bg-background border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-primary transition-colors"
               />
               <button className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors">
-                Join
+                Subscribe
               </button>
             </form>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div>© {mounted ? year : '...'} AnalogHeal Recovery Systems. All rights reserved.</div>
+          <div>© {mounted ? year : '...'} AnalogHeal Forensics & Recovery Labs. All rights reserved.</div>
           <div className="flex gap-6">
             <span>Certifications:</span>
             <span className="font-bold text-foreground/50">ISO 27001</span>
-            <span className="font-bold text-foreground/50">HIPAA Compliant</span>
+            <span className="font-bold text-foreground/50">FINMA Registered</span>
             <span className="font-bold text-foreground/50">SOC 2 Type II</span>
           </div>
         </div>

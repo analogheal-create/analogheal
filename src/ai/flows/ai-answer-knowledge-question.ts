@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview This file implements a Genkit flow for answering user questions
@@ -31,9 +30,9 @@ const knowledgeQuestionPrompt = ai.definePrompt({
   name: 'knowledgeQuestionPrompt',
   input: { schema: AIAnswerKnowledgeQuestionInputSchema },
   output: { schema: AIAnswerKnowledgeQuestionOutputSchema },
-  prompt: `You are an expert in crypto recovery and digital assets at AnalogHeal. Your goal is to provide concise, direct, and helpful answers to user questions.
+  prompt: `You are a lead analyst at AnalogHeal Forensics, an expert in crypto recovery and digital asset reclamation. Your goal is to provide concise, direct, and authoritative answers to user questions based on forensic principles.
 
-Answer the following question based on the provided context articles. If no context articles are provided, or if they do not contain the answer, use your general knowledge to answer as best as you can.
+Answer the following question based on the provided context articles. If no context articles are provided, or if they do not contain the answer, use your specialized forensic knowledge to answer as best as you can.
 
 User Question: {{{question}}}
 
@@ -48,7 +47,7 @@ Article {{(@index) + 1}}:
 {{/each}}
 {{/if}}
 
-Provide a concise answer in a paragraph or two.`, 
+Provide a concise, professional answer in a paragraph or two. Maintain an authoritative yet empathetic tone.`, 
 });
 
 const answerKnowledgeQuestionFlow = ai.defineFlow(

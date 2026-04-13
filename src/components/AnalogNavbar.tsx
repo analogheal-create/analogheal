@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -38,7 +37,7 @@ export function AnalogNavbar() {
               <Shield className="w-8 h-8 text-primary" />
             </div>
             <span className="font-headline text-2xl font-bold tracking-tight">
-              Analog<span className="text-primary">Heal</span>
+              Analog<span className="text-primary">Heal</span> Forensics
             </span>
           </div>
         </div>
@@ -54,7 +53,7 @@ export function AnalogNavbar() {
             <Shield className="w-8 h-8 text-primary" />
           </div>
           <span className="font-headline text-2xl font-bold tracking-tight">
-            Analog<span className="text-primary">Heal</span>
+            Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground font-medium text-lg">Forensics</span>
           </span>
         </Link>
 
@@ -75,7 +74,7 @@ export function AnalogNavbar() {
         <div className="hidden lg:flex items-center gap-4">
           <div className="flex items-center gap-2 mr-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 glow-confirmation">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-green shadow-[0_0_5px_rgba(34,197,94,0.5)]" />
-            <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Agents Online</span>
+            <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">Forensic Agents Online</span>
           </div>
           <Button variant="default" size="sm" asChild className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 btn-glow">
             <Link href="#request">Start Recovery</Link>
@@ -101,7 +100,7 @@ export function AnalogNavbar() {
               <SheetHeader className="px-6 pt-10 text-left">
                 <SheetTitle className="text-2xl font-headline font-bold">Menu</SheetTitle>
                 <SheetDescription>
-                  Access our professional recovery services and knowledge hub.
+                  Access our professional forensic recovery services and knowledge hub.
                 </SheetDescription>
               </SheetHeader>
               <div className="flex flex-col h-full pt-6 px-6 gap-6">
@@ -119,7 +118,7 @@ export function AnalogNavbar() {
                   <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 glow-interaction">
                     <div className="flex items-center gap-2 text-primary font-bold text-xs mb-2">
                       <ShieldCheck className="w-4 h-4" />
-                      Live Agent Support
+                      Forensic Agent Support
                     </div>
                     <p className="text-[10px] text-muted-foreground mb-4">Our specialists are currently active and typically review cases in under 24 hours.</p>
                   </div>

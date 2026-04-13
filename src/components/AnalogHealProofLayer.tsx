@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -7,8 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const proofs = [
-  { id: "blockchain-proof-1", label: "Wallet Reclamation - $1.2M", date: "Jan 2024" },
-  { id: "blockchain-proof-2", label: "Exchange Dispute Success", date: "Feb 2024" },
+  { id: "blockchain-proof-1", label: "Forensic Reclamation - $1.2M", date: "Jan 2024" },
+  { id: "blockchain-proof-2", label: "CEX Dispute Resolution", date: "Feb 2024" },
 ];
 
 export function AnalogHealProofLayer() {
@@ -16,19 +15,19 @@ export function AnalogHealProofLayer() {
     <section className="py-20 bg-primary/5 border-y border-white/5">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-2xl lg:text-3xl font-headline font-bold mb-4">Verified & Trusted Worldwide</h2>
+          <h2 className="text-2xl lg:text-3xl font-headline font-bold mb-4">Certified Forensic Infrastructure</h2>
           <div className="flex flex-wrap justify-center gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
             <div className="flex items-center gap-2">
               <Scale className="w-5 h-5" />
-              <span className="font-bold text-sm tracking-widest uppercase">FinCEN Regulated</span>
+              <span className="font-bold text-sm tracking-widest uppercase">FINMA Regulated</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5" />
-              <span className="font-bold text-sm tracking-widest uppercase">SOC 2 Type II</span>
+              <span className="font-bold text-sm tracking-widest uppercase">SOC 2 Type II Certified</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5" />
-              <span className="font-bold text-sm tracking-widest uppercase">Global Forensic Labs</span>
+              <span className="font-bold text-sm tracking-widest uppercase">Global Forensic Network</span>
             </div>
           </div>
         </div>
@@ -38,10 +37,10 @@ export function AnalogHealProofLayer() {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <Activity className="text-primary w-5 h-5" />
-                Proof of Recovery Gallery
+                Verified Forensic Results
               </h3>
               <p className="text-sm text-primary font-bold cursor-help border-b border-primary/30">
-                Trackable recovery cases available upon request
+                Validated recovery reports available for legal review
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -64,7 +63,7 @@ export function AnalogHealProofLayer() {
                         </div>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                        <span className="text-xs font-bold uppercase tracking-widest bg-primary px-2 py-1 rounded">View Case ID</span>
+                        <span className="text-xs font-bold uppercase tracking-widest bg-primary px-2 py-1 rounded">Forensic ID: #882-{proof.id.slice(-2)}</span>
                       </div>
                     </div>
                     <CardContent className="p-4 flex items-center justify-between">
@@ -81,7 +80,7 @@ export function AnalogHealProofLayer() {
           </div>
 
           <div className="bg-card p-8 rounded-3xl border border-white/10 shadow-xl">
-            <h3 className="text-xl font-headline font-bold mb-6">Legal Credibility</h3>
+            <h3 className="text-xl font-headline font-bold mb-6">Institutional Credibility</h3>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="p-2 rounded bg-primary/10 h-fit">
@@ -89,7 +88,7 @@ export function AnalogHealProofLayer() {
                 </div>
                 <div>
                   <div className="text-sm font-bold uppercase tracking-wider mb-1">Entity Registration</div>
-                  <div className="text-muted-foreground text-sm">AnalogHeal Recovery Systems Ltd.</div>
+                  <div className="text-muted-foreground text-sm">AnalogHeal Forensic Systems Ltd.</div>
                   <div className="text-primary font-mono text-xs mt-1">Reg #HE-45293-C1</div>
                 </div>
               </div>
@@ -98,7 +97,7 @@ export function AnalogHealProofLayer() {
                   <Globe className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold uppercase tracking-wider mb-1">Global HQ</div>
+                  <div className="text-sm font-bold uppercase tracking-wider mb-1">Laboratory HQ</div>
                   <div className="text-muted-foreground text-sm leading-relaxed">
                     1201 Digital Forensics Tower<br />
                     Zürich, Switzerland, 8001
@@ -107,7 +106,7 @@ export function AnalogHealProofLayer() {
               </div>
               <div className="pt-6 border-t border-white/5">
                 <p className="text-xs text-muted-foreground leading-relaxed italic">
-                  *AnalogHeal operates under strict Swiss digital privacy laws and is a certified member of the International Cyber Recovery Consortium.
+                  *AnalogHeal Recovery Labs operates under strict Swiss digital privacy laws and is a certified participant in the International Cyber Forensics Consortium.
                 </p>
               </div>
             </div>
