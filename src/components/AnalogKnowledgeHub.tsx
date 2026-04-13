@@ -23,6 +23,45 @@ const iconMap = {
   "Legal": Zap,
 };
 
+// Helper to render formatted text (bold and accent colors)
+const TechnicalRenderer = ({ text }: { text: string }) => {
+  if (!text) return null;
+
+  // Split by double newlines for paragraphs first
+  const paragraphs = text.split(/\n\n+/);
+
+  return (
+    <div className="space-y-4">
+      {paragraphs.map((p, idx) => {
+        // Convert literal \n to real line breaks if they exist
+        const sanitizedP = p.replace(/\\n/g, '\n');
+        
+        // Split by lines within paragraph
+        const lines = sanitizedP.split('\n');
+
+        return (
+          <p key={idx} className="text-base text-foreground/90 leading-relaxed">
+            {lines.map((line, lIdx) => (
+              <span key={lIdx}>
+                {line.split(/(\*\*.*?\*\*|\[accent\].*?\[\/accent\])/).map((part, pIdx) => {
+                  if (part.startsWith('**') && part.endsWith('**')) {
+                    return <strong key={pIdx} className="font-bold text-foreground">{part.slice(2, -2)}</strong>;
+                  }
+                  if (part.startsWith('[accent]') && part.endsWith('[/accent]')) {
+                    return <span key={pIdx} className="text-accent font-bold">{part.slice(8, -9)}</span>;
+                  }
+                  return part;
+                })}
+                {lIdx < lines.length - 1 && <br />}
+              </span>
+            ))}
+          </p>
+        );
+      })}
+    </div>
+  );
+};
+
 export function AnalogKnowledgeHub() {
   const [question, setQuestion] = useState("");
   const [aiAnswer, setAiAnswer] = useState("");
@@ -174,12 +213,8 @@ export function AnalogKnowledgeHub() {
                   {selectedPost.description}
                 </DialogDescription>
               </DialogHeader>
-              <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                {selectedPost.content.split('\n\n').map((paragraph: string, idx: number) => (
-                  <p key={idx} className="text-base text-foreground/90">
-                    {paragraph}
-                  </p>
-                ))}
+              <div className="mt-6">
+                <TechnicalRenderer text={selectedPost.content} />
               </div>
               <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-xs text-muted-foreground flex items-center gap-2">
