@@ -36,9 +36,14 @@ export function AnalogNavbar() {
             <div className="p-2 bg-primary/20 rounded-lg">
               <Shield className="w-8 h-8 text-primary" />
             </div>
-            <span className="font-headline text-2xl font-bold tracking-tight">
-              Analog<span className="text-primary">Heal</span> Forensics
-            </span>
+            <div className="flex flex-col">
+              <span className="font-headline text-2xl font-bold tracking-tight leading-none">
+                Analog<span className="text-primary">Heal</span> Forensics
+              </span>
+              <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider mt-1 hidden sm:block">
+                Crypto Asset Recovery & Blockchain Intelligence
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -49,12 +54,17 @@ export function AnalogNavbar() {
     <header className="glass-header">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors glow-interaction">
+          <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors glow-interaction shrink-0">
             <Shield className="w-8 h-8 text-primary" />
           </div>
-          <span className="font-headline text-2xl font-bold tracking-tight">
-            Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground font-medium text-lg">Forensics</span>
-          </span>
+          <div className="flex flex-col">
+            <span className="font-headline text-2xl font-bold tracking-tight leading-none">
+              Analog<span className="text-primary">Heal</span> <span className="text-muted-foreground font-medium text-lg">Forensics</span>
+            </span>
+            <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider mt-1 hidden sm:block">
+              Crypto Asset Recovery & Blockchain Intelligence
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
