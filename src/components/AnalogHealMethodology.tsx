@@ -42,7 +42,7 @@ export function AnalogHealMethodology() {
             </div>
             <h2 className="text-4xl lg:text-6xl font-headline font-bold mb-6">The Science of Reclamation</h2>
             <p className="text-muted-foreground text-lg">
-              Recovery isn't luck—it's a combination of advanced digital forensics, international legal pressure, and direct institutional cooperation.
+              Recovery isn't luck, it's a combination of advanced digital forensics, international legal pressure, and direct institutional cooperation.
             </p>
           </div>
           <div className="hidden lg:block">
@@ -105,7 +105,6 @@ export function AnalogHealMethodology() {
         </div>
       </div>
 
-      {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -z-10"></div>
     </section>
   );
