@@ -25,6 +25,9 @@ import Image from "next/image";
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -117,7 +120,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/admin/settings">
-              <Settings className="w-4 h-4" /> Lab Settings
+              <item.icon className="w-4 h-4" /> Lab Settings
             </Link>
           </Button>
         </div>
@@ -154,6 +157,10 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="p-0 border-r border-white/5 w-64 bg-[#0B1426]">
+            <SheetHeader className="sr-only">
+              <SheetTitle>Administrative Navigation</SheetTitle>
+              <SheetDescription>Access forensic recovery tools and internal laboratory systems.</SheetDescription>
+            </SheetHeader>
             <SidebarContent />
           </SheetContent>
         </Sheet>
