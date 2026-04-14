@@ -37,8 +37,10 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
   const { toast } = useToast();
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const fetchLogo = async () => {
       const { data } = await supabase
         .from('operational_proofs')
@@ -145,6 +147,8 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
       </div>
     </div>
   );
+
+  if (!mounted) return null;
 
   return (
     <>
