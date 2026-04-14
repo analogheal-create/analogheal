@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Wallet, TrendingUp, ShieldAlert, Landmark, Activity, ArrowRight, ShieldCheck, Info } from "lucide-react";
+import { Wallet, TrendingUp, ShieldAlert, Landmark, Activity, ArrowRight, ShieldCheck, Info, FileText, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +19,7 @@ const services = [
     title: "Wallet Recovery",
     description: "Lost access to your private keys or seed phrase? We utilize advanced cryptographic recovery techniques.",
     icon: Wallet,
-    content: "If you have lost your 12 or 24-word seed phrase, or the password to your digital wallet, professional recovery is still possible. We use high-performance computing clusters to simulate billions of password combinations based on your partial memory. For seed phrase recovery, we can often reclaim access if you have a partial list of words or have made a simple mistake in recording them. Our process is non-invasive and ensures your assets are never at risk during the recovery attempts.",
+    content: "If you have lost your 12 or 24-word seed phrase, or the password to your digital wallet, professional recovery is still possible. We use high-performance computing clusters to simulate billions of password combinations based on your partial memory. Our process is non-invasive and ensures your assets are never at risk during the recovery attempts.",
   },
   {
     id: "investment",
@@ -56,6 +56,20 @@ const services = [
     icon: ShieldCheck,
     content: "Romance scams are complex and multi-layered, often involving long-term grooming. Our lab provides an empathetic and professional environment to trace stolen wealth across multiple blockchains and work with international authorities to secure freezes on criminal-controlled wallets.",
   },
+  {
+    id: "loan",
+    title: "Loan Scam Recovery",
+    description: "Assistance for victims of fraudulent lending platforms and advanced-fee loan traps.",
+    icon: FileText,
+    content: "Loan scams often promise quick capital but lead to 'advanced fee' fraud where victims pay 'insurance' or 'tax' to release a non-existent loan. Our forensic specialists identify the wallet signatures of these fraudulent lending platforms and track the destination of paid fees to initiate recovery through legal and exchange channels.",
+  },
+  {
+    id: "crypto-assets",
+    title: "Crypto Assets Recovery",
+    description: "Comprehensive forensic reclamation for stolen NFTs, DeFi exploits, and cross-chain asset loss.",
+    icon: Zap,
+    content: "A comprehensive solution for complex digital asset reclamation. Whether it's NFT theft, DeFi exploit loss, or cross-chain bridge failures, we use multi-chain forensics to reconstruct the transaction path and work with global validators to identify malicious actors and reclaim asset value.",
+  },
 ];
 
 export function AnalogServices() {
@@ -71,10 +85,10 @@ export function AnalogServices() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {services.map((service) => (
             <Card 
-              key={service.title} 
+              key={service.id} 
               className="bg-background/40 border-white/10 card-hover group hover:-translate-y-1 cursor-pointer transition-all duration-300"
               onClick={() => setSelectedService(service)}
             >
@@ -85,7 +99,7 @@ export function AnalogServices() {
                 <CardTitle className="text-xl font-headline group-hover:text-accent transition-colors">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3 text-sm">
                   {service.description}
                 </p>
                 <button className="flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
