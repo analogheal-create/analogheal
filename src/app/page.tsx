@@ -12,7 +12,6 @@ import { AnalogKnowledgeHub } from "@/components/AnalogKnowledgeHub";
 import { AnalogContact } from "@/components/AnalogContact";
 import { AnalogFooter } from "@/components/AnalogFooter";
 import { AnalogStickyCTA } from "@/components/AnalogStickyCTA";
-import { AnalogLiveSupport } from "@/components/AnalogLiveSupport";
 
 export default function Home() {
   return (
@@ -33,7 +32,6 @@ export default function Home() {
       </main>
       <AnalogFooter />
       <AnalogStickyCTA />
-      <AnalogLiveSupport />
     </div>
   );
 }
