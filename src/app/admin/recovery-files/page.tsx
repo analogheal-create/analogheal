@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -19,7 +20,11 @@ import {
   Activity,
   ShieldCheck,
   Wallet,
-  Menu
+  User,
+  Mail,
+  Phone,
+  Clock,
+  ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -33,6 +38,13 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { cn } from "@/lib/utils";
 
@@ -50,6 +62,7 @@ export default function RecoveryFilesPage() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [requests, setRequests] = useState<any[]>([]);
+  const [selectedCase, setSelectedCase] = useState<any | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -136,7 +149,11 @@ export default function RecoveryFilesPage() {
                     {requests.map((file) => {
                       const catInfo = categories[file.recovery_type] || { label: file.recovery_type, icon: FileText, color: "text-muted-foreground" };
                       return (
-                        <TableRow key={file.id} className="border-white/5 hover:bg-white/5 group transition-colors">
+                        <TableRow 
+                          key={file.id} 
+                          className="border-white/5 hover:bg-white/5 group transition-colors cursor-pointer"
+                          onClick={() => setSelectedCase(file)}
+                        >
                           <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{file.id.slice(0, 4)}</TableCell>
                           <TableCell className="text-sm font-medium">{file.full_name}</TableCell>
                           <TableCell>
@@ -173,6 +190,108 @@ export default function RecoveryFilesPage() {
           </Card>
         </div>
       </main>
+
+      <Dialog open={!!selectedCase} onOpenChange={(open) => !open && setSelectedCase(null)}>
+        <DialogContent className="max-w-2xl bg-card border-white/10 text-foreground overflow-y-auto max-h-[90vh]">
+          {selectedCase && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase tracking-widest mb-2">
+                  <ShieldCheck className="w-4 h-4" />
+                  Forensic File AH-{selectedCase.id.slice(0, 4)}
+                </div>
+                <DialogTitle className="text-2xl font-headline font-bold">
+                  {selectedCase.full_name}
+                </DialogTitle>
+                <DialogDescription className="flex items-center gap-4 text-xs font-mono text-muted-foreground mt-2">
+                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {new Date(selectedCase.created_at).toLocaleString()}</span>
+                  <span className="flex items-center gap-1 uppercase tracking-tighter bg-white/5 px-2 py-0.5 rounded border border-white/10">Status: {selectedCase.status}</span>
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="mt-8 space-y-8">
+                {/* Case Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4">
+                    <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                      <TrendingUp className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold text-muted-foreground">Estimated Valuation</div>
+                      <div className="text-lg font-bold font-mono text-accent">${selectedCase.estimated_value}</div>
+                    </div>
+                  </div>
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4">
+                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                      {categories[selectedCase.recovery_type]?.icon ? (
+                        <div className={categories[selectedCase.recovery_type].color}>
+                          {(() => {
+                            const Icon = categories[selectedCase.recovery_type].icon;
+                            return <Icon className="w-5 h-5" />;
+                          })()}
+                        </div>
+                      ) : (
+                        <FileText className="w-5 h-5" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold text-muted-foreground">Loss Category</div>
+                      <div className="text-sm font-bold">{categories[selectedCase.recovery_type]?.label || selectedCase.recovery_type}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Data */}
+                <div className="space-y-4">
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+                    <User className="w-3 h-3" /> Client Communication Channels
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
+                      <Mail className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm font-medium truncate">{selectedCase.email}</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
+                      <Phone className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-sm font-medium">{selectedCase.phone}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* The Message / Narrative */}
+                <div className="space-y-4">
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+                    <Activity className="w-3 h-3 text-accent" /> Forensic Narrative
+                  </h4>
+                  <div className="p-6 rounded-2xl bg-[#070B14] border border-white/10 shadow-inner group relative">
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <Zap className="w-8 h-8 text-primary" />
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/90 whitespace-pre-wrap font-body">
+                      {selectedCase.message}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="text-[10px] text-muted-foreground italic flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-green-500" />
+                    Encrypted Case File | Swiss Lab Uplink Secure
+                  </div>
+                  <div className="flex gap-2 w-full sm:w-auto">
+                    <Button onClick={() => setSelectedCase(null)} variant="secondary" className="flex-1 sm:flex-none">
+                      Close File
+                    </Button>
+                    <Button className="flex-1 sm:flex-none bg-primary text-primary-foreground font-bold">
+                      Begin Intelligence Tracing
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
