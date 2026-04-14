@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Wallet, Key, ShieldAlert, Landmark, Smartphone, Cpu, ArrowRight, ShieldCheck, Info } from "lucide-react";
+import { Wallet, TrendingUp, ShieldAlert, Landmark, Activity, ArrowRight, ShieldCheck, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,39 +22,39 @@ const services = [
     content: "If you have lost your 12 or 24-word seed phrase, or the password to your digital wallet, professional recovery is still possible. We use high-performance computing clusters to simulate billions of password combinations based on your partial memory. For seed phrase recovery, we can often reclaim access if you have a partial list of words or have made a simple mistake in recording them. Our process is non-invasive and ensures your assets are never at risk during the recovery attempts.",
   },
   {
-    id: "password",
-    title: "Password Recovery",
-    description: "Forgotten passwords for hardware or software wallets? Our high-performance computing clusters can help.",
-    icon: Key,
-    content: "Forgotten passwords are the leading cause of inaccessible digital wealth. Our lab utilizes specialized GPU arrays designed to test millions of password variations per second. Whether it's a legacy JSON wallet, a forgotten MetaMask password, or an encrypted local backup, we apply institutional-grade brute-force and heuristic analysis to restore your access. We never ask for your funds to be sent to us; all recovery happens within your local environment or under strict forensic supervision.",
+    id: "investment",
+    title: "Investment Scam Recovery",
+    description: "Specialized tracing for stolen assets from fraudulent investment platforms and fake schemes.",
+    icon: TrendingUp,
+    content: "Investment scams often involve sophisticated 'liquidity' or 'yield' platforms. Our forensic team maps the flow of funds from these malicious smart contracts through multiple hops to identify the final exchange endpoints for reclamation. We prepare technical evidence bundles for exchange compliance teams to facilitate asset freezes.",
   },
   {
-    id: "hacked",
-    title: "Hacked Account Recovery",
-    description: "Victim of a phishing attack? We trace stolen funds and work with exchanges to freeze and recover assets.",
-    icon: ShieldAlert,
-    content: "If your funds have been stolen, time is the most critical factor. Our team uses advanced blockchain forensics to track the 'flow of funds' across multiple transactions. We identify when the stolen assets move into a centralized exchange (like Binance or Coinbase). Once identified, we utilize our direct compliance channels to request an emergency asset freeze. We assist you in filing the necessary law enforcement reports to reclaim the frozen assets through legal channels.",
+    id: "broker",
+    title: "Bad Finance Broker",
+    description: "Legal and technical assistance for victims of dishonest or unregulated financial brokers.",
+    icon: Landmark,
+    content: "If a broker has frozen your account or refused legitimate withdrawals under false pretenses, we can assist. We provide the institutional-grade forensic reports needed to initiate legal pressure and work with international regulatory bodies to release your capital from unscrupulous brokerage entities.",
   },
   {
     id: "exchange",
     title: "Exchange Recovery",
     description: "Issues with centralized exchanges? We navigate legal and technical channels to restore your access.",
-    icon: Landmark,
-    content: "Centralized exchanges often freeze accounts due to compliance flags, security breaches, or 'Source of Wealth' inquiries. Navigating their support system can take months. AnalogHeal acts as your technical and legal advocate. We help you prepare the correct forensic documentation and identity trails that exchanges require to release funds. We understand the specific regulatory requirements of various jurisdictions and help you meet them efficiently.",
+    icon: ShieldAlert,
+    content: "Centralized exchanges often freeze accounts due to compliance flags, security breaches, or 'Source of Wealth' inquiries. AnalogHeal acts as your technical advocate. We help you prepare the correct forensic documentation and identity trails that exchanges require to release funds and resolve disputes efficiently.",
   },
   {
-    id: "hardware",
-    title: "Hardware Wallet Recovery",
-    description: "Damaged Ledger, Trezor, or KeepKey? Physical hardware forensics for data extraction and recovery.",
-    icon: Cpu,
-    content: "Hardware wallets can fail physically—screens break, buttons stop working, or the firmware becomes corrupted. If you have lost your seed phrase and your device is damaged, do not attempt a DIY repair. Our hardware forensics lab can perform component-level repairs and secure data extraction from damaged devices. We work in a controlled environment to ensure the security of the internal chipsets while attempting to restore functionality long enough to migrate your assets to a new, secure wallet.",
+    id: "trading",
+    title: "Trading Scam Recovery",
+    description: "Recovery services for capital stolen through manipulated trading apps and fake crypto exchanges.",
+    icon: Activity,
+    content: "Trading scams use fake data and high-pressure tactics to trick victims into 'topping up' their accounts. We use de-anonymization techniques to track the real movement of your crypto on the blockchain and identify the illicit operators behind the fraudulent interface.",
   },
   {
-    id: "mobile",
-    title: "Mobile Wallet Recovery",
-    description: "Recovery from lost, damaged, or wiped mobile devices. We specialized in iOS and Android wallet extraction.",
-    icon: Smartphone,
-    content: "Lost your phone with your only wallet backup? Or accidentally deleted the app? Modern mobile forensics can often recover 'lost' data even after a factory reset or app deletion, provided the storage hasn't been completely overwritten. We use specialized forensic imaging tools to search for remnants of private keys or backup files within the device's deep storage. The sooner you stop using the device after the loss, the higher the probability of a successful recovery.",
+    id: "romance",
+    title: "Romance Scam Recovery",
+    description: "Confidential assistance for victims of pig-butchering and relationship-based crypto fraud.",
+    icon: ShieldCheck,
+    content: "Romance scams are complex and multi-layered, often involving long-term grooming. Our lab provides an empathetic and professional environment to trace stolen wealth across multiple blockchains and work with international authorities to secure freezes on criminal-controlled wallets.",
   },
 ];
 

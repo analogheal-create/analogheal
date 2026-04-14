@@ -31,7 +31,7 @@ export function AnalogHero() {
           <h1 className="text-4xl md:text-6xl font-headline font-bold leading-tight mb-6">
             AnalogHeal <span className="text-primary">Forensics</span><br />
             <span className="text-muted-foreground text-3xl md:text-4xl font-medium">
-              Recover Stolen Assets from Scams, Hacks & Locked Wallets
+              Recover Assets from Investment Scams, Bad Brokers, Trading & Romance Scams
             </span>
           </h1>
 
