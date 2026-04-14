@@ -36,13 +36,6 @@ const services = [
     content: "If a broker has frozen your account or refused legitimate withdrawals under false pretenses, we can assist. We provide the institutional-grade forensic reports needed to initiate legal pressure and work with international regulatory bodies to release your capital from unscrupulous brokerage entities.",
   },
   {
-    id: "exchange",
-    title: "Exchange Recovery",
-    description: "Issues with centralized exchanges? We navigate legal and technical channels to restore your access.",
-    icon: ShieldAlert,
-    content: "Centralized exchanges often freeze accounts due to compliance flags, security breaches, or 'Source of Wealth' inquiries. AnalogHeal acts as your technical advocate. We help you prepare the correct forensic documentation and identity trails that exchanges require to release funds and resolve disputes efficiently.",
-  },
-  {
     id: "trading",
     title: "Trading Scam Recovery",
     description: "Recovery services for capital stolen through manipulated trading apps and fake crypto exchanges.",
