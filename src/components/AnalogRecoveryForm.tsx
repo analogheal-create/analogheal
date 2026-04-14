@@ -19,7 +19,9 @@ import {
   TrendingUp,
   Mail,
   User,
-  Activity
+  Activity,
+  FileText,
+  Wallet
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,10 +50,13 @@ const formSchema = z.object({
 });
 
 const funnelOptions = [
-  { id: "scammed", label: "Fraudulent Scam", icon: ShieldAlert, description: "Investment scams, phishing, or fake platforms." },
-  { id: "wallet", label: "Hardware Lockout", icon: Key, description: "Lost seed phrase, password, or device failure." },
-  { id: "exchange", label: "Exchange Dispute", icon: Landmark, description: "Account frozen, withdrawal issues, or disputes." },
-  { id: "hacked", label: "Compromised Account", icon: Zap, description: "Unauthorized access or compromised credentials." },
+  { id: "investment", label: "Investment Scam", icon: TrendingUp, description: "Fraudulent platforms, fake yield or liquidity schemes." },
+  { id: "broker", label: "Bad Broker", icon: Landmark, description: "Unregulated brokers, frozen accounts or withdrawal refusals." },
+  { id: "trading", label: "Trading Scam", icon: Activity, description: "Manipulated apps, fake exchanges and high-pressure tactics." },
+  { id: "romance", label: "Romance Scam", icon: ShieldCheck, description: "Pig-butchering and relationship-based crypto fraud." },
+  { id: "loan", label: "Loan Scam", icon: FileText, description: "Advanced fee fraud and fraudulent lending traps." },
+  { id: "wallet", label: "Wallet Recovery", icon: Wallet, description: "Lost seed phrases, forgotten passwords or device failure." },
+  { id: "crypto-assets", label: "Assets Recovery", icon: Zap, description: "Stolen NFTs, DeFi exploits and cross-chain asset loss." },
 ];
 
 export function AnalogRecoveryForm() {
@@ -234,7 +239,7 @@ export function AnalogRecoveryForm() {
                             <opt.icon className="w-6 h-6" />
                           </div>
                           <div className="font-bold mb-1">{opt.label}</div>
-                          <div className="text-xs text-muted-foreground leading-relaxed">{opt.description}</div>
+                          <div className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{opt.description}</div>
                           <div className="mt-4 text-xs font-bold text-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             Categorize <ChevronRight className="w-3 h-3" />
                           </div>

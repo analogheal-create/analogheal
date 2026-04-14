@@ -27,10 +27,13 @@ import { Badge } from "@/components/ui/badge";
 import { AdminSidebar } from "@/components/AdminSidebar";
 
 const typeLabels: Record<string, string> = {
-  scammed: "Fraudulent Scam",
-  wallet: "Hardware Lockout",
-  exchange: "Exchange Dispute",
-  hacked: "Compromised Account",
+  investment: "Investment Scam",
+  broker: "Bad Broker",
+  trading: "Trading Scam",
+  romance: "Romance Scam",
+  loan: "Loan Scam",
+  wallet: "Wallet Recovery",
+  "crypto-assets": "Assets Recovery",
 };
 
 export default function AdminDashboardPage() {

@@ -14,7 +14,11 @@ import {
   ShieldAlert,
   Zap,
   Key,
-  Landmark
+  Landmark,
+  TrendingUp,
+  Activity,
+  ShieldCheck,
+  Wallet
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -32,10 +36,13 @@ import { AdminSidebar } from "@/components/AdminSidebar";
 import { cn } from "@/lib/utils";
 
 const categories: Record<string, any> = {
-  "scammed": { label: "Fraudulent Scam", icon: ShieldAlert, color: "text-red-400" },
-  "wallet": { label: "Hardware Lockout", icon: Key, color: "text-amber-400" },
-  "hacked": { label: "Compromised Account", icon: Zap, color: "text-primary" },
-  "exchange": { label: "Exchange Dispute", icon: Landmark, color: "text-accent" },
+  "investment": { label: "Investment Scam", icon: TrendingUp, color: "text-amber-400" },
+  "broker": { label: "Bad Broker", icon: Landmark, color: "text-accent" },
+  "trading": { label: "Trading Scam", icon: Activity, color: "text-primary" },
+  "romance": { label: "Romance Scam", icon: ShieldCheck, color: "text-red-400" },
+  "loan": { label: "Loan Scam", icon: FileText, color: "text-muted-foreground" },
+  "wallet": { label: "Wallet Recovery", icon: Wallet, color: "text-amber-400" },
+  "crypto-assets": { label: "Assets Recovery", icon: Zap, color: "text-primary" },
 };
 
 export default function RecoveryFilesPage() {
