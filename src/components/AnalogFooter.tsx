@@ -1,16 +1,111 @@
 "use client";
 
 import Link from "next/link";
-import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight, ShieldCheck } from "lucide-react";
+import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight, ShieldCheck, Scale, Lock, FileText, AlertTriangle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+
+const legalDocs = {
+  engagement: {
+    title: "Terms of Forensic Engagement",
+    icon: Scale,
+    description: "Official protocols governing the laboratory's relationship with private and institutional clients.",
+    content: `
+      **1. Scope of Investigation**
+      AnalogHeal Forensics provides digital asset tracing and heuristic probability assessments. We do not guarantee recovery but provide the technical evidence required for reclamation.
+
+      **2. Client Obligations**
+      Clients must provide accurate Transaction IDs (TXIDs), wallet addresses, and chronological event logs. Failure to provide validated data may result in case suspension.
+
+      **3. Fee Structure**
+      For qualifying fraud cases, the laboratory operates on a performance-aligned model. Initial assessments are complimentary. Specific forensic cycles may require resource allocation fees which are disclosed prior to initiation.
+
+      **4. Liability**
+      AnalogHeal acts as a forensic consultant. Final asset reclamation is subject to the cooperation of Virtual Asset Service Providers (VASPs) and law enforcement jurisdictions.
+    `
+  },
+  privacy: {
+    title: "Data Privacy Policy",
+    icon: Lock,
+    description: "Swiss-standard data isolation and encryption protocols for case integrity.",
+    content: `
+      **1. Data Isolation**
+      All submitted intake data is isolated on encrypted Swiss-based servers. We utilize RSA-4096 encryption for sensitive diagnostic files.
+
+      **2. Retention Policy**
+      Diagnostic data is retained for the duration of the investigation plus 90 days for audit purposes, after which it is purged from our primary forensic clusters unless legal holds are in place.
+
+      **3. Third-Party Sharing**
+      We do not sell data. We only share sanitized forensic reports with verified legal partners or exchange compliance teams upon explicit client authorization.
+
+      **4. SOC 2 Compliance**
+      Our infrastructure adheres to SOC 2 Type II standards, ensuring strict internal controls over data access and network security.
+    `
+  },
+  compliance: {
+    title: "Regulatory Compliance",
+    icon: ShieldCheck,
+    description: "International standards and institutional certifications of the AnalogHeal Laboratory.",
+    content: `
+      **1. FINMA Adherence**
+      AnalogHeal Forensic Systems Ltd. operates under the digital asset guidelines established by the Swiss Financial Market Supervisory Authority (FINMA).
+
+      **2. ISO 27001 Certification**
+      The laboratory maintains ISO 27001 certification for Information Security Management Systems (ISMS), ensuring global standard protection.
+
+      **3. VASP Cooperation**
+      We maintain emergency communication channels with Tier-1 exchanges. Our forensic reports are formatted to satisfy international AML (Anti-Money Laundering) and KYC (Know Your Customer) requirements.
+
+      **4. Forensic Integrity**
+      Our lead analysts are certified in blockchain intelligence (Chainalysis/Elliptic) and follow INTERPOL-compliant digital evidence gathering protocols.
+    `
+  },
+  conflict: {
+    title: "Conflict of Interest",
+    icon: AlertTriangle,
+    description: "Transparency protocols ensuring unbiased forensic reporting.",
+    content: `
+      **1. Neutrality Protocol**
+      AnalogHeal maintain strict independence from exchanges and DeFi protocols. Our findings are based solely on on-chain heuristics and forensic evidence.
+
+      **2. Case Screening**
+      Every intake undergoes an automated conflict-of-interest check. We do not accept cases where the laboratory has a prior or existing investigation into the target entity that could compromise report objectivity.
+
+      **3. Disclosure**
+      If a conflict is identified during an active investigation, the client will be notified immediately, and the file will be transferred to a neutral partner node within the International Cyber Forensics Consortium.
+    `
+  }
+};
+
+const TechnicalRenderer = ({ text }: { text: string }) => (
+  <div className="space-y-4">
+    {text.split('\n\n').map((p, idx) => (
+      <p key={idx} className="text-sm text-foreground/80 leading-relaxed">
+        {p.split(/(\*\*.*?\*\*)/).map((part, pIdx) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={pIdx} className="text-foreground">{part.slice(2, -2)}</strong>;
+          }
+          return part;
+        })}
+      </p>
+    ))}
+  </div>
+);
 
 export function AnalogFooter() {
   const [year, setYear] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<keyof typeof legalDocs | null>(null);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
@@ -108,10 +203,38 @@ export function AnalogFooter() {
           <div>
             <h4 className="font-bold text-lg mb-6">Legal & Compliance</h4>
             <ul className="space-y-4 text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary transition-colors">Terms of Forensic Engagement</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Data Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Regulatory Compliance</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Conflict of Interest</Link></li>
+              <li>
+                <button 
+                  onClick={() => setSelectedDoc('engagement')}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Terms of Forensic Engagement
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => setSelectedDoc('privacy')}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Data Privacy Policy
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => setSelectedDoc('compliance')}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Regulatory Compliance
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => setSelectedDoc('conflict')}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Conflict of Interest
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -141,6 +264,46 @@ export function AnalogFooter() {
           </div>
         </div>
       </div>
+
+      <Dialog open={!!selectedDoc} onOpenChange={(open) => !open && setSelectedDoc(null)}>
+        <DialogContent className="max-w-2xl bg-card border-white/10 text-foreground overflow-y-auto max-h-[90vh]">
+          {selectedDoc && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase tracking-widest mb-2">
+                  {(() => {
+                    const Icon = legalDocs[selectedDoc].icon;
+                    return <Icon className="w-4 h-4" />;
+                  })()}
+                  Laboratory Document
+                </div>
+                <DialogTitle className="text-2xl font-headline font-bold">
+                  {legalDocs[selectedDoc].title}
+                </DialogTitle>
+                <DialogDescription className="text-xs text-muted-foreground mt-2 italic">
+                  {legalDocs[selectedDoc].description}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="mt-8">
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <TechnicalRenderer text={legalDocs[selectedDoc].content} />
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-[10px] text-muted-foreground italic flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-green-500" />
+                  Authorized Forensic Protocol | Swiss Secure
+                </div>
+                <Button onClick={() => setSelectedDoc(null)} variant="secondary" className="w-full sm:w-auto">
+                  Close Document
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </footer>
   );
 }
