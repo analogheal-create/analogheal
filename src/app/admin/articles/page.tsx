@@ -95,7 +95,6 @@ export default function ArticlesManager() {
     try {
       let publicUrl = editingId ? articles.find(a => a.id === editingId)?.image_url : null;
 
-      // 1. Handle image upload if a new file is selected
       if (file) {
         const fileExt = file.name.split('.').pop();
         const fileName = `article_${Date.now()}.${fileExt}`;
@@ -118,7 +117,6 @@ export default function ArticlesManager() {
         throw new Error("Cover image is required for new articles.");
       }
 
-      // 2. Save/Update in Database
       if (editingId) {
         const { error: dbError } = await supabase
           .from('articles')
@@ -182,31 +180,31 @@ export default function ArticlesManager() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl text-primary">Knowledge Hub Manager</h1>
-          <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate text-primary">Knowledge Hub Manager</h1>
+          <div className="hidden sm:block text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
             Forensic Intelligence Node
           </div>
         </header>
 
-        <div className="p-8 space-y-12">
+        <div className="p-4 lg:p-8 space-y-12">
           <Card className="bg-card/50 border-white/5 max-w-3xl">
             <CardHeader>
               <CardTitle className="text-sm font-bold uppercase tracking-widest flex items-center gap-2">
                 {editingId ? <Edit2 className="w-4 h-4 text-primary" /> : <Plus className="w-4 h-4 text-primary" />}
                 {editingId ? "Modify Intelligence Report" : "New Research Guide"}
               </CardTitle>
-              <CardDescription>
-                Publish technical security guides. Use **bold** for emphasis and [accent]text[/accent] for highlight color.
+              <CardDescription className="text-xs">
+                Publish technical security guides. Use **bold** for emphasis and [accent]text[/accent] for highlighting.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-xs uppercase font-bold text-muted-foreground">Title</Label>
                     <Input 
-                      placeholder="e.g. How to Secure Your Assets..." 
+                      placeholder="Title" 
                       value={formData.title}
                       onChange={(e) => setFormData({...formData, title: e.target.value})}
                       className="bg-white/5 border-white/10" 
@@ -215,7 +213,7 @@ export default function ArticlesManager() {
                   <div className="space-y-2">
                     <Label className="text-xs uppercase font-bold text-muted-foreground">Category</Label>
                     <Input 
-                      placeholder="e.g. Security, Recovery, Legal" 
+                      placeholder="Security, Recovery..." 
                       value={formData.category}
                       onChange={(e) => setFormData({...formData, category: e.target.value})}
                       className="bg-white/5 border-white/10" 
@@ -225,23 +223,23 @@ export default function ArticlesManager() {
                 <div className="space-y-2">
                   <Label className="text-xs uppercase font-bold text-muted-foreground">Short Description</Label>
                   <Input 
-                    placeholder="Brief summary for the card view..." 
+                    placeholder="Brief summary..." 
                     value={formData.description}
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                     className="bg-white/5 border-white/10" 
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Full Content (Markdown Supported)</Label>
+                  <Label className="text-xs uppercase font-bold text-muted-foreground">Full Content</Label>
                   <Textarea 
-                    placeholder="Institutional-grade forensic insights..." 
+                    placeholder="Institutional insights..." 
                     value={formData.content}
                     onChange={(e) => setFormData({...formData, content: e.target.value})}
                     className="bg-white/5 border-white/10 min-h-[300px] font-mono text-sm" 
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Cover Image {editingId && "(Leave blank to keep current)"}</Label>
+                  <Label className="text-xs uppercase font-bold text-muted-foreground">Cover Image</Label>
                   <div className="flex items-center gap-4">
                     <Input 
                       type="file" 
@@ -251,9 +249,9 @@ export default function ArticlesManager() {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button type="submit" className="flex-1 bg-primary text-primary-foreground font-bold" disabled={isSaving}>
-                    {isSaving ? "Synchronizing..." : editingId ? "Update Intelligence" : "Publish to Knowledge Hub"}
+                    {isSaving ? "Synchronizing..." : editingId ? "Update Intelligence" : "Publish to Hub"}
                   </Button>
                   {editingId && (
                     <Button type="button" variant="outline" onClick={cancelEdit} className="gap-2">
@@ -272,11 +270,11 @@ export default function ArticlesManager() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {articles.map((article) => (
                 <Card key={article.id} className="bg-card/30 border-white/5 overflow-hidden group relative">
-                  <div className="absolute top-2 right-2 flex gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button size="icon" variant="secondary" className="h-8 w-8" onClick={() => handleEdit(article)}>
+                  <div className="absolute top-2 right-2 flex gap-2 z-20">
+                    <Button size="icon" variant="secondary" className="h-8 w-8 opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleEdit(article)}>
                       <Edit2 className="w-3.5 h-3.5" />
                     </Button>
-                    <Button size="icon" variant="destructive" className="h-8 w-8" onClick={() => handleDelete(article.id)}>
+                    <Button size="icon" variant="destructive" className="h-8 w-8 opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => handleDelete(article.id)}>
                       <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </div>

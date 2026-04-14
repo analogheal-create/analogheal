@@ -58,52 +58,49 @@ export default function IntelligenceLogsPage() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl">Intelligence Logs</h1>
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate">Intelligence Logs</h1>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
             <Activity className="w-3 h-3 text-primary animate-pulse" />
-            <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Live Forensic Stream</span>
+            <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Live Stream</span>
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="p-4 lg:p-8 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
             <Card className="bg-card/50 border-white/5">
               <CardHeader className="pb-2">
-                <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Network className="w-3.5 h-3.5" /> Network Load
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">1.2 PB/s</div>
-                <p className="text-[10px] text-muted-foreground">Global Forensic Thruput</p>
               </CardContent>
             </Card>
             <Card className="bg-card/50 border-white/5">
               <CardHeader className="pb-2">
-                <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Database className="w-3.5 h-3.5" /> Intelligence Nodes
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">428</div>
-                <p className="text-[10px] text-muted-foreground">Active Global Relay Hubs</p>
               </CardContent>
             </Card>
             <Card className="bg-card/50 border-white/5">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <Lock className="w-3.5 h-3.5" /> Encryption Status
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">RSA-4096</div>
-                <p className="text-[10px] text-green-500 font-bold uppercase">Active Integrity</p>
               </CardContent>
             </Card>
           </div>
 
-          <Card className="bg-[#070B14] border-white/10 font-mono shadow-2xl">
+          <Card className="bg-[#070B14] border-white/10 font-mono shadow-2xl overflow-hidden">
             <CardHeader className="border-b border-white/5 bg-white/5 p-4 flex flex-row items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
@@ -111,17 +108,17 @@ export default function IntelligenceLogsPage() {
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
                 </div>
-                <span className="text-xs font-bold text-muted-foreground">terminal_intake_v2.log</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase">terminal_intake.log</span>
               </div>
               <Terminal className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
-            <CardContent className="p-6 space-y-4 max-h-[500px] overflow-y-auto">
+            <CardContent className="p-4 lg:p-6 space-y-4 max-h-[500px] overflow-y-auto">
               {logs.map((log, idx) => (
-                <div key={idx} className="flex gap-4 text-xs leading-relaxed group">
+                <div key={idx} className="flex gap-4 text-[10px] lg:text-xs leading-relaxed group">
                   <span className="text-muted-foreground/40 font-bold shrink-0">[{log.time}]</span>
-                  <span className="text-muted-foreground/60 shrink-0 uppercase tracking-widest font-bold text-[10px]">{log.source}</span>
+                  <span className="text-muted-foreground/60 shrink-0 uppercase tracking-widest font-bold hidden sm:inline">{log.source}</span>
                   <span className="flex-1 text-foreground/80">{log.event}</span>
-                  <span className={cn("font-bold uppercase tracking-widest text-[9px]", log.color)}>{log.status}</span>
+                  <span className={cn("font-bold uppercase tracking-widest", log.color)}>{log.status}</span>
                 </div>
               ))}
               <div className="flex gap-4 text-xs animate-pulse">
@@ -130,14 +127,6 @@ export default function IntelligenceLogsPage() {
               </div>
             </CardContent>
           </Card>
-
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/20">
-            <Globe className="w-5 h-5 text-primary" />
-            <div>
-              <div className="text-sm font-bold">Active Lab Session: Zürich Node</div>
-              <div className="text-xs text-muted-foreground">Your terminal is currently synchronized with the main Swiss forensic cluster.</div>
-            </div>
-          </div>
         </div>
       </main>
     </div>

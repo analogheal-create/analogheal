@@ -42,7 +42,7 @@ export default function AdminDashboardPage() {
   const [requests, setRequests] = useState<any[]>([]);
   const [stats, setStats] = useState({
     activeFiles: 0,
-    totalRecovered: "$1.8M", // Static for now as requested no new features beyond visibility
+    totalRecovered: "$1.8M", 
     verifiedSignatures: 3842
   });
   const router = useRouter();
@@ -87,23 +87,23 @@ export default function AdminDashboardPage() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl">Operational Overview</h1>
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate">Operational Overview</h1>
           <div className="flex items-center gap-4">
             <div className="relative hidden md:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search forensic ID..." className="pl-9 h-9 w-64 bg-white/5 border-white/10 text-xs" />
+              <Input placeholder="Search forensic ID..." className="pl-9 h-9 w-48 lg:w-64 bg-white/5 border-white/10 text-xs" />
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider">System Optimal</span>
+              <span className="text-[9px] lg:text-[10px] font-bold text-green-500 uppercase tracking-wider">System Optimal</span>
             </div>
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
+        <div className="p-4 lg:p-8 space-y-8">
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             <Card className="bg-card/50 border-white/5">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-2">
@@ -147,55 +147,55 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Recent Requests Table */}
-          <Card className="bg-card/50 border-white/5">
-            <CardHeader className="flex flex-row items-center justify-between">
+          <Card className="bg-card/50 border-white/5 overflow-hidden">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
               <div>
                 <CardTitle className="font-headline text-lg">Recent Forensic Intake</CardTitle>
-                <CardDescription>Latest recovery requests awaiting analyst review.</CardDescription>
+                <CardDescription className="text-xs">Latest recovery requests awaiting review.</CardDescription>
               </div>
-              <Button variant="outline" size="sm" onClick={() => router.push('/admin/recovery-files')} className="h-8 text-[10px] font-bold uppercase tracking-wider">View All Files</Button>
+              <Button variant="outline" size="sm" onClick={() => router.push('/admin/recovery-files')} className="h-8 text-[9px] lg:text-[10px] font-bold uppercase tracking-wider">View All</Button>
             </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-white/5 hover:bg-transparent">
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Forensic ID</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client Name</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Loss Category</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Estimated Value</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Status</TableHead>
-                    <TableHead className="text-right"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {requests.map((request) => (
-                    <TableRow key={request.id} className="border-white/5 hover:bg-white/5 group transition-colors">
-                      <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{request.id.slice(0, 4)}</TableCell>
-                      <TableCell className="text-sm font-medium">{request.full_name}</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className="bg-white/5 text-[10px] border-none">{typeLabels[request.recovery_type] || request.recovery_type}</Badge>
-                      </TableCell>
-                      <TableCell className="text-sm font-bold font-mono text-accent">${request.estimated_value}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className={`w-1.5 h-1.5 rounded-full ${request.status === 'Pending' ? 'bg-amber-500' : 'bg-green-500'} animate-pulse`} />
-                          <span className="text-xs font-medium">{request.status}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <ChevronRight className="w-4 h-4" />
-                        </Button>
-                      </TableCell>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-white/5 hover:bg-transparent">
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Forensic ID</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client Name</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Loss Category</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Status</TableHead>
+                      <TableHead className="text-right"></TableHead>
                     </TableRow>
-                  ))}
-                  {requests.length === 0 && (
-                    <TableRow>
-                      <TableCell colSpan={6} className="text-center py-8 text-muted-foreground italic">No forensic intake files found.</TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {requests.map((request) => (
+                      <TableRow key={request.id} className="border-white/5 hover:bg-white/5 group transition-colors">
+                        <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{request.id.slice(0, 4)}</TableCell>
+                        <TableCell className="text-sm font-medium">{request.full_name}</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary" className="bg-white/5 text-[9px] lg:text-[10px] border-none">{typeLabels[request.recovery_type] || request.recovery_type}</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className={`w-1.5 h-1.5 rounded-full ${request.status === 'Pending' ? 'bg-amber-500' : 'bg-green-500'} animate-pulse`} />
+                            <span className="text-xs font-medium">{request.status}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <ChevronRight className="w-4 h-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {requests.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={5} className="text-center py-12 text-muted-foreground italic text-sm">No forensic intake files found.</TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </div>

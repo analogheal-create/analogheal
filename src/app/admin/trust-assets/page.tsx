@@ -65,7 +65,6 @@ export default function TrustAssetsPage() {
 
     setUploadingKey(key);
     try {
-      // 1. Upload to Supabase Storage
       const fileExt = file.name.split('.').pop();
       const fileName = `${key}_${Date.now()}.${fileExt}`;
       const filePath = `operational/${fileName}`;
@@ -76,12 +75,10 @@ export default function TrustAssetsPage() {
 
       if (uploadError) throw uploadError;
 
-      // 2. Get Public URL
       const { data: { publicUrl } } = supabase.storage
         .from('public-assets')
         .getPublicUrl(filePath);
 
-      // 3. Upsert to Database
       const { error: dbError } = await supabase
         .from('operational_proofs')
         .upsert({
@@ -114,20 +111,20 @@ export default function TrustAssetsPage() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl text-primary">Trust Assets Manager</h1>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate text-primary">Trust Assets Manager</h1>
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
             <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Institutional Proof Hub</span>
+            <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Institutional Proof</span>
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
+        <div className="p-4 lg:p-8 space-y-8">
           <div className="max-w-4xl space-y-6">
             <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 flex gap-4 items-center">
-              <AlertCircle className="w-5 h-5 text-amber-500" />
-              <p className="text-xs text-muted-foreground">
-                <strong>Attention:</strong> Updating these assets will immediately change the public Trust Strip and brand elements across the platform. Ensure all uploaded images meet AnalogHeal Forensic Lab's high-resolution institutional standards.
+              <AlertCircle className="w-5 h-5 text-amber-500 shrink-0" />
+              <p className="text-[10px] lg:text-xs text-muted-foreground">
+                <strong>Attention:</strong> Updating these assets will immediately change the public Trust Strip. Ensure images meet AnalogHeal Forensic Lab standards.
               </p>
             </div>
 
@@ -147,7 +144,7 @@ export default function TrustAssetsPage() {
                           />
                         </div>
                       ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground">
+                        <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground py-8">
                           <ImageIcon className="w-8 h-8 mb-2 opacity-20" />
                           <span className="text-[10px] uppercase font-bold tracking-widest">No Asset</span>
                         </div>
@@ -161,7 +158,7 @@ export default function TrustAssetsPage() {
                     <CardContent className="flex-1 p-6 flex flex-col justify-between">
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-bold font-headline">{type.label}</h3>
+                          <h3 className="text-base lg:text-lg font-bold font-headline">{type.label}</h3>
                           {assets[type.key] && (
                             <div className="flex items-center gap-1.5 text-green-500 text-[10px] font-bold uppercase">
                               <CheckCircle2 className="w-3.5 h-3.5" /> Live
@@ -170,24 +167,22 @@ export default function TrustAssetsPage() {
                         </div>
                         <p className="text-xs text-muted-foreground">
                           {type.key === 'brand-logo' 
-                            ? "Official institutional logo used in Navbar, Sidebar, and Login terminal." 
-                            : "Identified as institutional proof node. Displays in the primary Trust Strip section."}
+                            ? "Official institutional logo for platform branding." 
+                            : "Displays in the primary Trust Strip section."}
                         </p>
                       </div>
                       <div className="space-y-3">
-                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Replace Laboratory Evidence</Label>
-                        <div className="flex items-center gap-4">
-                          <Input 
-                            type="file" 
-                            accept="image/*"
-                            onChange={(e) => {
-                              const file = e.target.files?.[0];
-                              if (file) handleFileUpload(type.key, type.label, file);
-                            }}
-                            className="bg-white/5 border-white/10 file:bg-primary file:text-primary-foreground file:font-bold file:rounded-md file:border-none file:text-[10px] file:px-4 file:mr-4 file:cursor-pointer h-10" 
-                            disabled={!!uploadingKey}
-                          />
-                        </div>
+                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Replace Asset</Label>
+                        <Input 
+                          type="file" 
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleFileUpload(type.key, type.label, file);
+                          }}
+                          className="bg-white/5 border-white/10 file:bg-primary file:text-primary-foreground file:font-bold file:rounded-md file:border-none file:text-[10px] file:px-4 file:mr-4 file:cursor-pointer h-10" 
+                          disabled={!!uploadingKey}
+                        />
                       </div>
                     </CardContent>
                   </div>

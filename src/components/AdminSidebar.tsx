@@ -14,19 +14,26 @@ import {
   Image as ImageIcon,
   Camera,
   BookOpen,
-  Quote
+  Quote,
+  Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function AdminSidebar({ userEmail }: { userEmail?: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const { toast } = useToast();
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchLogo = async () => {
@@ -60,10 +67,10 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
     { name: "Client Database", href: "/admin/clients", icon: Users },
   ];
 
-  return (
-    <aside className="w-64 border-r border-white/5 bg-card/30 backdrop-blur-xl hidden lg:flex flex-col">
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full bg-[#0B1426]">
       <div className="p-6 border-b border-white/5">
-        <Link href="/admin/dashboard" className="flex items-center gap-3 mb-2">
+        <Link href="/admin/dashboard" className="flex items-center gap-3 mb-2" onClick={() => setIsOpen(false)}>
           {logoUrl ? (
             <div className="relative w-8 h-8 rounded bg-primary/10 overflow-hidden">
               <Image src={logoUrl} alt="Logo" fill className="object-contain p-1" />
@@ -78,7 +85,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
         </div>
       </div>
 
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
         {navItems.map((item) => (
           <Button
             key={item.href}
@@ -90,6 +97,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
                 ? "bg-primary/10 text-primary shadow-sm" 
                 : "text-muted-foreground hover:text-primary hover:bg-white/5"
             )}
+            onClick={() => setIsOpen(false)}
           >
             <Link href={item.href}>
               <item.icon className="w-4 h-4" /> {item.name}
@@ -106,6 +114,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
                 ? "bg-primary/10 text-primary shadow-sm" 
                 : "text-muted-foreground hover:text-primary hover:bg-white/5"
             )}
+            onClick={() => setIsOpen(false)}
           >
             <Link href="/admin/settings">
               <Settings className="w-4 h-4" /> Lab Settings
@@ -131,6 +140,29 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
           <LogOut className="w-4 h-4" /> Sign Out
         </button>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Nav Trigger Overlay (only visible on small screens) */}
+      <div className="lg:hidden fixed top-3 left-4 z-[60]">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="h-10 w-10 bg-background/80 backdrop-blur-md border-white/10 shadow-2xl">
+              <Menu className="w-5 h-5 text-primary" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="p-0 border-r border-white/5 w-64 bg-[#0B1426]">
+            <SidebarContent />
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Desktop Sidebar (hidden on mobile) */}
+      <aside className="w-64 border-r border-white/5 bg-card/30 backdrop-blur-xl hidden lg:flex flex-col shrink-0 h-screen sticky top-0">
+        <SidebarContent />
+      </aside>
+    </>
   );
 }

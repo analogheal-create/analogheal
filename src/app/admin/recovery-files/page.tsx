@@ -18,7 +18,8 @@ import {
   TrendingUp,
   Activity,
   ShieldCheck,
-  Wallet
+  Wallet,
+  Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -89,87 +90,85 @@ export default function RecoveryFilesPage() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl">Recovery Case Files</h1>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" className="gap-2 text-[10px] font-bold uppercase">
-              <Download className="w-3.5 h-3.5" /> Export DB
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate">Recovery Case Files</h1>
+          <div className="flex items-center gap-2 lg:gap-4">
+            <Button variant="outline" size="sm" className="hidden sm:flex gap-2 text-[10px] font-bold uppercase">
+              <Download className="w-3.5 h-3.5" /> Export
             </Button>
             <Button size="sm" className="gap-2 text-[10px] font-bold uppercase bg-primary text-primary-foreground">
-              New Intake Case
+              New Intake
             </Button>
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
+        <div className="p-4 lg:p-8 space-y-8">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative w-full md:w-96">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search by name, ID, or email..." className="pl-9 h-10 bg-white/5 border-white/10" />
+              <Input placeholder="Search records..." className="pl-9 h-10 bg-white/5 border-white/10" />
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" className="h-10 w-10 border-white/10">
+            <div className="flex items-center justify-between w-full md:w-auto gap-2">
+              <Button variant="outline" size="icon" className="h-10 w-10 border-white/10 shrink-0">
                 <Filter className="w-4 h-4" />
               </Button>
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-none py-1.5 px-3">
+              <Badge variant="secondary" className="bg-primary/10 text-primary border-none py-1.5 px-3 truncate">
                 {requests.length} Active Files
               </Badge>
             </div>
           </div>
 
-          <Card className="bg-card/50 border-white/5">
+          <Card className="bg-card/50 border-white/5 overflow-hidden">
             <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-white/5 hover:bg-transparent">
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Case ID</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Category</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Assets</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Date</TableHead>
-                    <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Status</TableHead>
-                    <TableHead className="text-right"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {requests.map((file) => {
-                    const catInfo = categories[file.recovery_type] || { label: file.recovery_type, icon: FileText, color: "text-muted-foreground" };
-                    return (
-                      <TableRow key={file.id} className="border-white/5 hover:bg-white/5 group transition-colors">
-                        <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{file.id.slice(0, 4)}</TableCell>
-                        <TableCell className="text-sm font-medium">{file.full_name}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <catInfo.icon className={cn("w-3.5 h-3.5", catInfo.color)} />
-                            <span className="text-xs">{catInfo.label}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-sm font-bold font-mono text-accent">${file.estimated_value}</TableCell>
-                        <TableCell className="text-[10px] font-medium text-muted-foreground">
-                          {new Date(file.created_at).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="text-[10px] border-white/10 uppercase tracking-tighter">
-                            {file.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                          </Button>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-white/5 hover:bg-transparent">
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Case ID</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Category</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Assets</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Status</TableHead>
+                      <TableHead className="text-right"></TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {requests.map((file) => {
+                      const catInfo = categories[file.recovery_type] || { label: file.recovery_type, icon: FileText, color: "text-muted-foreground" };
+                      return (
+                        <TableRow key={file.id} className="border-white/5 hover:bg-white/5 group transition-colors">
+                          <TableCell className="font-mono text-[10px] font-bold text-primary uppercase">AH-{file.id.slice(0, 4)}</TableCell>
+                          <TableCell className="text-sm font-medium">{file.full_name}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <catInfo.icon className={cn("w-3.5 h-3.5", catInfo.color)} />
+                              <span className="text-xs truncate max-w-[100px]">{catInfo.label}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-sm font-bold font-mono text-accent">${file.estimated_value}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="text-[9px] border-white/10 uppercase tracking-tighter">
+                              {file.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                    {requests.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-12 text-muted-foreground italic text-sm">
+                          The laboratory intake database is currently empty.
                         </TableCell>
                       </TableRow>
-                    );
-                  })}
-                  {requests.length === 0 && (
-                    <TableRow>
-                      <TableCell colSpan={7} className="text-center py-12 text-muted-foreground italic">
-                        The laboratory intake database is currently empty.
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </div>

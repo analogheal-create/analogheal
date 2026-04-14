@@ -68,7 +68,6 @@ export default function ForensicResultsManager() {
 
     setIsUploading(true);
     try {
-      // 1. Upload image to Supabase Storage
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `results/${fileName}`;
@@ -79,12 +78,10 @@ export default function ForensicResultsManager() {
 
       if (uploadError) throw uploadError;
 
-      // 2. Get Public URL
       const { data: { publicUrl } } = supabase.storage
         .from('public-assets')
         .getPublicUrl(filePath);
 
-      // 3. Save metadata to Database
       const { error: dbError } = await supabase
         .from('forensic_results')
         .insert([{
@@ -107,17 +104,14 @@ export default function ForensicResultsManager() {
     }
   };
 
-  const handleDelete = async (id: string, imageUrl: string) => {
+  const handleDelete = async (id: string) => {
     try {
-      // Delete from DB
       const { error: dbError } = await supabase
         .from('forensic_results')
         .delete()
         .eq('id', id);
 
       if (dbError) throw dbError;
-
-      // Optionally delete from storage (if needed, would require parsing fileName from imageUrl)
       
       setResults(results.filter(r => r.id !== id));
       toast({ title: "Result Removed", description: "Forensic record deleted from database." });
@@ -139,73 +133,50 @@ export default function ForensicResultsManager() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl text-primary">Forensic Results Manager</h1>
-          <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-            Authorized Storage Access
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate text-primary">Forensic Results Manager</h1>
+          <div className="hidden sm:block text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+            Authorized Storage
           </div>
         </header>
 
-        <div className="p-8 space-y-12">
-          {/* New Result Form */}
+        <div className="p-4 lg:p-8 space-y-12">
           <Card className="bg-card/50 border-white/5 max-w-2xl">
             <CardHeader>
               <CardTitle className="text-sm font-bold uppercase tracking-widest flex items-center gap-2">
                 <Plus className="w-4 h-4 text-primary" /> New Forensic Proof
               </CardTitle>
-              <CardDescription>Upload authenticated recovery screenshots for public validation.</CardDescription>
+              <CardDescription className="text-xs">Upload authenticated recovery screenshots for public validation.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleUpload} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-xs uppercase font-bold text-muted-foreground">Case Label</Label>
-                    <Input 
-                      placeholder="e.g. Forensic Reclamation - $1.2M" 
-                      value={formData.label}
-                      onChange={(e) => setFormData({...formData, label: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Input placeholder="Reclamation - $1.2M" value={formData.label} onChange={(e) => setFormData({...formData, label: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Verification Date</Label>
-                    <Input 
-                      placeholder="e.g. Nov 25" 
-                      value={formData.date}
-                      onChange={(e) => setFormData({...formData, date: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-xs uppercase font-bold text-muted-foreground">Date</Label>
+                    <Input placeholder="Nov 25" value={formData.date} onChange={(e) => setFormData({...formData, date: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Forensic ID (Optional)</Label>
-                  <Input 
-                    placeholder="e.g. #882-01" 
-                    value={formData.forensic_id}
-                    onChange={(e) => setFormData({...formData, forensic_id: e.target.value})}
-                    className="bg-white/5 border-white/10" 
-                  />
+                  <Label className="text-xs uppercase font-bold text-muted-foreground">Forensic ID</Label>
+                  <Input placeholder="#882-01" value={formData.forensic_id} onChange={(e) => setFormData({...formData, forensic_id: e.target.value})} className="bg-white/5 border-white/10" />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Authenticated Evidence (Image)</Label>
+                  <Label className="text-xs uppercase font-bold text-muted-foreground">Evidence Image</Label>
                   <div className="flex items-center gap-4">
-                    <Input 
-                      type="file" 
-                      accept="image/*"
-                      onChange={(e) => setFile(e.target.files?.[0] || null)}
-                      className="bg-white/5 border-white/10 file:bg-primary file:text-primary-foreground file:font-bold file:rounded-md file:border-none file:text-[10px] file:px-4 file:mr-4 file:cursor-pointer" 
-                    />
-                    {isUploading && <Loader2 className="w-4 h-4 animate-spin text-primary" />}
+                    <Input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="bg-white/5 border-white/10 file:bg-primary file:text-primary-foreground file:font-bold file:rounded-md file:border-none file:text-[10px] file:px-4 file:mr-4 file:cursor-pointer" />
                   </div>
                 </div>
                 <Button type="submit" className="w-full bg-primary text-primary-foreground font-bold" disabled={isUploading}>
-                  {isUploading ? "Processing Evidence..." : "Publish to Forensic Layer"}
+                  {isUploading ? "Processing..." : "Publish to Forensic Layer"}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
-          {/* Existing Results List */}
           <div className="space-y-6">
             <h2 className="text-lg font-headline font-bold flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-green-500" /> Active Proof Nodes
@@ -214,20 +185,10 @@ export default function ForensicResultsManager() {
               {results.map((result) => (
                 <Card key={result.id} className="bg-card/30 border-white/5 overflow-hidden group">
                   <div className="relative aspect-video">
-                    <Image 
-                      src={result.image_url} 
-                      alt={result.label} 
-                      fill 
-                      className="object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button 
-                        variant="destructive" 
-                        size="sm" 
-                        className="gap-2 font-bold uppercase text-[10px]"
-                        onClick={() => handleDelete(result.id, result.image_url)}
-                      >
-                        <Trash2 className="w-3.5 h-3.5" /> Purge Record
+                    <Image src={result.image_url} alt={result.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button variant="destructive" size="sm" className="gap-2 font-bold uppercase text-[10px]" onClick={() => handleDelete(result.id)}>
+                        <Trash2 className="w-3.5 h-3.5" /> Purge
                       </Button>
                     </div>
                   </div>
@@ -242,12 +203,6 @@ export default function ForensicResultsManager() {
                   </CardContent>
                 </Card>
               ))}
-              {results.length === 0 && (
-                <div className="col-span-full p-12 text-center rounded-3xl border border-dashed border-white/10 bg-white/5">
-                  <ImageIcon className="w-12 h-12 text-muted-foreground/20 mx-auto mb-4" />
-                  <p className="text-muted-foreground text-sm">No forensic results found in database.</p>
-                </div>
-              )}
             </div>
           </div>
         </div>

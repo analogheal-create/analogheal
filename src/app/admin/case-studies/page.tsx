@@ -177,82 +177,54 @@ export default function CaseStudiesManager() {
       <AdminSidebar userEmail={user?.email} />
 
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
-          <h1 className="font-headline font-bold text-xl text-primary">Proven Recovery Results</h1>
-          <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-            Institutional Case Management
+        <header className="h-16 border-b border-white/5 flex items-center justify-between pl-16 pr-4 lg:px-8 sticky top-0 bg-background/80 backdrop-blur-md z-10">
+          <h1 className="font-headline font-bold text-lg lg:text-xl truncate text-primary">Proven Recovery Results</h1>
+          <div className="hidden sm:block text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+            Case Management
           </div>
         </header>
 
-        <div className="p-8 space-y-12">
+        <div className="p-4 lg:p-8 space-y-12">
           <Card className="bg-card/50 border-white/5 max-w-3xl">
             <CardHeader>
               <CardTitle className="text-sm font-bold uppercase tracking-widest flex items-center gap-2">
                 {editingId ? <Edit2 className="w-4 h-4 text-primary" /> : <Plus className="w-4 h-4 text-primary" />}
                 {editingId ? "Modify Case Study" : "New Recovery Result"}
               </CardTitle>
-              <CardDescription>Document successful asset reclamation stories for public verification.</CardDescription>
+              <CardDescription className="text-xs">Document successful asset reclamation stories for public verification.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Client Name</Label>
-                    <Input 
-                      placeholder="e.g. A. Thompson" 
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Client Name</Label>
+                    <Input placeholder="Client Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Client Role</Label>
-                    <Input 
-                      placeholder="e.g. Private Investor" 
-                      value={formData.role}
-                      onChange={(e) => setFormData({...formData, role: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Client Role</Label>
+                    <Input placeholder="Role" value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Case Title</Label>
-                    <Input 
-                      placeholder="e.g. Phishing Scam Reclamation" 
-                      value={formData.title}
-                      onChange={(e) => setFormData({...formData, title: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Case Title</Label>
+                    <Input placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Case ID</Label>
-                    <Input 
-                      placeholder="e.g. #1042" 
-                      value={formData.case_id}
-                      onChange={(e) => setFormData({...formData, case_id: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Case ID</Label>
+                    <Input placeholder="#ID" value={formData.case_id} onChange={(e) => setFormData({...formData, case_id: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Recovery Result</Label>
-                    <Input 
-                      placeholder="e.g. $32,700 Recovered (82%)" 
-                      value={formData.result}
-                      onChange={(e) => setFormData({...formData, result: e.target.value})}
-                      className="bg-white/5 border-white/10" 
-                    />
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Recovery Result</Label>
+                    <Input placeholder="Result" value={formData.result} onChange={(e) => setFormData({...formData, result: e.target.value})} className="bg-white/5 border-white/10" />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground">Icon Type</Label>
-                    <Select 
-                      value={formData.icon_type} 
-                      onValueChange={(val) => setFormData({...formData, icon_type: val})}
-                    >
+                    <Label className="text-[10px] uppercase font-bold text-muted-foreground">Icon Type</Label>
+                    <Select value={formData.icon_type} onValueChange={(val) => setFormData({...formData, icon_type: val})}>
                       <SelectTrigger className="bg-white/5 border-white/10 text-xs">
                         <SelectValue />
                       </SelectTrigger>
@@ -266,26 +238,16 @@ export default function CaseStudiesManager() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Forensic Methods / Metrics</Label>
-                  <Input 
-                    placeholder="e.g. Mixer Hop Tracing • VASP Freeze" 
-                    value={formData.metrics}
-                    onChange={(e) => setFormData({...formData, metrics: e.target.value})}
-                    className="bg-white/5 border-white/10" 
-                  />
+                  <Label className="text-[10px] uppercase font-bold text-muted-foreground">Methods / Metrics</Label>
+                  <Input placeholder="Tracing methods..." value={formData.metrics} onChange={(e) => setFormData({...formData, metrics: e.target.value})} className="bg-white/5 border-white/10" />
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-xs uppercase font-bold text-muted-foreground">Client Quote / Testimonial</Label>
-                  <Textarea 
-                    placeholder="Institutional-grade client feedback..." 
-                    value={formData.quote}
-                    onChange={(e) => setFormData({...formData, quote: e.target.value})}
-                    className="bg-white/5 border-white/10 min-h-[120px]" 
-                  />
+                  <Label className="text-[10px] uppercase font-bold text-muted-foreground">Client Quote</Label>
+                  <Textarea placeholder="Testimonial..." value={formData.quote} onChange={(e) => setFormData({...formData, quote: e.target.value})} className="bg-white/5 border-white/10 min-h-[100px]" />
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button type="submit" className="flex-1 bg-primary text-primary-foreground font-bold" disabled={isSaving}>
                     {isSaving ? "Saving..." : editingId ? "Update Result" : "Publish Result"}
                   </Button>
@@ -306,7 +268,7 @@ export default function CaseStudiesManager() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {caseStudies.map((study) => (
                 <Card key={study.id} className="bg-card/30 border-white/5 group relative">
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-4 right-4 flex gap-2 opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button size="icon" variant="secondary" className="h-8 w-8" onClick={() => handleEdit(study)}>
                       <Edit2 className="w-3.5 h-3.5" />
                     </Button>
@@ -330,11 +292,9 @@ export default function CaseStudiesManager() {
                       </div>
                     </div>
                     <p className="text-[11px] text-muted-foreground italic line-clamp-3">"{study.quote}"</p>
-                    <div className="pt-4 border-t border-white/5 flex justify-between items-end">
-                      <div>
-                        <div className="text-xs font-bold">{study.name}</div>
-                        <div className="text-[9px] text-muted-foreground uppercase font-bold">{study.role}</div>
-                      </div>
+                    <div className="pt-4 border-t border-white/5">
+                      <div className="text-xs font-bold">{study.name}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-bold">{study.role}</div>
                     </div>
                   </CardContent>
                 </Card>
