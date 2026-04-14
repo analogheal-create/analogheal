@@ -255,7 +255,7 @@ export function AnalogFooter() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div>© {mounted ? year : '...'} AnalogHeal Forensics & Recovery Labs. All rights reserved.</div>
+          <div>© 2020-{mounted ? year : '...'} AnalogHeal Forensics & Recovery Labs. All rights reserved.</div>
           <div className="flex gap-6">
             <span>Certifications:</span>
             <span className="font-bold text-foreground/50">ISO 27001</span>
@@ -280,6 +280,7 @@ export function AnalogFooter() {
                 <DialogTitle className="text-2xl font-headline font-bold">
                   {legalDocs[selectedDoc].title}
                 </DialogTitle>
+                <DialogTitle className="sr-only">Access institutional legal documentation and compliance policies.</DialogTitle>
                 <DialogDescription className="text-xs text-muted-foreground mt-2 italic">
                   {legalDocs[selectedDoc].description}
                 </DialogDescription>

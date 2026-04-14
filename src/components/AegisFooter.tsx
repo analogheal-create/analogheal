@@ -1,8 +1,7 @@
-
 "use client";
 
 import Link from "next/link";
-import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight, ShieldCheck } from "lucide-react";
+import { Shield, Twitter, Facebook, Linkedin, Github, MapPin, Building, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -115,7 +114,7 @@ export function AegisFooter() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div>© {mounted ? year : '...'} AnalogHeal Recovery Systems. All rights reserved.</div>
+          <div>© 2020-{mounted ? year : '...'} AnalogHeal Recovery Systems. All rights reserved.</div>
           <div className="flex gap-6">
             <span>Certifications:</span>
             <span className="font-bold text-foreground/50">ISO 27001</span>
