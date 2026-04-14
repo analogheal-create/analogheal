@@ -120,7 +120,7 @@ export function AdminSidebar({ userEmail }: { userEmail?: string }) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/admin/settings">
-              <item.icon className="w-4 h-4" /> Lab Settings
+              <Settings className="w-4 h-4" /> Lab Settings
             </Link>
           </Button>
         </div>
